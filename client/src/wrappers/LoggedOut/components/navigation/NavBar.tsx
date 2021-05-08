@@ -42,7 +42,7 @@ interface NavBarProps {
   classes: any
   handleMobileDrawerOpen: (event: any) => any
   handleMobileDrawerClose: (event: any) => any
-  mobileDrawerOpen: (event: any) => any
+  mobileDrawerOpen: boolean
   selectedTab: string
   openRegisterDialog: any
   openLoginDialog: any
@@ -110,19 +110,22 @@ const NavBar: React.FC<NavBarProps> = (props) => {
               {menuItems.map((element) => {
                 if (element.link) {
                   return (
-                    <Link
-                      key={element.name}
-                      to={element.link}
-                      className={classes.noDecoration}
-                      onClick={handleMobileDrawerClose}
-                    >
-                      <Button
-                        color="secondary"
-                        size="large"
-                        classes={{ text: classes.menuButtonText }}
+                    <Link key={element.name} href={element.link}>
+                      <a
+                        className={classes.noDecoration}
+                        onClick={handleMobileDrawerClose}
+                        role="link"
+                        onKeyPress={handleMobileDrawerClose}
+                        tabIndex={0}
                       >
-                        {element.name}
-                      </Button>
+                        <Button
+                          color="secondary"
+                          size="large"
+                          classes={{ text: classes.menuButtonText }}
+                        >
+                          {element.name}
+                        </Button>
+                      </a>
                     </Link>
                   )
                 }

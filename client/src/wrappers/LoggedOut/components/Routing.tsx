@@ -1,5 +1,6 @@
 import React, { memo } from 'react'
 import PropTypes from 'prop-types'
+import { Switch } from 'react-router-dom'
 import PropsRoute from '../../../common/components/PropsRoute'
 import Home from './home/Home'
 import Blog from './blog/Blog'

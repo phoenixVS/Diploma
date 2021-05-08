@@ -4,9 +4,9 @@ import classNames from 'classnames'
 import format from 'date-fns/format'
 import { Grid, Typography, Card, Box, withStyles } from '@material-ui/core'
 import BlogCard from './BlogCard'
-import ShareButton from '../../../common/components/ShareButton'
-import ZoomImage from '../../../common/components/ZoomImage'
-import smoothScrollTop from '../../../common/functions/smoothScrollTop'
+import ShareButton from '../../../../common/components/ShareButton'
+import ZoomImage from '../../../../common/components/ZoomImage'
+import smoothScrollTop from '../../../../common/functions/smoothScrollTop'
 
 const styles = (theme) => ({
   blogContentWrapper: {

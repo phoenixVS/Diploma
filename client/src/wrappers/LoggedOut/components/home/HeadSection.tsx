@@ -12,8 +12,8 @@ import {
   withWidth,
   isWidthUp,
 } from '@material-ui/core'
-import WaveBorder from '../../../common/components/WaveBorder'
-import ZoomImage from '../../../common/components/ZoomImage'
+import WaveBorder from '../../../../common/components/WaveBorder'
+import ZoomImage from '../../../../common/components/ZoomImage'
 
 const styles = (theme) => ({
   extraLargeButtonLabel: {

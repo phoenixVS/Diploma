@@ -1,4 +1,4 @@
-import React, { lazy } from 'react'
+import React, { lazy, useCallback, useState } from 'react'
 import { NextPage } from 'next'
 import Head from 'next/head'
 import { MuiThemeProvider, CssBaseline } from '@material-ui/core'
@@ -6,12 +6,23 @@ import theme from '../common/theme'
 import GlobalStyles from '../common/GlobalStyles'
 import Pace from '../common/components/Pace'
 import s from '@styles/Home.module.sass'
+import smoothScrollTop from 'common/functions/smoothScrollTop'
+import { Nullable } from '@helpers/commonInterfaces/interfaces'
+import Home from 'wrappers/LoggedOut/components/home/Home'
+import LoggedOutWrapper from 'wrappers/LoggedOut/components/LoggedOutWrapper'
 
-//const LoggedInComponent = lazy(() => import('../wrappers/LoggedIn/components/LoggedInWrapper'))
+// const LoggedInComponent = lazy(() => import('../wrappers/LoggedIn/components/LoggedInWrapper'))
 
-const LoggedOutComponent = lazy(() => import('../wrappers/LoggedOut/components/LoggedOutWrapper'))
+// const LoggedOutWrapper = lazy(() => import('../wrappers/LoggedOut/components/LoggedOutWrapper'))
 
 const IndexPage: NextPage = () => {
+  const [selectedTab, setSelectedTab] = useState<Nullable<string>>(null)
+  const selectHome = useCallback(() => {
+    smoothScrollTop()
+    document.title = 'WaVer - Free template for building a SaaS or admin application'
+    setSelectedTab('Home')
+  }, [setSelectedTab])
+
   return (
     <div className={s.root}>
       <Head>
@@ -25,7 +36,9 @@ const IndexPage: NextPage = () => {
         <CssBaseline />
         <GlobalStyles />
         <Pace color={theme.palette.primary.light} />
-        <LoggedOutComponent />
+        <LoggedOutWrapper {...{ selectedTab }} {...{ setSelectedTab }}>
+          <Home {...{ selectHome }} />
+        </LoggedOutWrapper>
       </MuiThemeProvider>
     </div>
   )

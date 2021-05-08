@@ -1,18 +1,19 @@
 import React, { memo, useState, useEffect, useCallback } from 'react'
 import PropTypes from 'prop-types'
-import AOS from 'aos/dist/aos'
+// import AOS from 'aos/dist/aos'
 import { Theme, withStyles } from '@material-ui/core'
+import 'aos/dist/aos.css'
+import { Styles } from '@material-ui/styles'
 import NavBar from './navigation/NavBar'
 import Footer from './footer/Footer'
-import 'aos/dist/aos.css'
 import CookieRulesDialog from './cookies/CookieRulesDialog'
 import CookieConsent from './cookies/CookieConsent'
 import dummyBlogPosts from '../dummyData/blogPosts'
 import DialogSelector from './register_login/DialogSelector'
 import smoothScrollTop from '../../../common/functions/smoothScrollTop'
-import { Styles } from '@material-ui/styles'
+import { Nullable } from '@helpers/commonInterfaces/interfaces'
 
-AOS.init({ once: true })
+// AOS.init({ once: true })
 
 const styles: Styles<Theme, {}, 'wrapper'> = (theme) => ({
   wrapper: {
@@ -22,18 +23,11 @@ const styles: Styles<Theme, {}, 'wrapper'> = (theme) => ({
 })
 
 function Main(props) {
-  const { classes, children } = props
-  const [selectedTab, setSelectedTab] = useState(null)
+  const { classes, children, selectedTab, setSelectedTab } = props
   const [isMobileDrawerOpen, setIsMobileDrawerOpen] = useState(false)
   const [blogPosts, setBlogPosts] = useState([])
-  const [dialogOpen, setDialogOpen] = useState(null)
+  const [dialogOpen, setDialogOpen] = useState<Nullable<string>>(null)
   const [isCookieRulesDialogOpen, setIsCookieRulesDialogOpen] = useState(false)
-
-  const selectHome = useCallback(() => {
-    smoothScrollTop()
-    document.title = 'WaVer - Free template for building a SaaS or admin application'
-    setSelectedTab('Home')
-  }, [setSelectedTab])
 
   const selectBlog = useCallback(() => {
     smoothScrollTop()
@@ -121,7 +115,7 @@ function Main(props) {
         handleMobileDrawerOpen={handleMobileDrawerOpen}
         handleMobileDrawerClose={handleMobileDrawerClose}
       />
-      {/*<Routing blogPosts={blogPosts} selectHome={selectHome} selectBlog={selectBlog} />*/}
+      {/* <Routing blogPosts={blogPosts} selectHome={selectHome} selectBlog={selectBlog} /> */}
       {children}
       <Footer />
     </div>
