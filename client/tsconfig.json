@@ -31,7 +31,7 @@
     "next-env.d.ts",
     "**/*.ts",
     "**/*.tsx"
-  ],
+, "src/wrappers/LoggedOut/components/cookies/CookieConsent.tsx"  ],
   "exclude": [
     "node_modules",
     "build"

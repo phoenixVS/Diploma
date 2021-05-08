@@ -1,15 +1,12 @@
-import React, { lazy } from 'react'
+import React from 'react'
 import { NextPage } from 'next'
 import Head from 'next/head'
 import { MuiThemeProvider, CssBaseline } from '@material-ui/core'
-import theme from '../common/theme'
-import GlobalStyles from '../common/GlobalStyles'
-import Pace from '../common/components/Pace'
+import theme from '../../common/theme'
+import GlobalStyles from '../../common/GlobalStyles'
+import Pace from '../../common/components/Pace'
 import s from '@styles/Home.module.sass'
-
-//const LoggedInComponent = lazy(() => import('../wrappers/LoggedIn/components/LoggedInWrapper'))
-
-const LoggedOutComponent = lazy(() => import('../wrappers/LoggedOut/components/LoggedOutWrapper'))
+import LoggedInWrapper from 'wrappers/LoggedIn/components/LoggedInWrapper'
 
 const IndexPage: NextPage = () => {
   return (
@@ -25,7 +22,7 @@ const IndexPage: NextPage = () => {
         <CssBaseline />
         <GlobalStyles />
         <Pace color={theme.palette.primary.light} />
-        <LoggedOutComponent />
+        <LoggedInWrapper />
       </MuiThemeProvider>
     </div>
   )
