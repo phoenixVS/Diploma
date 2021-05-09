@@ -1,6 +1,7 @@
-import React, { Fragment } from 'react'
+import React, { Fragment, useEffect } from 'react'
 import PropTypes from 'prop-types'
 import { Typography, withStyles } from '@material-ui/core'
+import Aos from 'aos'
 
 const styles = (theme) => ({
   iconWrapper: {
@@ -36,8 +37,16 @@ function shadeColor(hex, percent) {
     .slice(1)}`
 }
 
-function FeatureCard(props) {
+interface FeatureCardProps {
+  classes?: any
+  Icon: any
+  color: string
+  headline: string
+  text: string
+}
+const FeatureCard: React.FC<FeatureCardProps> = (props) => {
   const { classes, Icon, color, headline, text } = props
+
   return (
     <Fragment>
       <div
@@ -59,14 +68,6 @@ function FeatureCard(props) {
       </Typography>
     </Fragment>
   )
-}
-
-FeatureCard.propTypes = {
-  classes: PropTypes.object.isRequired,
-  Icon: PropTypes.element.isRequired,
-  color: PropTypes.string.isRequired,
-  headline: PropTypes.string.isRequired,
-  text: PropTypes.string.isRequired,
 }
 
 export default withStyles(styles, { withTheme: true })(FeatureCard)

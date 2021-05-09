@@ -1,5 +1,4 @@
 import React, { Fragment } from 'react'
-import PropTypes from 'prop-types'
 import classNames from 'classnames'
 import {
   Grid,
@@ -11,11 +10,17 @@ import {
   withStyles,
   withWidth,
   isWidthUp,
+  Theme,
 } from '@material-ui/core'
 import WaveBorder from '../../../../common/components/WaveBorder'
 import ZoomImage from '../../../../common/components/ZoomImage'
+import { Styles } from '@material-ui/styles'
+import { Breakpoint } from '@material-ui/core/styles/createBreakpoints'
 
-const styles = (theme) => ({
+const styles: Styles<Theme, {}> = (theme) => ({
+  relative: {
+    position: 'relative',
+  },
   extraLargeButtonLabel: {
     fontSize: theme.typography.body1.fontSize,
     [theme.breakpoints.up('sm')]: {
@@ -64,6 +69,11 @@ const styles = (theme) => ({
       width: 'auto',
     },
   },
+  logo: {
+    float: 'left',
+    width: '75px',
+    height: '75px',
+  },
   wrapper: {
     position: 'relative',
     backgroundColor: theme.palette.secondary.main,
@@ -98,8 +108,14 @@ const styles = (theme) => ({
   },
 })
 
-function HeadSection(props) {
+interface HeadSectionProps {
+  classes: any
+  theme: any
+  width: Breakpoint
+}
+const HeadSection: React.FC<HeadSectionProps> = (props) => {
   const { classes, theme, width } = props
+
   return (
     <Fragment>
       <div className={classNames('lg-p-top', classes.wrapper)}>
@@ -116,6 +132,7 @@ function HeadSection(props) {
                       height="100%"
                     >
                       <Box mb={4}>
+                        <img className={classes.logo} src="/icons/icon-384x384.png" alt="logo" />
                         <Typography variant={isWidthUp('lg', width) ? 'h3' : 'h4'}>
                           Free Template for building a SaaS app using Material-UI
                         </Typography>
@@ -144,7 +161,7 @@ function HeadSection(props) {
                     </Box>
                   </Grid>
                   <Hidden smDown>
-                    <Grid item md={6}>
+                    <Grid className={classes.relative} item md={6}>
                       <ZoomImage
                         src={`${process.env.PUBLIC_URL}/images/logged_out/headerImage.jpg`}
                         className={classes.image}
@@ -166,12 +183,6 @@ function HeadSection(props) {
       />
     </Fragment>
   )
-}
-
-HeadSection.propTypes = {
-  classes: PropTypes.object,
-  width: PropTypes.string,
-  theme: PropTypes.object,
 }
 
 export default withWidth()(withStyles(styles, { withTheme: true })(HeadSection))

@@ -1,6 +1,5 @@
 import React, { Fragment, useRef, useCallback, useState } from 'react'
 import Link from 'next/link'
-import PropTypes from 'prop-types'
 import classNames from 'classnames'
 import {
   AppBar,
@@ -19,6 +18,7 @@ import {
   withStyles,
   isWidthUp,
   withWidth,
+  Theme,
 } from '@material-ui/core'
 import DashboardIcon from '@material-ui/icons/Dashboard'
 import ImageIcon from '@material-ui/icons/Image'
@@ -30,8 +30,11 @@ import MessagePopperButton from './MessagePopperButton'
 import SideDrawer from './SideDrawer'
 import Balance from './Balance'
 import NavigationDrawer from '../../../../common/components/NavigationDrawer'
+import { Nullable } from '@helpers/commonInterfaces/interfaces'
+import { Breakpoint } from '@material-ui/core/styles/createBreakpoints'
+import { Styles } from '@material-ui/styles'
 
-const styles = (theme) => ({
+const styles: Styles<Theme, {}> = (theme: Theme) => ({
   appBar: {
     boxShadow: theme.shadows[6],
     backgroundColor: theme.palette.common.white,
@@ -125,8 +128,14 @@ const styles = (theme) => ({
     paddingBottom: theme.spacing(2),
   },
 })
-
-function NavBar(props) {
+interface NavBarProps {
+  selectedTab: Nullable<string>
+  classes?: any
+  width?: Breakpoint
+  messages?: any[]
+  openAddBalanceDialog: () => void
+}
+const NavBar: React.FC<NavBarProps> = (props) => {
   const { selectedTab, messages, classes, width, openAddBalanceDialog } = props
   // Will be use to make website more accessible by screen readers
   const links = useRef([])
@@ -272,31 +281,34 @@ function NavBar(props) {
         >
           <List>
             {menuItems.map((element, index) => (
-              <Link
-                to={element.link}
-                className={classes.menuLink}
-                onClick={element.onClick}
-                key={index}
-                ref={(node) => {
-                  links.current[index] = node
-                }}
-              >
-                <Tooltip title={element.name} placement="right" key={element.name}>
-                  <ListItem
-                    selected={selectedTab === element.name}
-                    button
-                    divider={index !== menuItems.length - 1}
-                    className={classes.permanentDrawerListItem}
-                    onClick={() => {
-                      links.current[index].click()
-                    }}
-                    aria-label={element.name === 'Logout' ? 'Logout' : `Go to ${element.name}`}
-                  >
-                    <ListItemIcon className={classes.justifyCenter}>
-                      {element.icon.desktop}
-                    </ListItemIcon>
-                  </ListItem>
-                </Tooltip>
+              <Link href={element.link} key={index}>
+                <a
+                  ref={(node) => {
+                    links.current[index] = node
+                  }}
+                  role="link"
+                  className={classes.menuLink}
+                  onClick={element.onClick}
+                  onKeyPress={() => 0}
+                  tabIndex={0}
+                >
+                  <Tooltip title={element.name} placement="right" key={element.name}>
+                    <ListItem
+                      selected={selectedTab === element.name}
+                      button
+                      divider={index !== menuItems.length - 1}
+                      className={classes.permanentDrawerListItem}
+                      onClick={() => {
+                        links.current[index].click()
+                      }}
+                      aria-label={element.name === 'Logout' ? 'Logout' : `Go to ${element.name}`}
+                    >
+                      <ListItemIcon className={classes.justifyCenter}>
+                        {element.icon.desktop}
+                      </ListItemIcon>
+                    </ListItem>
+                  </Tooltip>
+                </a>
               </Link>
             ))}
           </List>
@@ -316,14 +328,6 @@ function NavBar(props) {
       />
     </Fragment>
   )
-}
-
-NavBar.propTypes = {
-  messages: PropTypes.arrayOf(PropTypes.object).isRequired,
-  selectedTab: PropTypes.string.isRequired,
-  width: PropTypes.string.isRequired,
-  classes: PropTypes.object.isRequired,
-  openAddBalanceDialog: PropTypes.func.isRequired,
 }
 
 export default withWidth()(withStyles(styles, { withTheme: true })(NavBar))

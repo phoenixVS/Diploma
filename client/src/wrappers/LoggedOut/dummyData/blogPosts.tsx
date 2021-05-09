@@ -72,7 +72,16 @@ const content: React.FC = () => (
   </Fragment>
 )
 
-const posts = [
+const posts: Array<{
+  title: string
+  id: number
+  date: number
+  src: string
+  snippet: string
+  content: any
+  url?: string
+  params?: string
+}> = [
   {
     title: 'Post 1',
     id: 1,

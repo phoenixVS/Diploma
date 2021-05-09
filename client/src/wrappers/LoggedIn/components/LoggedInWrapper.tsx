@@ -6,6 +6,7 @@ import ConsecutiveSnackbarMessages from '../../../common/components/ConsecutiveS
 import smoothScrollTop from '../../../common/functions/smoothScrollTop'
 import persons from '../dummyData/persons'
 import LazyLoadAddBalanceDialog from './subscription/LazyLoadAddBalanceDialog'
+import { Nullable } from '@helpers/commonInterfaces/interfaces'
 
 const styles = (theme) => ({
   main: {
@@ -32,7 +33,7 @@ interface MainProps {
 
 const Main: React.FC<MainProps> = (props) => {
   const { classes, children } = props
-  const [selectedTab, setSelectedTab] = useState(null)
+  const [selectedTab, setSelectedTab] = useState<Nullable<string>>(null)
   const [CardChart, setCardChart] = useState(null)
   const [hasFetchedCardChart, setHasFetchedCardChart] = useState(false)
   const [EmojiTextArea, setEmojiTextArea] = useState(null)

@@ -1,14 +1,18 @@
 import React, { Fragment, useEffect } from 'react'
-import PropTypes from 'prop-types'
 import HeadSection from './HeadSection'
 import FeatureSection from './FeatureSection'
 import PricingSection from './PricingSection'
 
-function Home(props) {
+interface HomeProps {
+  selectHome: any
+}
+const Home: React.FC<HomeProps> = (props) => {
   const { selectHome } = props
+
   useEffect(() => {
     selectHome()
   }, [selectHome])
+
   return (
     <Fragment>
       <HeadSection />
@@ -16,10 +20,6 @@ function Home(props) {
       <PricingSection />
     </Fragment>
   )
-}
-
-Home.propTypes = {
-  selectHome: PropTypes.func.isRequired,
 }
 
 export default Home

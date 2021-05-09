@@ -1,5 +1,5 @@
-import React from 'react'
-import PropTypes from 'prop-types'
+import React, { useEffect } from 'react'
+import AOS from 'aos'
 import { Grid, Typography, isWidthUp, withWidth } from '@material-ui/core'
 import CodeIcon from '@material-ui/icons/Code'
 import BuildIcon from '@material-ui/icons/Build'
@@ -12,6 +12,7 @@ import MeassageIcon from '@material-ui/icons/Message'
 import CancelIcon from '@material-ui/icons/Cancel'
 import calculateSpacing from './calculateSpacing'
 import FeatureCard from './FeatureCard'
+import { Breakpoint } from '@material-ui/core/styles/createBreakpoints'
 
 const iconSize = 30
 
@@ -99,7 +100,11 @@ const features = [
   },
 ]
 
-function FeatureSection(props) {
+interface FeatureSectionProps {
+  width?: Breakpoint
+}
+
+const FeatureSection: React.FC<FeatureSectionProps> = (props) => {
   const { width } = props
   return (
     <div style={{ backgroundColor: '#FFFFFF' }}>
@@ -131,10 +136,6 @@ function FeatureSection(props) {
       </div>
     </div>
   )
-}
-
-FeatureSection.propTypes = {
-  width: PropTypes.string.isRequired,
 }
 
 export default withWidth()(FeatureSection)

@@ -1,5 +1,4 @@
 import React, { useState, useCallback, useRef, Fragment } from 'react'
-import PropTypes from 'prop-types'
 import classNames from 'classnames'
 import {
   TextField,
@@ -8,13 +7,15 @@ import {
   Typography,
   FormControlLabel,
   withStyles,
+  Theme,
 } from '@material-ui/core'
 import FormDialog from '../../../../common/components/FormDialog'
 import HighlightedInformation from '../../../../common/components/HighlightedInformation'
 import ButtonCircularProgress from '../../../../common/components/ButtonCircularProgress'
 import VisibilityPasswordTextField from '../../../../common/components/VisibilityPasswordTextField'
+import { useRouter } from 'next/dist/client/router'
 
-const styles = (theme) => ({
+const styles = (theme: Theme) => ({
   forgotPassword: {
     marginTop: theme.spacing(2),
     color: theme.palette.primary.main,
@@ -35,13 +36,21 @@ const styles = (theme) => ({
   },
 })
 
-function LoginDialog(props) {
+interface LoginDialogProps {
+  classes: any
+  onClose: () => void
+  setStatus: (status: Nullable<string>) => void
+  openChangePasswordDialog: () => void
+  history?: any
+  status: string
+}
+const LoginDialog: React.FC<LoginDialogProps> = (props) => {
   const { setStatus, history, classes, onClose, openChangePasswordDialog, status } = props
   const [isLoading, setIsLoading] = useState(false)
   const [isPasswordVisible, setIsPasswordVisible] = useState(false)
   const loginEmail = useRef<{ value: string }>()
   const loginPassword = useRef<{ value: string }>()
-
+  const router = useRouter()
   const login = useCallback(() => {
     setIsLoading(true)
     setStatus(null)
@@ -57,7 +66,7 @@ function LoginDialog(props) {
       }, 1500)
     } else {
       setTimeout(() => {
-        history.push('/c/dashboard')
+        router.push('/c/dashboard')
       }, 150)
     }
   }, [setIsLoading, loginEmail, loginPassword, history, setStatus])
@@ -84,7 +93,6 @@ function LoginDialog(props) {
               fullWidth
               label="Email Address"
               inputRef={loginEmail}
-              autoFocus
               autoComplete="off"
               type="email"
               onChange={() => {
@@ -157,15 +165,15 @@ function LoginDialog(props) {
               {isLoading && <ButtonCircularProgress />}
             </Button>
             <Typography
+              role="button"
               align="center"
               className={classNames(
                 classes.forgotPassword,
                 isLoading ? classes.disabledText : null
               )}
               color="primary"
-              onClick={isLoading ? null : openChangePasswordDialog}
+              onClick={isLoading ? () => {} : openChangePasswordDialog}
               tabIndex={0}
-              role="button"
               onKeyDown={(event) => {
                 // For screenreaders listen to space and enter events
                 if ((!isLoading && event.keyCode === 13) || event.keyCode === 32) {
@@ -180,15 +188,6 @@ function LoginDialog(props) {
       />
     </Fragment>
   )
-}
-
-LoginDialog.propTypes = {
-  classes: PropTypes.object.isRequired,
-  onClose: PropTypes.func.isRequired,
-  setStatus: PropTypes.func.isRequired,
-  openChangePasswordDialog: PropTypes.func.isRequired,
-  history: PropTypes.object.isRequired,
-  status: PropTypes.string,
 }
 
 export default withStyles(styles)(LoginDialog)

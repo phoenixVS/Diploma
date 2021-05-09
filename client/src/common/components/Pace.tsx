@@ -44,7 +44,7 @@ declare global {
 		paceOptions: any
 	}
 }
-if (process.browser) {
+if (window) {
   window.paceOptions = {
     ajax: {
       trackMethods: ["GET", "POST"]
@@ -54,7 +54,7 @@ if (process.browser) {
 
 /*! pace 1.0.0 */
 function activatePace() {
-  if (!process.browser) {
+  if (!window) {
     return
   }
   var a,

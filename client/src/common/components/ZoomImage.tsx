@@ -1,10 +1,12 @@
 import React, { Fragment, useState, useCallback, useEffect } from 'react'
 import PropTypes from 'prop-types'
-import { Portal, Backdrop, withStyles } from '@material-ui/core'
+import { Portal, Backdrop, withStyles, Theme } from '@material-ui/core'
 import ScrollbarSize from '@material-ui/core/Tabs/ScrollbarSize'
 import classNames from 'classnames'
+import Image from 'next/image'
+import { Styles } from '@material-ui/styles'
 
-const styles = (theme) => ({
+const styles: Styles<Theme, {}> = (theme: Theme) => ({
   backdrop: {
     zIndex: theme.zIndex.modal,
     backgroundColor: 'rgba(0, 0, 0, 0.8)',
@@ -53,14 +55,18 @@ function ZoomImage(props) {
   }, [setZoomedIn])
 
   useEffect(() => {
+    const header = document.querySelector('header')
+    if (!header) {
+      return
+    }
     if (zoomedIn) {
       document.body.style.overflow = 'hidden'
       document.body.style.paddingRight = `${scrollbarSize}px`
-      document.querySelector('header').style.paddingRight = `${scrollbarSize}px`
+      header.style.paddingRight = `${scrollbarSize}px`
     } else {
       document.body.style.overflow = 'auto'
       document.body.style.paddingRight = '0px'
-      document.querySelector('header').style.paddingRight = '0px'
+      header.style.paddingRight = '0px'
     }
   }, [zoomedIn, scrollbarSize])
 
@@ -72,18 +78,25 @@ function ZoomImage(props) {
           <Backdrop open={zoomedIn} className={classes.backdrop} onClick={zoomOut}></Backdrop>
           <div onClick={zoomOut} className={classes.portalImgWrapper}>
             <div className={classes.portalImgInnerWrapper}>
-              <img alt={alt} src={src} className={classes.portalImg} {...zoomedImgProps}></img>
+              <Image
+                alt={alt}
+                src={src}
+                layout="fill"
+                className={classes.portalImg}
+                {...zoomedImgProps}
+              ></Image>
             </div>
           </div>
         </Portal>
       )}
-      <img
+      <Image
         alt={alt}
         src={src}
+        layout="fill"
         onClick={zoomIn}
         className={classNames(className, classes.zoomedOutImage)}
         {...rest}
-      ></img>
+      ></Image>
     </Fragment>
   )
 }

@@ -1,11 +1,10 @@
 import React from 'react'
-import PropTypes from 'prop-types'
-import { Link } from 'react-router-dom'
+import Link from 'next/link'
 import format from 'date-fns/format'
 import classNames from 'classnames'
-import { Typography, Card, Box, withStyles } from '@material-ui/core'
+import { Typography, Card, Box, withStyles, Theme } from '@material-ui/core'
 
-const styles = (theme) => ({
+const styles = (theme: Theme) => ({
   img: {
     width: '100%',
     height: 'auto',
@@ -49,14 +48,24 @@ const styles = (theme) => ({
   },
 })
 
-function BlogCard(props) {
+interface BlogCardProps {
+  classes?: any
+  url: string
+  title: string
+  date: number
+  snippet: string
+  src?: string
+}
+const BlogCard: React.FC<BlogCardProps> = (props) => {
   const { classes, url, src, date, title, snippet } = props
 
   return (
     <Card className={classes.card}>
       {src && (
-        <Link to={url} tabIndex={-1}>
-          <img src={src} className={classes.img} alt="" />
+        <Link href={url}>
+          <a role="link" tabIndex={-1}>
+            <img src={src} className={classes.img} alt="" />
+          </a>
         </Link>
       )}
       <Box p={2}>
@@ -65,29 +74,24 @@ function BlogCard(props) {
             awareOfUnicodeTokens: true,
           })}
         </Typography>
-        <Link to={url} className={classNames(classes.noDecoration, classes.showFocus)}>
-          <Typography variant="h6">
-            <span className={classes.title}>{title}</span>
-          </Typography>
+        <Link href={url}>
+          <a className={classNames(classes.noDecoration, classes.showFocus)}>
+            <Typography variant="h6">
+              <span className={classes.title}>{title}</span>
+            </Typography>
+          </a>
         </Link>
         <Typography variant="body1" color="textSecondary">
           {snippet}
-          <Link to={url} className={classes.noDecoration} tabIndex={-1}>
-            <span className={classes.link}> read more...</span>
+          <Link href={url}>
+            <a className={classes.noDecoration} tabIndex={-1}>
+              <span className={classes.link}> read more...</span>
+            </a>
           </Link>
         </Typography>
       </Box>
     </Card>
   )
-}
-
-BlogCard.propTypes = {
-  classes: PropTypes.object.isRequired,
-  url: PropTypes.string.isRequired,
-  title: PropTypes.string.isRequired,
-  date: PropTypes.number.isRequired,
-  snippet: PropTypes.string.isRequired,
-  src: PropTypes.string,
 }
 
 export default withStyles(styles, { withTheme: true })(BlogCard)

@@ -1,4 +1,4 @@
-import React, { memo } from 'react'
+import React from 'react'
 import Link from 'next/link'
 import {
   AppBar,
@@ -8,6 +8,7 @@ import {
   Hidden,
   IconButton,
   withStyles,
+  Theme,
 } from '@material-ui/core'
 import MenuIcon from '@material-ui/icons/Menu'
 import HomeIcon from '@material-ui/icons/Home'
@@ -15,9 +16,12 @@ import HowToRegIcon from '@material-ui/icons/HowToReg'
 import LockOpenIcon from '@material-ui/icons/LockOpen'
 import BookIcon from '@material-ui/icons/Book'
 import NavigationDrawer from '../../../../common/components/NavigationDrawer'
+import { Nullable } from '@helpers/commonInterfaces/interfaces'
+import { Styles } from '@material-ui/styles'
 
-const styles = (theme) => ({
+const styles: Styles<Theme, {}> = (theme: Theme) => ({
   appBar: {
+    position: 'relative',
     boxShadow: theme.shadows[6],
     backgroundColor: theme.palette.common.white,
   },
@@ -39,13 +43,14 @@ const styles = (theme) => ({
 })
 
 interface NavBarProps {
-  classes: any
-  handleMobileDrawerOpen: (event: any) => any
-  handleMobileDrawerClose: (event: any) => any
-  mobileDrawerOpen: boolean
-  selectedTab: string
-  openRegisterDialog: any
-  openLoginDialog: any
+  classes?: any
+  handleMobileDrawerOpen?: () => any
+  handleMobileDrawerClose?: () => any
+  mobileDrawerOpen?: boolean
+  selectedTab: Nullable<string>
+  selectTab: (name: string) => void
+  openRegisterDialog?: any
+  openLoginDialog?: any
 }
 const NavBar: React.FC<NavBarProps> = (props) => {
   const {
@@ -85,7 +90,7 @@ const NavBar: React.FC<NavBarProps> = (props) => {
         <Toolbar className={classes.toolbar}>
           <div>
             <Typography variant="h4" className={classes.brandText} display="inline" color="primary">
-              Wa
+              Hand
             </Typography>
             <Typography
               variant="h4"
@@ -93,7 +98,7 @@ const NavBar: React.FC<NavBarProps> = (props) => {
               display="inline"
               color="secondary"
             >
-              Ver
+              -to-hand combat
             </Typography>
           </div>
           <div>
@@ -156,4 +161,4 @@ const NavBar: React.FC<NavBarProps> = (props) => {
   )
 }
 
-export default withStyles(styles, { withTheme: true })(memo(NavBar))
+export default withStyles(styles, { withTheme: true })(NavBar)

@@ -1,10 +1,10 @@
 import React, { useEffect } from 'react'
-import PropTypes from 'prop-types'
 import classNames from 'classnames'
-import { Grid, Box, isWidthUp, withWidth, withStyles } from '@material-ui/core'
+import { Grid, Box, isWidthUp, withWidth, withStyles, Theme } from '@material-ui/core'
 import BlogCard from './BlogCard'
+import { Breakpoint } from '@material-ui/core/styles/createBreakpoints'
 
-const styles = (theme) => ({
+const styles = (theme: Theme) => ({
   blogContentWrapper: {
     marginLeft: theme.spacing(1),
     marginRight: theme.spacing(1),
@@ -23,10 +23,10 @@ const styles = (theme) => ({
   },
 })
 
-function getVerticalBlogPosts(width, blogPosts) {
-  const gridRows = [[], [], []]
-  let rows
-  let xs
+const getVerticalBlogPosts = (width: Breakpoint, blogPosts: any[]) => {
+  const gridRows: any = [[], [], []]
+  let rows: number
+  let xs: number
   if (isWidthUp('md', width)) {
     rows = 3
     xs = 4
@@ -59,7 +59,14 @@ function getVerticalBlogPosts(width, blogPosts) {
   ))
 }
 
-function Blog(props) {
+interface BlogProps {
+  selectBlog: () => void
+  classes: any
+  width: Breakpoint
+  blogPosts: any[]
+}
+
+const Blog: React.FC<BlogProps> = (props) => {
   const { classes, width, blogPosts, selectBlog } = props
 
   useEffect(() => {
@@ -75,13 +82,6 @@ function Blog(props) {
       </div>
     </Box>
   )
-}
-
-Blog.propTypes = {
-  selectBlog: PropTypes.func.isRequired,
-  classes: PropTypes.object.isRequired,
-  width: PropTypes.string.isRequired,
-  blogPosts: PropTypes.arrayOf(PropTypes.object),
 }
 
 export default withWidth()(withStyles(styles, { withTheme: true })(Blog))
