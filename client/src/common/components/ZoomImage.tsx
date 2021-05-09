@@ -1,5 +1,4 @@
 import React, { Fragment, useState, useCallback, useEffect } from 'react'
-import PropTypes from 'prop-types'
 import { Portal, Backdrop, withStyles, Theme } from '@material-ui/core'
 import ScrollbarSize from '@material-ui/core/Tabs/ScrollbarSize'
 import classNames from 'classnames'
@@ -41,7 +40,15 @@ const styles: Styles<Theme, {}> = (theme: Theme) => ({
   },
 })
 
-function ZoomImage(props) {
+interface ZoomImageProps {
+  classes?: any
+  alt: string
+  src: string
+  theme?: any
+  zoomedImgProps?: any
+  className: string
+}
+const ZoomImage: React.FC<ZoomImageProps> = (props) => {
   const { alt, src, zoomedImgProps, classes, className, ...rest } = props
   const [zoomedIn, setZoomedIn] = useState(false)
   const [scrollbarSize, setScrollbarSize] = useState(null)
@@ -59,6 +66,11 @@ function ZoomImage(props) {
     if (!header) {
       return
     }
+    console.log(
+      `%cඞ zoomed in`,
+      "color: #29f4e9; font: 16px 'Open Sans', sans-serif; font-weight: 500; background: #FF00CB; border-radius: 10px; padding: 0 15px",
+      zoomedIn
+    )
     if (zoomedIn) {
       document.body.style.overflow = 'hidden'
       document.body.style.paddingRight = `${scrollbarSize}px`
@@ -99,15 +111,6 @@ function ZoomImage(props) {
       ></Image>
     </Fragment>
   )
-}
-
-ZoomImage.propTypes = {
-  classes: PropTypes.object.isRequired,
-  alt: PropTypes.string.isRequired,
-  src: PropTypes.string.isRequired,
-  theme: PropTypes.object.isRequired,
-  zoomedImgProps: PropTypes.object,
-  className: PropTypes.string,
 }
 
 export default withStyles(styles, { withTheme: true })(ZoomImage)

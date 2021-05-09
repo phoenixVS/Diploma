@@ -63,7 +63,7 @@ const BlogPost: React.FC<BlogPostProps> = (props) => {
                   })}
                 </Typography>
               </Box>
-              <ZoomImage className={classes.img} src={src} alt="" />
+              <ZoomImage className={classes.img} src={src} alt="post image" />
               <Box p={3}>
                 {content}
                 <Box pt={2}>
