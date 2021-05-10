@@ -7,13 +7,13 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 };
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.AlbumModule = void 0;
-const module_1 = require("module");
+const common_1 = require("@nestjs/common");
 const album_service_1 = require("./album.service");
 const album_controller_1 = require("./album.controller");
 let AlbumModule = class AlbumModule {
 };
 AlbumModule = __decorate([
-    module_1.Module({
+    common_1.Module({
         controllers: [album_controller_1.AlbumController],
         providers: [album_service_1.AlbumService]
     })
