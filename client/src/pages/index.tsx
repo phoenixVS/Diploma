@@ -1,30 +1,27 @@
-import React, { lazy, useCallback, useState } from 'react'
+import React, { useCallback, useState } from 'react'
 import { NextPage } from 'next'
+import dynamic from 'next/dynamic'
 import Head from 'next/head'
 import { MuiThemeProvider, CssBaseline } from '@material-ui/core'
 import theme from '../common/theme'
 import GlobalStyles from '../common/GlobalStyles'
-import Pace from '../common/components/Pace'
-import s from '@styles/Home.module.sass'
 import smoothScrollTop from 'common/functions/smoothScrollTop'
 import { Nullable } from '@helpers/commonInterfaces/interfaces'
 import Home from 'wrappers/LoggedOut/components/home/Home'
 import LoggedOutWrapper from 'wrappers/LoggedOut/components/LoggedOutWrapper'
 
-// const LoggedInComponent = lazy(() => import('../wrappers/LoggedIn/components/LoggedInWrapper'))
-
-// const LoggedOutWrapper = lazy(() => import('../wrappers/LoggedOut/components/LoggedOutWrapper'))
+const Pace = dynamic(() => import('../common/components/Pace'), { ssr: false })
 
 const IndexPage: NextPage = () => {
   const [selectedTab, setSelectedTab] = useState<Nullable<string>>(null)
   const selectHome = useCallback(() => {
     smoothScrollTop()
-    document.title = 'WaVer - Free template for building a SaaS or admin application'
+    document.title = 'Hand-to-hand combat | Kyiv'
     setSelectedTab('Home')
   }, [setSelectedTab])
 
   return (
-    <div className={s.root}>
+    <>
       <Head>
         <link rel="manifest" href="/manifest.json" />
         <link href="/icons/icon-16x16.png" rel="icon" type="image/png" sizes="16x16" />
@@ -40,7 +37,8 @@ const IndexPage: NextPage = () => {
           <Home {...{ selectHome }} />
         </LoggedOutWrapper>
       </MuiThemeProvider>
-    </div>
+    </>
   )
 }
+
 export default IndexPage

@@ -1,87 +1,66 @@
-import React, { useEffect } from 'react'
-import PropTypes from 'prop-types'
-import classNames from 'classnames'
-import { Grid, Box, isWidthUp, withWidth, withStyles } from '@material-ui/core'
-import BlogCard from '../../wrappers/LoggedOut/components/blog/BlogCard'
+import React, { useCallback, useEffect, useState } from 'react'
+import { NextPage } from 'next'
+import dynamic from 'next/dynamic'
+import Head from 'next/head'
+import { MuiThemeProvider, CssBaseline } from '@material-ui/core'
+import theme from '../../common/theme'
+import GlobalStyles from '../../common/GlobalStyles'
+import smoothScrollTop from '../../common/functions/smoothScrollTop'
+import { Nullable } from '@helpers/commonInterfaces/interfaces'
+import LoggedOutWrapper from '../../wrappers/LoggedOut/components/LoggedOutWrapper'
+import Blog from '../../wrappers/LoggedOut/components/blog/Blog'
+import dummyBlogPosts from '../../wrappers/LoggedOut/dummyData/blogPosts'
 
-const styles = (theme) => ({
-  blogContentWrapper: {
-    marginLeft: theme.spacing(1),
-    marginRight: theme.spacing(1),
-    [theme.breakpoints.up('sm')]: {
-      marginLeft: theme.spacing(4),
-      marginRight: theme.spacing(4),
-    },
-    maxWidth: 1280,
-    width: '100%',
-  },
-  wrapper: {
-    minHeight: '60vh',
-  },
-  noDecoration: {
-    textDecoration: 'none !important',
-  },
-})
+const Pace = dynamic(() => import('../../common/components/Pace'), { ssr: false })
 
-function getVerticalBlogPosts(width, blogPosts) {
-  const gridRows = [[], [], []]
-  let rows
-  let xs
-  if (isWidthUp('md', width)) {
-    rows = 3
-    xs = 4
-  } else if (isWidthUp('sm', width)) {
-    rows = 2
-    xs = 6
-  } else {
-    rows = 1
-    xs = 12
-  }
-  blogPosts.forEach((blogPost, index) => {
-    gridRows[index % rows].push(
-      <Grid key={blogPost.id} item xs={12}>
-        <Box mb={3}>
-          <BlogCard
-            src={blogPost.src}
-            title={blogPost.title}
-            snippet={blogPost.snippet}
-            date={blogPost.date}
-            url={blogPost.url}
-          />
-        </Box>
-      </Grid>
-    )
-  })
-  return gridRows.map((element, index) => (
-    <Grid key={index} item xs={xs}>
-      {element}
-    </Grid>
-  ))
-}
+const IndexPage: NextPage = () => {
+  const [selectedTab, setSelectedTab] = useState<Nullable<string>>(null)
+  const [blogPosts, setBlogPosts] = useState<any[]>([])
 
-function Blog(props) {
-  const { classes, width, blogPosts, selectBlog } = props
+  const selectBlog = useCallback(() => {
+    smoothScrollTop()
+    document.title = 'prb - Blog'
+    setSelectedTab('Blog')
+  }, [setSelectedTab])
 
-  useEffect(() => {
-    selectBlog()
-  }, [selectBlog])
+  const fetchBlogPosts = useCallback(() => {
+    const blogPosts = dummyBlogPosts.map((blogPost) => {
+      let title = blogPost.title
+      title = title.toLowerCase()
+      /* Remove unwanted characters, only accept alphanumeric and space */
+      title = title.replace(/[^A-Za-z0-9 ]/g, '')
+      /* Replace multi spaces with a single space */
+      title = title.replace(/\s{2,}/g, ' ')
+      /* Replace space with a '-' symbol */
+      title = title.replace(/\s/g, '-')
+      blogPost.url = `/blog/post/${title}`
+      blogPost.params = `?id=${blogPost.id}`
+      return blogPost
+    })
+    setBlogPosts(blogPosts)
+  }, [setBlogPosts])
+
+  useEffect(fetchBlogPosts, [fetchBlogPosts])
 
   return (
-    <Box display="flex" justifyContent="center" className={classNames(classes.wrapper, 'lg-p-top')}>
-      <div className={classes.blogContentWrapper}>
-        <Grid container spacing={3}>
-          {getVerticalBlogPosts(width, blogPosts)}
-        </Grid>
-      </div>
-    </Box>
+    <>
+      <Head>
+        <link rel="manifest" href="/manifest.json" />
+        <link href="/icons/icon-16x16.png" rel="icon" type="image/png" sizes="16x16" />
+        <link href="/icons/icon-32x32.png" rel="icon" type="image/png" sizes="32x32" />
+        <link rel="apple-touch-icon" href="/icons/apple-icon.png"></link>
+        <meta name="theme-color" content="#317EFB" />
+      </Head>
+      <MuiThemeProvider theme={theme}>
+        <CssBaseline />
+        <GlobalStyles />
+        <Pace color={theme.palette.primary.light} />
+        <LoggedOutWrapper {...{ selectedTab }} {...{ setSelectedTab }}>
+          <Blog {...{ blogPosts }} {...{ selectBlog }} />
+        </LoggedOutWrapper>
+      </MuiThemeProvider>
+    </>
   )
 }
 
-Blog.propTypes = {
-  selectBlog: PropTypes.func.isRequired,
-  classes: PropTypes.object.isRequired,
-  width: PropTypes.string.isRequired,
-  blogPosts: PropTypes.arrayOf(PropTypes.object),
-}
-
-export default withWidth()(withStyles(styles, { withTheme: true })(Blog))
+export default IndexPage

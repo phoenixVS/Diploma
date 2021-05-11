@@ -1,5 +1,6 @@
 import { Prop, Schema, SchemaFactory } from '@nestjs/mongoose';
-import { Document, ObjectId  } from 'mongoose';
+import { Document } from 'mongoose';
+import * as mongoose from 'mongoose';
 
 export type ImageDocument = Image & Document;
 
@@ -11,7 +12,7 @@ export class Image {
   @Prop()
   image: number;
 
-  @Prop({ type: [{ type: ObjectId, ref: 'Comment' }]} )
+  @Prop({ type: [{ type: mongoose.Schema.Types.ObjectId, ref: 'Comment' }]} )
   comment: Comment[];
 
   @Prop()

@@ -1,8 +1,5 @@
 import React, { memo, useState, useEffect, useCallback } from 'react'
-import PropTypes from 'prop-types'
-// import AOS from 'aos/dist/aos'
 import { Theme, withStyles } from '@material-ui/core'
-import 'aos/dist/aos.css'
 import { Styles } from '@material-ui/styles'
 import NavBar from './navigation/NavBar'
 import Footer from './footer/Footer'
@@ -13,8 +10,6 @@ import DialogSelector from './register_login/DialogSelector'
 import smoothScrollTop from '../../../common/functions/smoothScrollTop'
 import { Nullable } from '@helpers/commonInterfaces/interfaces'
 
-// AOS.init({ once: true })
-
 const styles: Styles<Theme, {}, 'wrapper'> = (theme) => ({
   wrapper: {
     backgroundColor: theme.palette.common.white,
@@ -22,16 +17,21 @@ const styles: Styles<Theme, {}, 'wrapper'> = (theme) => ({
   },
 })
 
-function Main(props) {
+interface MainProps {
+  classes?: any
+  selectedTab: Nullable<string>
+  setSelectedTab: (name: string) => void
+}
+const Main: React.FC<MainProps> = (props) => {
   const { classes, children, selectedTab, setSelectedTab } = props
   const [isMobileDrawerOpen, setIsMobileDrawerOpen] = useState(false)
-  const [blogPosts, setBlogPosts] = useState([])
+  const [blogPosts, setBlogPosts] = useState<any[]>([])
   const [dialogOpen, setDialogOpen] = useState<Nullable<string>>(null)
   const [isCookieRulesDialogOpen, setIsCookieRulesDialogOpen] = useState(false)
 
   const selectBlog = useCallback(() => {
     smoothScrollTop()
-    document.title = 'WaVer - Blog'
+    document.title = 'prb - Blog'
     setSelectedTab('Blog')
   }, [setSelectedTab])
 
@@ -115,15 +115,10 @@ function Main(props) {
         handleMobileDrawerOpen={handleMobileDrawerOpen}
         handleMobileDrawerClose={handleMobileDrawerClose}
       />
-      {/* <Routing blogPosts={blogPosts} selectHome={selectHome} selectBlog={selectBlog} /> */}
       {children}
       <Footer />
     </div>
   )
-}
-
-Main.propTypes = {
-  classes: PropTypes.object.isRequired,
 }
 
 export default withStyles(styles, { withTheme: true })(memo(Main))

@@ -1,14 +1,13 @@
 import React, { useEffect } from 'react'
-import PropTypes from 'prop-types'
 import classNames from 'classnames'
 import format from 'date-fns/format'
-import { Grid, Typography, Card, Box, withStyles } from '@material-ui/core'
+import { Grid, Typography, Card, Box, withStyles, Theme } from '@material-ui/core'
 import BlogCard from './BlogCard'
 import ShareButton from '../../../../common/components/ShareButton'
 import ZoomImage from '../../../../common/components/ZoomImage'
 import smoothScrollTop from '../../../../common/functions/smoothScrollTop'
 
-const styles = (theme) => ({
+const styles = (theme: Theme) => ({
   blogContentWrapper: {
     marginLeft: theme.spacing(1),
     marginRight: theme.spacing(1),
@@ -31,11 +30,20 @@ const styles = (theme) => ({
   },
 })
 
-function BlogPost(props) {
+interface BlogPostProps {
+  classes: any
+  title: string
+  date: number
+  src: string
+  content: any
+  otherArticles: any[]
+}
+
+const BlogPost: React.FC<BlogPostProps> = (props) => {
   const { classes, date, title, src, content, otherArticles } = props
 
   useEffect(() => {
-    document.title = `WaVer - ${title}`
+    document.title = `${title}`
     smoothScrollTop()
   }, [title])
 
@@ -55,7 +63,7 @@ function BlogPost(props) {
                   })}
                 </Typography>
               </Box>
-              <ZoomImage className={classes.img} src={src} alt="" />
+              <ZoomImage className={classes.img} src={src} alt="post image" />
               <Box p={3}>
                 {content}
                 <Box pt={2}>
@@ -99,15 +107,6 @@ function BlogPost(props) {
       </div>
     </Box>
   )
-}
-
-BlogPost.propTypes = {
-  classes: PropTypes.object.isRequired,
-  title: PropTypes.string.isRequired,
-  date: PropTypes.number.isRequired,
-  src: PropTypes.string.isRequired,
-  content: PropTypes.node.isRequired,
-  otherArticles: PropTypes.arrayOf(PropTypes.object).isRequired,
 }
 
 export default withStyles(styles, { withTheme: true })(BlogPost)

@@ -10,9 +10,11 @@ interface HomeProps {
 
 const Home: React.FC<HomeProps> = (props) => {
   const { selectHome } = props
+
   useEffect(() => {
     selectHome()
   }, [selectHome])
+
   return (
     <Fragment>
       <HeadSection />

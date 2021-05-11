@@ -6,6 +6,7 @@ import ConsecutiveSnackbarMessages from '../../../common/components/ConsecutiveS
 import smoothScrollTop from '../../../common/functions/smoothScrollTop'
 import persons from '../dummyData/persons'
 import LazyLoadAddBalanceDialog from './subscription/LazyLoadAddBalanceDialog'
+import { Nullable } from '@helpers/commonInterfaces/interfaces'
 
 const styles = (theme) => ({
   main: {
