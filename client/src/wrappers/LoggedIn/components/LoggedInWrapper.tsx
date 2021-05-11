@@ -32,7 +32,7 @@ interface MainProps {
 
 const Main: React.FC<MainProps> = (props) => {
   const { classes, children } = props
-  const [selectedTab, setSelectedTab] = useState(null)
+  const [selectedTab, setSelectedTab] = useState<Nullable<string>>(null)
   const [CardChart, setCardChart] = useState(null)
   const [hasFetchedCardChart, setHasFetchedCardChart] = useState(false)
   const [EmojiTextArea, setEmojiTextArea] = useState(null)
@@ -338,7 +338,7 @@ const Main: React.FC<MainProps> = (props) => {
           openAddBalanceDialog={openAddBalanceDialog}
           setTargets={setTargets}
           setPosts={setPosts}
-        /> */}
+        />*/}
         {children}
       </main>
     </Fragment>

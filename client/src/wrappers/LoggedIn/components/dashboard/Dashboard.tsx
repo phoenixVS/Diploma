@@ -1,12 +1,22 @@
 import React, { Fragment, useEffect } from 'react'
-import PropTypes from 'prop-types'
 import { Typography, Box } from '@material-ui/core'
 import SettingsArea from './SettingsArea'
 import UserDataArea from './UserDataArea'
 import AccountInformationArea from './AccountInformationArea'
 import StatisticsArea from './StatisticsArea'
 
-function Dashboard(props) {
+interface DashboardProps {
+  CardChart: any
+  statistics: any
+  toggleAccountActivation: () => void
+  pushMessageToSnackbar: (msg: string) => void
+  targets: any[]
+  setTargets: (newTargets: any[]) => void
+  isAccountActivated: boolean
+  selectDashboard: () => void
+}
+
+const Dashboard: React.FC<DashboardProps> = (props) => {
   const {
     selectDashboard,
     CardChart,
@@ -45,17 +55,6 @@ function Dashboard(props) {
       />
     </Fragment>
   )
-}
-
-Dashboard.propTypes = {
-  CardChart: PropTypes.elementType,
-  statistics: PropTypes.object.isRequired,
-  toggleAccountActivation: PropTypes.func,
-  pushMessageToSnackbar: PropTypes.func,
-  targets: PropTypes.arrayOf(PropTypes.object).isRequired,
-  setTargets: PropTypes.func.isRequired,
-  isAccountActivated: PropTypes.bool.isRequired,
-  selectDashboard: PropTypes.func.isRequired,
 }
 
 export default Dashboard

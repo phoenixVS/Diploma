@@ -125,3 +125,5 @@ const theme = createMuiTheme({
 })
 
 export default responsiveFontSizes(theme)
+
+export const defaultTheme = theme
