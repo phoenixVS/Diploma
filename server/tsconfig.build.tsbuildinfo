@@ -1536,8 +1536,18 @@
         "signature": "5f52765e552e65343cfa472648b2ae11514d83de5c1a6440bb3a0692b643d3c0",
         "affectsGlobalScope": false
       },
+      "./src/album/schemas/image.schema.ts": {
+        "version": "143c7838c1a065d3a9222ae499e11cbcc10b6a03dfa44bf6fd0ecc883db91a99",
+        "signature": "a77b1f03af95f98bb99503fb25c48e39dec0d62dd3e5967c34cc8737044b78a1",
+        "affectsGlobalScope": false
+      },
+      "./src/album/schemas/album.schema.ts": {
+        "version": "c61fc8bd8a17126e90e1b285c2846898630593a1320df4804bc5638ba6a01920",
+        "signature": "556b0a82a1c35a0aea20f2bae226deb2f2d9a23e0c2936408cb03f9278e511c2",
+        "affectsGlobalScope": false
+      },
       "./src/album/album.module.ts": {
-        "version": "aa40d58e15a74fe1aa1292c7bf1b9d39248275a81e4fa472f1f1d24c937ce544",
+        "version": "231b82a06dadc1d408d12a0ebac533821901da1f04d938d5be905fe2b5856567",
         "signature": "73bca0e151ea0558343c217da6d21aa12aa70edd04b37d965651231ece857a35",
         "affectsGlobalScope": false
       },
@@ -1729,16 +1739,6 @@
       "./src/main.ts": {
         "version": "2cd79ca3b4f8da6e5bfea41db935b8552e79926188f71ceec92b27714084b511",
         "signature": "f761c91419d0a89422a0004ef1a92929dd4d2d5e5c16758654d8b0467d1998c6",
-        "affectsGlobalScope": false
-      },
-      "./src/album/schemas/album.schema.ts": {
-        "version": "1c0ad556cc6674b02a5f089b1ce7ab3a2ef2404addbef86926ec845c4cc8ab81",
-        "signature": "cf8d2237b60f7a59cca28639137bbae279f7ea4f307d0553ace2b40cba3807cb",
-        "affectsGlobalScope": false
-      },
-      "./src/album/schemas/image.schema.ts": {
-        "version": "143c7838c1a065d3a9222ae499e11cbcc10b6a03dfa44bf6fd0ecc883db91a99",
-        "signature": "a77b1f03af95f98bb99503fb25c48e39dec0d62dd3e5967c34cc8737044b78a1",
         "affectsGlobalScope": false
       },
       "./src/comment/schemas/comment.schema.ts": {
@@ -3436,15 +3436,19 @@
       ],
       "./src/album/album.module.ts": [
         "./node_modules/@nestjs/common/index.d.ts",
+        "./node_modules/@nestjs/mongoose/index.d.ts",
         "./src/album/album.controller.ts",
-        "./src/album/album.service.ts"
+        "./src/album/album.service.ts",
+        "./src/album/schemas/album.schema.ts",
+        "./src/album/schemas/image.schema.ts"
       ],
       "./src/album/album.service.ts": [
         "./node_modules/@nestjs/common/index.d.ts"
       ],
       "./src/album/schemas/album.schema.ts": [
         "./node_modules/@nestjs/mongoose/index.d.ts",
-        "./node_modules/mongoose/index.d.ts"
+        "./node_modules/mongoose/index.d.ts",
+        "./src/album/schemas/image.schema.ts"
       ],
       "./src/album/schemas/image.schema.ts": [
         "./node_modules/@nestjs/mongoose/index.d.ts",
@@ -4820,7 +4824,8 @@
         "./node_modules/rxjs/internal/types.d.ts"
       ],
       "./src/album/schemas/album.schema.ts": [
-        "./node_modules/mongoose/index.d.ts"
+        "./node_modules/mongoose/index.d.ts",
+        "./src/album/schemas/image.schema.ts"
       ],
       "./src/album/schemas/image.schema.ts": [
         "./node_modules/mongoose/index.d.ts"

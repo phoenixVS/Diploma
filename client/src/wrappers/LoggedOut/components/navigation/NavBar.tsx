@@ -12,9 +12,13 @@ import {
 } from '@material-ui/core'
 import MenuIcon from '@material-ui/icons/Menu'
 import HomeIcon from '@material-ui/icons/Home'
+import DynamicFeedIcon from '@material-ui/icons/DynamicFeed'
+import PhotoAlbumIcon from '@material-ui/icons/PhotoAlbum'
 import HowToRegIcon from '@material-ui/icons/HowToReg'
 import LockOpenIcon from '@material-ui/icons/LockOpen'
 import BookIcon from '@material-ui/icons/Book'
+import DuoIcon from '@material-ui/icons/Duo'
+import ScheduleIcon from '@material-ui/icons/Schedule'
 import NavigationDrawer from '../../../../common/components/NavigationDrawer'
 import { Nullable } from '@helpers/commonInterfaces/interfaces'
 import { Styles } from '@material-ui/styles'
@@ -70,8 +74,28 @@ const NavBar: React.FC<NavBarProps> = (props) => {
     },
     {
       link: '/blog',
-      name: 'Blog',
+      name: 'News',
+      icon: <DynamicFeedIcon className="text-white" />,
+    },
+    {
+      link: '/blog',
+      name: 'Gallery',
+      icon: <PhotoAlbumIcon className="text-white" />,
+    },
+    {
+      link: '/blog',
+      name: 'Library',
       icon: <BookIcon className="text-white" />,
+    },
+    {
+      link: '/blog',
+      name: 'Online lesson',
+      icon: <DuoIcon className="text-white" />,
+    },
+    {
+      link: '/test',
+      name: 'Create seminar',
+      icon: <ScheduleIcon className="text-white" />,
     },
     {
       name: 'Register',
@@ -90,7 +114,7 @@ const NavBar: React.FC<NavBarProps> = (props) => {
         <Toolbar className={classes.toolbar}>
           <div>
             <Typography variant="h4" className={classes.brandText} display="inline" color="primary">
-              Hand
+              Спортивна
             </Typography>
             <Typography
               variant="h4"
@@ -98,7 +122,7 @@ const NavBar: React.FC<NavBarProps> = (props) => {
               display="inline"
               color="secondary"
             >
-              -to-hand combat
+              &nbsp;секція
             </Typography>
           </div>
           <div>

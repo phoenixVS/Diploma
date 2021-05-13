@@ -134,7 +134,7 @@ const HeadSection: React.FC<HeadSectionProps> = (props) => {
                       <Box mb={4}>
                         <img className={classes.logo} src="/icons/icon-384x384.png" alt="logo" />
                         <Typography variant={isWidthUp('lg', width) ? 'h3' : 'h4'}>
-                          Free Template for building a SaaS app using Material-UI
+                          Онлайн заняття, семінари, змагання
                         </Typography>
                       </Box>
                       <div>
@@ -143,8 +143,7 @@ const HeadSection: React.FC<HeadSectionProps> = (props) => {
                             variant={isWidthUp('lg', width) ? 'h6' : 'body1'}
                             color="textSecondary"
                           >
-                            Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy
-                            eirmod tempor invidunt
+                            Єдиний, хто зможе затягнути тебе на дно та витягти наверх - це ти сам.
                           </Typography>
                         </Box>
                         <Button
@@ -155,7 +154,7 @@ const HeadSection: React.FC<HeadSectionProps> = (props) => {
                           classes={{ label: classes.extraLargeButtonLabel }}
                           href="https://github.com/dunky11/react-saas-template"
                         >
-                          Download from GitHub
+                          Записатися на тренування
                         </Button>
                       </div>
                     </Box>

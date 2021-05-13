@@ -18,7 +18,7 @@ const Home: React.FC<HomeProps> = (props) => {
   return (
     <Fragment>
       <HeadSection />
-      <SeminarDashboard />
+      {/* <SeminarDashboard /> */}
       <FeatureSection />
       <PricingSection />
     </Fragment>
