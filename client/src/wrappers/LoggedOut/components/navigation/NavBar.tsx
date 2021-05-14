@@ -9,6 +9,7 @@ import {
   IconButton,
   withStyles,
   Theme,
+  Box,
 } from '@material-ui/core'
 import MenuIcon from '@material-ui/icons/Menu'
 import HomeIcon from '@material-ui/icons/Home'
@@ -22,6 +23,7 @@ import ScheduleIcon from '@material-ui/icons/Schedule'
 import NavigationDrawer from '../../../../common/components/NavigationDrawer'
 import { Nullable } from '@helpers/commonInterfaces/interfaces'
 import { Styles } from '@material-ui/styles'
+import LanguageSwitcher from 'wrappers/LoggedIn/components/navigation/LanguageSwitcher'
 
 const styles: Styles<Theme, {}> = (theme: Theme) => ({
   appBar: {
@@ -112,7 +114,10 @@ const NavBar: React.FC<NavBarProps> = (props) => {
     <div className={classes.root}>
       <AppBar position="fixed" className={classes.appBar}>
         <Toolbar className={classes.toolbar}>
-          <div>
+          <Box display="flex" alignItems="center">
+            <Hidden xsDown>
+              <LanguageSwitcher />
+            </Hidden>
             <Typography variant="h4" className={classes.brandText} display="inline" color="primary">
               Спортивна
             </Typography>
@@ -124,7 +129,7 @@ const NavBar: React.FC<NavBarProps> = (props) => {
             >
               &nbsp;секція
             </Typography>
-          </div>
+          </Box>
           <div>
             <Hidden mdUp>
               <IconButton

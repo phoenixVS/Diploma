@@ -126,11 +126,4 @@ function CookieRulesDialog(props) {
   )
 }
 
-CookieRulesDialog.propTypes = {
-  classes: PropTypes.object.isRequired,
-  onClose: PropTypes.func.isRequired,
-  open: PropTypes.bool.isRequired,
-  theme: PropTypes.object.isRequired,
-}
-
 export default withStyles(styles, { withTheme: true })(CookieRulesDialog)

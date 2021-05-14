@@ -4,6 +4,7 @@ import AOS from 'aos'
 import 'aos/dist/aos.css'
 
 import '../styles/globals.sass'
+import { appWithTranslation } from 'i18n'
 
 const MyApp = ({ Component, pageProps }: any) => {
   useEffect(() => {
@@ -19,4 +20,4 @@ MyApp.getInitialProps = async (appContext: any) => ({
   ...(await App.getInitialProps(appContext)),
 })
 
-export default MyApp
+export default appWithTranslation(MyApp)

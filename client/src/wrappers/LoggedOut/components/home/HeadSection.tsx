@@ -16,6 +16,7 @@ import WaveBorder from '../../../../common/components/WaveBorder'
 import ZoomImage from '../../../../common/components/ZoomImage'
 import { Styles } from '@material-ui/styles'
 import { Breakpoint } from '@material-ui/core/styles/createBreakpoints'
+import { useTranslation } from 'i18n'
 
 const styles: Styles<Theme, {}> = (theme) => ({
   relative: {
@@ -115,6 +116,7 @@ interface HeadSectionProps {
 }
 const HeadSection: React.FC<HeadSectionProps> = (props) => {
   const { classes, theme, width } = props
+  const { t } = useTranslation(['home'])
 
   return (
     <Fragment>
@@ -133,8 +135,11 @@ const HeadSection: React.FC<HeadSectionProps> = (props) => {
                     >
                       <Box mb={4}>
                         <img className={classes.logo} src="/icons/icon-384x384.png" alt="logo" />
-                        <Typography variant={isWidthUp('lg', width) ? 'h3' : 'h4'}>
-                          Онлайн заняття, семінари, змагання
+                        <Typography
+                          className={classes.minHeaderWidth}
+                          variant={isWidthUp('lg', width) ? 'h3' : 'h4'}
+                        >
+                          {t('Online training, workshops and competitions')}
                         </Typography>
                       </Box>
                       <div>
@@ -143,7 +148,9 @@ const HeadSection: React.FC<HeadSectionProps> = (props) => {
                             variant={isWidthUp('lg', width) ? 'h6' : 'body1'}
                             color="textSecondary"
                           >
-                            Єдиний, хто зможе затягнути тебе на дно та витягти наверх - це ти сам.
+                            {t(
+                              'The only one who can pull you to the bottom and pull you up is you.'
+                            )}
                           </Typography>
                         </Box>
                         <Button
@@ -162,7 +169,7 @@ const HeadSection: React.FC<HeadSectionProps> = (props) => {
                   <Hidden smDown>
                     <Grid className={classes.relative} item md={6}>
                       <ZoomImage
-                        src={`${process.env.PUBLIC_URL}/images/logged_out/headerImage.jpg`}
+                        src={`${process.env.PUBLIC_URL}/images/logged_out/hero.jpg`}
                         className={classes.image}
                         alt="header example"
                       />

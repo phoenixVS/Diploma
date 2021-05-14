@@ -33,6 +33,7 @@ import NavigationDrawer from '../../../../common/components/NavigationDrawer'
 import { Nullable } from '@helpers/commonInterfaces/interfaces'
 import { Breakpoint } from '@material-ui/core/styles/createBreakpoints'
 import { Styles } from '@material-ui/styles'
+import LanguageSwitcher from './LanguageSwitcher'
 
 const styles: Styles<Theme, {}> = (theme: Theme) => ({
   appBar: {
@@ -223,13 +224,16 @@ const NavBar: React.FC<NavBarProps> = (props) => {
               </Box>
             </Hidden>
             <Hidden xsDown>
+              <LanguageSwitcher />
+            </Hidden>
+            <Hidden xsDown>
               <Typography
                 variant="h4"
                 className={classes.brandText}
                 display="inline"
                 color="primary"
               >
-                Wa
+                Спортивна
               </Typography>
               <Typography
                 variant="h4"
@@ -237,7 +241,7 @@ const NavBar: React.FC<NavBarProps> = (props) => {
                 display="inline"
                 color="secondary"
               >
-                Ver
+                секція
               </Typography>
             </Hidden>
           </Box>
