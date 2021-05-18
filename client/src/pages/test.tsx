@@ -2,7 +2,7 @@ import React, { useCallback, useState } from 'react'
 import { NextPage } from 'next'
 import dynamic from 'next/dynamic'
 import Head from 'next/head'
-import { MuiThemeProvider, CssBaseline } from '@material-ui/core'
+import { ThemeProvider, CssBaseline } from '@material-ui/core'
 import theme from '../common/theme'
 import GlobalStyles from '../common/GlobalStyles'
 import smoothScrollTop from 'common/functions/smoothScrollTop'
@@ -29,6 +29,9 @@ const IndexPage: NextPage = () => {
         <link rel="apple-touch-icon" href="/icons/apple-icon.png"></link>
         <meta name="theme-color" content="#317EFB" />
       </Head>
+      <ThemeProvider theme={theme}>
+        <div></div>
+      </ThemeProvider>
       {/*<MuiThemeProvider theme={theme}>
         <CssBaseline />
         <GlobalStyles />

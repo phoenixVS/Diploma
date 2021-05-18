@@ -17,6 +17,7 @@ import {
 import CloseIcon from '@material-ui/icons/Close'
 import { Nullable } from '@helpers/commonInterfaces/interfaces'
 import { Breakpoint } from '@material-ui/core/styles/createBreakpoints'
+import LanguageSwitcher from 'wrappers/LoggedIn/components/navigation/LanguageSwitcher'
 
 const styles = (theme: Theme) => ({
   closeIcon: {
@@ -28,6 +29,9 @@ const styles = (theme: Theme) => ({
   blackList: {
     backgroundColor: theme.palette.common.black,
     height: '100%',
+  },
+  langs: {
+    backgroundColor: theme.palette.common.black,
   },
   noDecoration: {
     textDecoration: 'none !important',
@@ -120,6 +124,16 @@ const NavigationDrawer: React.FC<NavigationDrawerProps> = (props) => {
             </ListItem>
           )
         })}
+        <ListItem
+          style={{
+            position: 'absolute',
+            bottom: '0',
+            justifyContent: anchor === 'left' ? 'flex-start' : 'flex-end',
+          }}
+          disableGutters
+        >
+          <LanguageSwitcher className={classes.langs} />
+        </ListItem>
       </List>
     </Drawer>
   )

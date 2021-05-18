@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { ReactElement } from 'react'
 import cx from 'classnames'
 import { makeStyles } from '@material-ui/core/styles'
 import List from '@material-ui/core/List'
@@ -16,6 +16,30 @@ const useStyles = makeStyles((theme) => ({
     color: '#cf55fc',
     fontWeight: 700,
   },
+  sec: {
+    fontWeight: 700,
+  },
+  secDark: {
+    fontWeight: 700,
+    color: '#fff',
+  },
+  overrides: {
+    MUITypography: {
+      root: {
+        fontWeight: 700,
+      },
+      body1: {
+        fontWeight: 700,
+        color: '#fff',
+      },
+    },
+    MuiListItemText: {
+      body1: {
+        fontWeight: 700,
+        color: '#fff',
+      },
+    },
+  },
 }))
 
 const options = ['English', 'Русский', 'Українська']
@@ -23,11 +47,17 @@ const langsIndices = ['en', 'ru', 'ua']
 
 interface languageSwitcherProps {
   className?: string
+  inNavDrawer?: boolean
 }
-const LanguageSwitcher: React.FC<languageSwitcherProps> = ({ className = '' }) => {
+const LanguageSwitcher: React.FC<languageSwitcherProps> = ({
+  className = '',
+  inNavDrawer = false,
+}) => {
   const classes = useStyles()
   const [anchorEl, setAnchorEl] = React.useState(null)
-  const [selectedIndex, setSelectedIndex] = React.useState(0)
+  const [selectedIndex, setSelectedIndex] = React.useState(
+    langsIndices.findIndex((lang) => lang === i18n.language)
+  )
 
   const handleClickListItem = (event) => {
     setAnchorEl(event.currentTarget)
@@ -45,8 +75,13 @@ const LanguageSwitcher: React.FC<languageSwitcherProps> = ({ className = '' }) =
 
   return (
     <div className={cx(classes.root, className)}>
-      <List component="nav" aria-label="Language">
+      <List
+        component="nav"
+        aria-label="Language"
+        className={inNavDrawer ? classes.sec : classes.secDark}
+      >
         <ListItem
+          className={inNavDrawer ? classes.sec : classes.secDark}
           button
           aria-haspopup="true"
           aria-controls="lock-menu"
@@ -54,8 +89,11 @@ const LanguageSwitcher: React.FC<languageSwitcherProps> = ({ className = '' }) =
           onClick={handleClickListItem}
         >
           <ListItemText
-            className={classes.label}
             primary="Language"
+            className={classes.label}
+            style={{
+              fontWeight: 700,
+            }}
             secondary={options[selectedIndex]}
           />
         </ListItem>
