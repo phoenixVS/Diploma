@@ -1,22 +1,15 @@
-import React, { useCallback, useState } from 'react'
-import { NextPage } from 'next'
-import Head from 'next/head'
-import { MuiThemeProvider, CssBaseline } from '@material-ui/core'
-import theme from '../common/theme'
-import GlobalStyles from '../common/GlobalStyles'
-import smoothScrollTop from 'common/functions/smoothScrollTop'
 import { Nullable } from '@helpers/commonInterfaces/interfaces'
-import Home from 'wrappers/LoggedOut/components/home/Home'
+import { CssBaseline, MuiThemeProvider, withStyles } from '@material-ui/core'
+import GlobalStyles from 'common/GlobalStyles'
+import theme from 'common/theme'
+import Head from 'next/head'
+import React, { useState } from 'react'
 import LoggedOutWrapper from 'wrappers/LoggedOut/components/LoggedOutWrapper'
 
-const IndexPage: NextPage = () => {
-  const [selectedTab, setSelectedTab] = useState<Nullable<string>>(null)
-  const selectHome = useCallback(() => {
-    smoothScrollTop()
-    document.title = 'Workout | Kyiv'
-    setSelectedTab('Home')
-  }, [setSelectedTab])
+interface Custom500Props {}
 
+const Custom500: React.FC<Custom500Props> = (props) => {
+  const [selectedTab, setSelectedTab] = useState<Nullable<string>>(null)
   return (
     <>
       <Head>
@@ -30,12 +23,11 @@ const IndexPage: NextPage = () => {
         <CssBaseline />
         <GlobalStyles />
         <LoggedOutWrapper {...{ selectedTab }} {...{ setSelectedTab }}>
-          {/*@ts-ignore*/}
-          <Home {...{ selectHome }} />
+          <h1>500 - Page not found</h1>
         </LoggedOutWrapper>
       </MuiThemeProvider>
     </>
   )
 }
 
-export default IndexPage
+export default withStyles(styles, { withTheme: true })(Custom500)

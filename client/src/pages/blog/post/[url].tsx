@@ -1,6 +1,5 @@
 import React, { useCallback, useEffect, useState } from 'react'
 import { NextPage } from 'next'
-import dynamic from 'next/dynamic'
 import Head from 'next/head'
 import { MuiThemeProvider, CssBaseline } from '@material-ui/core'
 import theme from '../../../common/theme'
@@ -10,8 +9,6 @@ import LoggedOutWrapper from 'wrappers/LoggedOut/components/LoggedOutWrapper'
 import dummyBlogPosts from '../../../wrappers/LoggedOut/dummyData/blogPosts'
 import BlogPost from '../../../wrappers/LoggedOut/components/blog/BlogPost'
 import { useRouter } from 'next/dist/client/router'
-
-const Pace = dynamic(() => import('../../../common/components/Pace'), { ssr: false })
 
 const IndexPage: NextPage = () => {
   const [selectedTab, setSelectedTab] = useState<Nullable<string>>(null)
@@ -65,7 +62,6 @@ const IndexPage: NextPage = () => {
       <MuiThemeProvider theme={theme}>
         <CssBaseline />
         <GlobalStyles />
-        <Pace color={theme.palette.primary.light} />
         <LoggedOutWrapper {...{ selectedTab }} {...{ setSelectedTab }}>
           {post ? (
             <BlogPost

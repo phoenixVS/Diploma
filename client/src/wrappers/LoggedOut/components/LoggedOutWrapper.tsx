@@ -115,7 +115,13 @@ const Main: React.FC<MainProps> = (props) => {
         handleMobileDrawerOpen={handleMobileDrawerOpen}
         handleMobileDrawerClose={handleMobileDrawerClose}
       />
-      {children}
+      {React.Children.map(children, (child) => {
+        // checking isValidElement is the safe way and avoids a typescript errors too
+        if (React.isValidElement(child)) {
+          return React.cloneElement(child, { openLoginDialog: openLoginDialog })
+        }
+        return child
+      })}
       <Footer />
     </div>
   )

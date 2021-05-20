@@ -2,15 +2,13 @@ import React, { useCallback, useState } from 'react'
 import { NextPage } from 'next'
 import dynamic from 'next/dynamic'
 import Head from 'next/head'
-import { ThemeProvider, CssBaseline } from '@material-ui/core'
+import { CssBaseline, MuiThemeProvider } from '@material-ui/core'
 import theme from '../common/theme'
 import GlobalStyles from '../common/GlobalStyles'
 import smoothScrollTop from 'common/functions/smoothScrollTop'
 import { Nullable } from '@helpers/commonInterfaces/interfaces'
 import Home from 'wrappers/LoggedOut/components/home/Home'
 import LoggedOutWrapper from 'wrappers/LoggedOut/components/LoggedOutWrapper'
-
-const Pace = dynamic(() => import('../common/components/Pace'), { ssr: false })
 
 const IndexPage: NextPage = () => {
   const [selectedTab, setSelectedTab] = useState<Nullable<string>>(null)
@@ -29,17 +27,13 @@ const IndexPage: NextPage = () => {
         <link rel="apple-touch-icon" href="/icons/apple-icon.png"></link>
         <meta name="theme-color" content="#317EFB" />
       </Head>
-      <ThemeProvider theme={theme}>
-        <div></div>
-      </ThemeProvider>
-      {/*<MuiThemeProvider theme={theme}>
+      <MuiThemeProvider theme={theme}>
         <CssBaseline />
         <GlobalStyles />
-        <Pace color={theme.palette.primary.light} />
-       <LoggedOutWrapper {...{ selectedTab }} {...{ setSelectedTab }}>
+        <LoggedOutWrapper {...{ selectedTab }} {...{ setSelectedTab }}>
           <Home {...{ selectHome }} />
         </LoggedOutWrapper>
-      </MuiThemeProvider> */}
+      </MuiThemeProvider>
     </>
   )
 }

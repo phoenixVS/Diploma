@@ -24,6 +24,7 @@ import NavigationDrawer from '../../../../common/components/NavigationDrawer'
 import { Nullable } from '@helpers/commonInterfaces/interfaces'
 import { Styles } from '@material-ui/styles'
 import LanguageSwitcher from 'wrappers/LoggedIn/components/navigation/LanguageSwitcher'
+import { useTranslation } from 'i18n'
 
 const styles: Styles<Theme, {}> = (theme: Theme) => ({
   appBar: {
@@ -68,44 +69,40 @@ const NavBar: React.FC<NavBarProps> = (props) => {
     mobileDrawerOpen,
     selectedTab,
   } = props
+  const { t } = useTranslation(['common'])
   const menuItems = [
     {
-      link: '/',
-      name: 'Home',
-      icon: <HomeIcon className="text-white" />,
-    },
-    {
       link: '/blog',
-      name: 'News',
+      name: t('News'),
       icon: <DynamicFeedIcon className="text-white" />,
     },
     {
-      link: '/blog',
-      name: 'Gallery',
+      link: '/gallery',
+      name: t('Gallery'),
       icon: <PhotoAlbumIcon className="text-white" />,
     },
     {
-      link: '/blog',
-      name: 'Library',
+      link: '/library',
+      name: t('Library'),
       icon: <BookIcon className="text-white" />,
     },
     {
-      link: '/blog',
-      name: 'Online lesson',
+      link: '/c/online',
+      name: t('Online lesson'),
       icon: <DuoIcon className="text-white" />,
     },
     {
       link: '/test',
-      name: 'Create seminar',
+      name: t('Create seminar'),
       icon: <ScheduleIcon className="text-white" />,
     },
     {
-      name: 'Register',
+      name: t('Sign up'),
       onClick: openRegisterDialog,
       icon: <HowToRegIcon className="text-white" />,
     },
     {
-      name: 'Login',
+      name: t('Login'),
       onClick: openLoginDialog,
       icon: <LockOpenIcon className="text-white" />,
     },
@@ -118,17 +115,26 @@ const NavBar: React.FC<NavBarProps> = (props) => {
             <Hidden xsDown>
               <LanguageSwitcher />
             </Hidden>
-            <Typography variant="h4" className={classes.brandText} display="inline" color="primary">
-              Спортивна
-            </Typography>
-            <Typography
-              variant="h4"
-              className={classes.brandText}
-              display="inline"
-              color="secondary"
-            >
-              &nbsp;секція
-            </Typography>
+            <Link href="/">
+              <a>
+                <Typography
+                  variant="h4"
+                  className={classes.brandText}
+                  display="inline"
+                  color="primary"
+                >
+                  {t('Work')}
+                </Typography>
+                <Typography
+                  variant="h4"
+                  className={classes.brandText}
+                  display="inline"
+                  color="secondary"
+                >
+                  {t('out')}
+                </Typography>
+              </a>
+            </Link>
           </Box>
           <div>
             <Hidden mdUp>

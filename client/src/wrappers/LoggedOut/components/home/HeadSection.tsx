@@ -72,8 +72,9 @@ const styles: Styles<Theme, {}> = (theme) => ({
   },
   logo: {
     float: 'left',
-    width: '75px',
-    height: '75px',
+    width: '80px',
+    height: '80px',
+    marginLeft: '-10px',
   },
   wrapper: {
     position: 'relative',
@@ -112,10 +113,11 @@ const styles: Styles<Theme, {}> = (theme) => ({
 interface HeadSectionProps {
   classes: any
   theme: any
+  openLoginDialog: () => void
   width: Breakpoint
 }
 const HeadSection: React.FC<HeadSectionProps> = (props) => {
-  const { classes, theme, width } = props
+  const { classes, theme, width, openLoginDialog } = props
   const { t } = useTranslation(['home'])
 
   return (
@@ -159,9 +161,9 @@ const HeadSection: React.FC<HeadSectionProps> = (props) => {
                           fullWidth
                           className={classes.extraLargeButton}
                           classes={{ label: classes.extraLargeButtonLabel }}
-                          href="https://github.com/dunky11/react-saas-template"
+                          onClick={openLoginDialog}
                         >
-                          Записатися на тренування
+                          {t('Try')}
                         </Button>
                       </div>
                     </Box>

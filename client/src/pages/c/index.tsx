@@ -4,7 +4,6 @@ import Head from 'next/head'
 import { MuiThemeProvider, CssBaseline } from '@material-ui/core'
 import theme from '../../common/theme'
 import GlobalStyles from '../../common/GlobalStyles'
-import Pace from '../../common/components/Pace'
 import s from '@styles/Home.module.sass'
 import LoggedInWrapper from 'wrappers/LoggedIn/components/LoggedInWrapper'
 
@@ -21,7 +20,6 @@ const IndexPage: NextPage = () => {
       <MuiThemeProvider theme={theme}>
         <CssBaseline />
         <GlobalStyles />
-        <Pace color={theme.palette.primary.light} />
         <LoggedInWrapper />
       </MuiThemeProvider>
     </div>

@@ -6,18 +6,18 @@ import SeminarDashboard from 'wrappers/LoggedIn/components/dashboard/SeminarDash
 
 interface HomeProps {
   selectHome: () => void
+  openLoginDialog: () => void
 }
 
 const Home: React.FC<HomeProps> = (props) => {
-  const { selectHome } = props
-
+  const { selectHome, openLoginDialog } = props
   useEffect(() => {
     selectHome()
   }, [selectHome])
 
   return (
     <Fragment>
-      <HeadSection />
+      <HeadSection {...{ openLoginDialog }} />
       {/* <SeminarDashboard /> */}
       <FeatureSection />
       <PricingSection />

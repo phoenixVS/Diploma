@@ -1,6 +1,15 @@
 {
   "Language": "Мова",
+  "Work": "Спортивна",
+  "out": "\u00A0секція",
   "Home": "Додому",
+  "News": "Новини",
+  "Gallery": "Галерея",
+  "Library": "Бібліотека",
+  "Online lesson": "Заняття онлайн",
+  "Create seminar": "Створити семінар",
+  "Sign up": "Записатися",
+  "Login": "Увійти",
   "We use cookies to ensure you get the best experience on our website. ": "Ми використовуємо файли cookie, щоб забезпечити найкращий досвід роботи на нашому веб-сайті.",
   "More details": "Більш детально",
   "Got it!": "Зрозуміло!"
