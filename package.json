@@ -7,8 +7,8 @@
     "test": "jest",
     "type-check": "tsc --project tsconfig.json --pretty --noEmit",
     "lint": "eslint --ext js,jsx,ts,tsx --fix",
-    "prepare": "husky install",
-    "postinstall": "husky install"
+    "prepare": "husky install ./client/husky",
+    "postinstall": "husky install ./client/husky"
   },
   "repository": {
     "type": "git",
