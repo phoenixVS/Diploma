@@ -5,6 +5,8 @@
   "main": "index.js",
   "scripts": {
     "test": "jest",
+    "type-check": "tsc --project tsconfig.json --pretty --noEmit",
+    "lint": "eslint --ext js,jsx,ts,tsx --fix",
     "prepare": "husky install",
     "postinstall": "husky install"
   },
@@ -24,5 +26,8 @@
   "bugs": {
     "url": "https://github.com/phoenixVS/Diploma/issues"
   },
-  "homepage": "https://github.com/phoenixVS/Diploma#readme"
+  "homepage": "https://github.com/phoenixVS/Diploma#readme",
+  "devDependencies": {
+    "husky": "^6.0.0"
+  }
 }
