@@ -3,13 +3,6 @@
   "version": "1.0.0",
   "description": "nextjs + nestjs pwa",
   "main": "index.js",
-  "scripts": {
-    "test": "jest",
-    "type-check": "tsc --project tsconfig.json --pretty --noEmit",
-    "lint": "eslint --ext js,jsx,ts,tsx --fix",
-    "prepare": "husky install ./client/husky",
-    "postinstall": "husky install ./client/husky"
-  },
   "repository": {
     "type": "git",
     "url": "git+https://github.com/phoenixVS/Diploma.git"
@@ -27,7 +20,4 @@
     "url": "https://github.com/phoenixVS/Diploma/issues"
   },
   "homepage": "https://github.com/phoenixVS/Diploma#readme",
-  "devDependencies": {
-    "husky": "^6.0.0"
-  }
 }
