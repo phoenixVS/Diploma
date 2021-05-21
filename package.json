@@ -1,0 +1,28 @@
+{
+  "name": "diploma",
+  "version": "1.0.0",
+  "description": "nextjs + nestjs pwa",
+  "main": "index.js",
+  "scripts": {
+    "test": "jest",
+    "prepare": "husky install",
+    "postinstall": "husky install"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/phoenixVS/Diploma.git"
+  },
+  "keywords": [
+    "nest",
+    "next",
+    "pwa",
+    "redux",
+    "mongo"
+  ],
+  "author": "Valentin Shapoval",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/phoenixVS/Diploma/issues"
+  },
+  "homepage": "https://github.com/phoenixVS/Diploma#readme"
+}
