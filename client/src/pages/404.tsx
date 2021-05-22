@@ -83,7 +83,7 @@ const Custom404: React.FC<Custom404Props> = (props) => {
                 <Card className={classes.card} data-aos-delay="200" data-aos="zoom-in">
                   <div className={cx(classes.containerFix, 'container')}>
                     <Box justifyContent="space-between" className="row">
-                      <Grid item xs={12} md={5}>
+                      <Grid item xs={12} md={12}>
                         <Box
                           display="flex"
                           flexDirection="column"
