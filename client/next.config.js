@@ -19,5 +19,19 @@ module.exports = withPWA({
     locales: ['en-US', 'uk-UA'],
     defaultLocale: 'en-US'
   },
+  async redirects() {
+    return [
+      {
+        source: '/en/c',
+        destination: '/en/c/dashboard',
+        permanent: true,
+      },
+      {
+        source: '/ua/c',
+        destination: '/ua/c/dashboard',
+        permanent: true,
+      },
+    ]
+  },
  rewrites: async () => nextI18NextRewrites(localeSubpaths)
 })

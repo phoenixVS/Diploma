@@ -19,9 +19,9 @@ import {
   withStyles,
 } from '@material-ui/core'
 import ExpandMoreIcon from '@material-ui/icons/ExpandMore'
-import HelpIcon from '../../../common/components/HelpIcon'
-import Bordered from '../../../common/components/Bordered'
-import ButtonCircularProgress from '../../../common/components/ButtonCircularProgress'
+import HelpIcon from '../../../../common/components/HelpIcon'
+import Bordered from '../../../../common/components/Bordered'
+import ButtonCircularProgress from '../../../../common/components/ButtonCircularProgress'
 
 const styles = (theme) => ({
   numberInput: {

@@ -18,11 +18,11 @@ import PlayCirlceOutlineIcon from '@material-ui/icons/PlayCircleOutline'
 import PauseCircleOutlineIcon from '@material-ui/icons/PauseCircleOutline'
 import ExpandMoreIcon from '@material-ui/icons/ExpandMore'
 import DeleteIcon from '@material-ui/icons/Delete'
-import EnhancedTableHead from '../../../common/components/EnhancedTableHead'
-import stableSort from '../../../common/functions/stableSort'
-import getSorting from '../../../common/functions/getSorting'
-import HighlightedInformation from '../../../common/components/HighlightedInformation'
-import ConfirmationDialog from '../../../common/components/ConfirmationDialog'
+import EnhancedTableHead from '../../../../common/components/EnhancedTableHead'
+import stableSort from '../../../../common/functions/stableSort'
+import getSorting from '../../../../common/functions/getSorting'
+import HighlightedInformation from '../../../../common/components/HighlightedInformation'
+import ConfirmationDialog from '../../../../common/components/ConfirmationDialog'
 import { Nullable } from '@helpers/commonInterfaces/interfaces'
 
 const styles = (theme: any) => ({
@@ -89,13 +89,19 @@ interface IDeleteDialog {
   name: string
 }
 
-function CustomTable(props) {
+interface CustomTableProps {
+  classes: any
+  targets: any[]
+  setTargets: (targets: any[]) => void
+  pushMessageToSnackbar: (message: string) => void
+}
+const CustomTable: React.FC<CustomTableProps> = (props) => {
   const { pushMessageToSnackbar, classes, targets, setTargets } = props
   const [order, setOrder] = useState('asc')
   const [orderBy, setOrderBy] = useState(null)
   const [page, setPage] = useState(0)
   const [isDeleteTargetDialogOpen, setIsDeleteTargetDialogOpen] = useState(false)
-  const [deleteTargetDialogRow, setDeleteTargetDialogRow] = useState < Nullable<IDeleteDialog>(null)
+  const [deleteTargetDialogRow, setDeleteTargetDialogRow] = useState<Nullable<IDeleteDialog>>(null)
   const [isDeleteTargetLoading, setIsDeleteTargetLoading] = useState(false)
 
   const handleRequestSort = useCallback(
@@ -297,13 +303,6 @@ function CustomTable(props) {
       </Box>
     </Accordion>
   )
-}
-
-CustomTable.propTypes = {
-  classes: PropTypes.object.isRequired,
-  targets: PropTypes.arrayOf(PropTypes.object).isRequired,
-  setTargets: PropTypes.func.isRequired,
-  pushMessageToSnackbar: PropTypes.func,
 }
 
 export default withStyles(styles, { withTheme: true })(CustomTable)

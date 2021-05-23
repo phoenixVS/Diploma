@@ -34,24 +34,28 @@ interface MainProps {
 const Main: React.FC<MainProps> = (props) => {
   const { classes, children } = props
   const [selectedTab, setSelectedTab] = useState<Nullable<string>>(null)
-  const [CardChart, setCardChart] = useState(null)
+  const [CardChart, setCardChart] = useState<any>(null)
   const [hasFetchedCardChart, setHasFetchedCardChart] = useState(false)
-  const [EmojiTextArea, setEmojiTextArea] = useState(null)
+  const [EmojiTextArea, setEmojiTextArea] = useState<any>(null)
   const [hasFetchedEmojiTextArea, setHasFetchedEmojiTextArea] = useState(false)
-  const [ImageCropper, setImageCropper] = useState(null)
+  const [ImageCropper, setImageCropper] = useState<any>(null)
   const [hasFetchedImageCropper, setHasFetchedImageCropper] = useState(false)
-  const [Dropzone, setDropzone] = useState(null)
+  const [Dropzone, setDropzone] = useState<any>(null)
   const [hasFetchedDropzone, setHasFetchedDropzone] = useState(false)
-  const [DateTimePicker, setDateTimePicker] = useState(null)
+  const [DateTimePicker, setDateTimePicker] = useState<any>(null)
   const [hasFetchedDateTimePicker, setHasFetchedDateTimePicker] = useState(false)
-  const [transactions, setTransactions] = useState([])
-  const [statistics, setStatistics] = useState({ views: [], profit: [] })
+  const [transactions, setTransactions] = useState<any[]>([])
+  type StatisticsType = {
+    profit: Array<{ value: number; timestamp: number }>
+    views: Array<{ value: number; timestamp: number }>
+  }
+  const [statistics, setStatistics] = useState<StatisticsType>({ views: [], profit: [] })
   const [posts, setPosts] = useState([])
-  const [targets, setTargets] = useState([])
-  const [messages, setMessages] = useState([])
+  const [targets, setTargets] = useState<any[]>([])
+  const [messages, setMessages] = useState<any[]>([])
   const [isAccountActivated, setIsAccountActivated] = useState(false)
   const [isAddBalanceDialogOpen, setIsAddBalanceDialogOpen] = useState(false)
-  const [pushMessageToSnackbar, setPushMessageToSnackbar] = useState(null)
+  const [pushMessageToSnackbar, setPushMessageToSnackbar] = useState<any>(null)
 
   const fetchRandomTargets = useCallback(() => {
     const targets = []
@@ -90,7 +94,10 @@ const Main: React.FC<MainProps> = (props) => {
   }, [pushMessageToSnackbar, setIsAddBalanceDialogOpen])
 
   const fetchRandomStatistics = useCallback(() => {
-    const statistics = { profit: [], views: [] }
+    const statistics: StatisticsType = {
+      profit: [],
+      views: [],
+    }
     const iterations = 300
     const oneYearSeconds = 60 * 60 * 24 * 365
     let curProfit = Math.round(3000 + Math.random() * 1000)
@@ -113,7 +120,7 @@ const Main: React.FC<MainProps> = (props) => {
   }, [setStatistics])
 
   const fetchRandomTransactions = useCallback(() => {
-    const transactions = []
+    const transactions: any[] = []
     const iterations = 32
     const oneMonthSeconds = Math.round(60 * 60 * 24 * 30.5)
     const transactionTemplates = [
@@ -340,7 +347,13 @@ const Main: React.FC<MainProps> = (props) => {
           setTargets={setTargets}
           setPosts={setPosts}
         />*/}
-        {children}
+        {React.Children.map(children, (child) => {
+          // checking isValidElement is the safe way and avoids a typescript errors too
+          if (React.isValidElement(child)) {
+            return React.cloneElement(child)
+          }
+          return child
+        })}
       </main>
     </Fragment>
   )

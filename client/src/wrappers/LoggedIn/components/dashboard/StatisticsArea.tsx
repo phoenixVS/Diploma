@@ -1,8 +1,12 @@
 import React from 'react'
-import PropTypes from 'prop-types'
 import { Grid, withTheme } from '@material-ui/core'
 
-function StatisticsArea(props) {
+interface StatisticsAreaProps {
+  theme: any
+  data: any
+  CardChart: any
+}
+const StatisticsArea: React.FC<StatisticsAreaProps> = (props) => {
   const { theme, CardChart, data } = props
   return (
     CardChart &&
@@ -28,12 +32,6 @@ function StatisticsArea(props) {
       </Grid>
     )
   )
-}
-
-StatisticsArea.propTypes = {
-  theme: PropTypes.object.isRequired,
-  data: PropTypes.object.isRequired,
-  CardChart: PropTypes.elementType,
 }
 
 export default withTheme(StatisticsArea)
