@@ -1,6 +1,5 @@
 import React, { useCallback, useEffect, useState } from 'react'
 import { NextPage } from 'next'
-import Head from 'next/head'
 import { MuiThemeProvider, CssBaseline } from '@material-ui/core'
 import theme from '../../common/theme'
 import GlobalStyles from '../../common/GlobalStyles'

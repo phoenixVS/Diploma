@@ -2,7 +2,6 @@ import React, { Fragment, useState, useCallback, useEffect } from 'react'
 import { Portal, Backdrop, withStyles, Theme } from '@material-ui/core'
 import ScrollbarSize from '@material-ui/core/Tabs/ScrollbarSize'
 import classNames from 'classnames'
-import Image from 'next/image'
 import { Styles } from '@material-ui/styles'
 
 const styles: Styles<Theme, {}> = (theme: Theme) => ({
@@ -71,6 +70,7 @@ const ZoomImage: React.FC<ZoomImageProps> = (props) => {
       "color: #29f4e9; font: 16px 'Open Sans', sans-serif; font-weight: 500; background: #FF00CB; border-radius: 10px; padding: 0 15px",
       zoomedIn
     )
+    console.log(`scrollbar size`, scrollbarSize)
     if (zoomedIn) {
       document.body.style.overflow = 'hidden'
       document.body.style.paddingRight = `${scrollbarSize}px`
@@ -88,27 +88,33 @@ const ZoomImage: React.FC<ZoomImageProps> = (props) => {
       {zoomedIn && (
         <Portal>
           <Backdrop open={zoomedIn} className={classes.backdrop} onClick={zoomOut}></Backdrop>
-          <div onClick={zoomOut} className={classes.portalImgWrapper}>
+          <div
+            role="button"
+            onClick={zoomOut}
+            onKeyPress={zoomOut}
+            className={classes.portalImgWrapper}
+            tabIndex={0}
+          >
             <div className={classes.portalImgInnerWrapper}>
-              <Image
+              <img
                 alt={alt}
                 src={src}
                 layout="fill"
                 className={classes.portalImg}
                 {...zoomedImgProps}
-              ></Image>
+              ></img>
             </div>
           </div>
         </Portal>
       )}
-      <Image
-        alt={alt}
-        src={src}
-        layout="fill"
-        onClick={zoomIn}
-        className={classNames(className, classes.zoomedOutImage)}
-        {...rest}
-      ></Image>
+      <div role="button" onClick={zoomIn} onKeyDown={() => 1} tabIndex={0}>
+        <img
+          alt={alt}
+          src={src}
+          className={classNames(className, classes.zoomedOutImage)}
+          {...rest}
+        ></img>
+      </div>
     </Fragment>
   )
 }

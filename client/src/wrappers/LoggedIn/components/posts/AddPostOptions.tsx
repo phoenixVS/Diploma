@@ -12,12 +12,15 @@ import {
   MenuItem,
   Box,
   withStyles,
+  Theme,
 } from '@material-ui/core'
 import CloseIcon from '@material-ui/icons/Close'
 import Bordered from '../../../../common/components/Bordered'
 import ImageCropperDialog from '../../../../common/components/ImageCropperDialog'
+import { Styles } from '@material-ui/styles'
+import { useTranslation } from 'i18n'
 
-const styles = (theme) => ({
+const styles: Styles<Theme, {}> = (theme) => ({
   floatButtonWrapper: {
     position: 'absolute',
     top: theme.spacing(1),
@@ -76,22 +79,21 @@ const styles = (theme) => ({
 const inputOptions = ['None', 'Slow', 'Normal', 'Fast']
 
 interface AddPostOptionsProps {
-  onEmojiTextareaChange: () => void
   DateTimePicker: any
   EmojiTextArea: any
   Dropzone: any
   ImageCropper: any
   classes: any
   cropperFile: any
-  onCrop: () => void
+  onCrop: (dataUrl: any) => void
   onCropperClose: () => void
   files: any[]
   deleteItem: () => void
-  onDrop: () => void
-  value: string
-  characters: number
+  onDrop: (acceptedFiles: any, rejectedFiles: any) => void
+  value?: string
+  characters?: number
   uploadAt: Date
-  onChangeUploadAt: () => void
+  onChangeUploadAt: (dataUrl: any) => void
 }
 const AddPostOptions: React.FC<AddPostOptionsProps> = (props) => {
   const {
@@ -113,6 +115,8 @@ const AddPostOptions: React.FC<AddPostOptionsProps> = (props) => {
   const [option2, setOption2] = useState('None')
   const [option3, setOption3] = useState('None')
   const [option4, setOption4] = useState('None')
+
+  const { t } = useTranslation(['posts'])
 
   const handleChange = useCallback(
     (event) => {
@@ -138,7 +142,7 @@ const AddPostOptions: React.FC<AddPostOptionsProps> = (props) => {
   )
 
   const printFile = useCallback(() => {
-    if (files[0]) {
+    if (files && files[0]) {
       return (
         <div className={classes.imgWrapper}>
           <img
@@ -200,7 +204,7 @@ const AddPostOptions: React.FC<AddPostOptionsProps> = (props) => {
         />
       )}
       <Typography paragraph variant="h6">
-        Upload Image
+        {t('Upload Image')}
       </Typography>
       <Box mb={2}>
         {EmojiTextArea && (
@@ -213,7 +217,7 @@ const AddPostOptions: React.FC<AddPostOptionsProps> = (props) => {
         )}
       </Box>
       <Typography paragraph variant="h6">
-        Options
+        {t('Options')}
       </Typography>
       <List disablePadding>
         <Bordered disableVerticalPadding disableBorderRadius>

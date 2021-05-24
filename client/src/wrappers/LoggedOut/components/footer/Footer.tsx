@@ -1,5 +1,4 @@
 import React from 'react'
-import PropTypes from 'prop-types'
 import {
   Grid,
   Typography,
@@ -16,6 +15,7 @@ import MailIcon from '@material-ui/icons/Mail'
 import WaveBorder from '../../../../common/components/WaveBorder'
 import transitions from '@material-ui/core/styles/transitions'
 import ColoredButton from '../../../../common/components/ColoredButton'
+import { useTranslation } from 'i18n'
 
 const styles = (theme) => ({
   footerInner: {
@@ -78,11 +78,11 @@ const styles = (theme) => ({
 const infos = [
   {
     icon: <PhoneIcon />,
-    description: '+1 555 123456',
+    description: '+380 067 782 16 87',
   },
   {
     icon: <MailIcon />,
-    description: 'support@company.com',
+    description: 'shapoval.vad.nick@gmail.com',
   },
 ]
 
@@ -101,7 +101,7 @@ const socialIcons = [
       </svg>
     ),
     label: 'Github',
-    href: 'https://github.com/dunky11/react-saas-template',
+    href: 'https://github.com/phoenixVS/Diploma',
   },
   {
     icon: (
@@ -141,6 +141,41 @@ const socialIcons = [
         role="img"
         width="24px"
         height="24px"
+        viewBox="14 14 24 24"
+        xmlns="http://www.w3.org/2000/svg"
+      >
+        <title>Instagram</title>
+        <g
+          xmlns="http://www.w3.org/2000/svg"
+          fill="none"
+          fillRule="evenodd"
+          id="black"
+          stroke="none"
+          strokeWidth="1"
+        >
+          <g id="instagram">
+            <path
+              d="M30,60 C46.5685433,60 60,46.5685433 60,30 C60,13.4314567 46.5685433,0 30,0 C13.4314567,0 0,13.4314567 0,30 C0,46.5685433 13.4314567,60 30,60 Z"
+              fill="#000000"
+              id="Instagram"
+            />
+            <path
+              d="M21.7673614,24.2307692 L12.6923077,24.2307692 L12.6923077,23.0769231 L12.692308,23.0769231 C12.6923085,34.2046259 12.6923077,41.1538462 12.6923077,41.1538462 C12.6923077,46.1538451 17.6923077,46.1538451 17.6923077,46.1538451 L41.1538451,46.1538451 C41.1538451,46.1538451 46.1538451,46.1538451 46.1538462,41.1538462 L46.1538454,24.2307692 L46.1538462,24.2307692 L46.1538462,23.0769231 L36.3467878,23.0769231 C34.7679692,20.9749961 32.2543003,19.6153846 29.4230769,19.6153846 C26.5918536,19.6153846 24.0781847,20.9749961 22.4993661,23.0769231 L12.692308,23.0769231 C12.6923079,21.3763439 12.6923078,19.5781757 12.6923077,17.6923077 C12.6923077,14.53622 14.6844856,13.3723102 16.1538462,12.9430807 L16.1538462,19.6153846 L17.3076923,19.6153846 L17.3076923,12.7168978 L17.3076923,12.7168978 C17.5477091,12.6923077 17.6923077,12.6923077 17.6923077,12.6923077 L41.1538462,12.6923077 C41.1538462,12.6923077 46.1538451,12.6923077 46.1538451,17.6923077 L46.1538454,24.2307692 L37.0787925,24.2307692 C37.716079,25.4363757 38.0769231,26.8106634 38.0769231,28.2692308 C38.0769231,33.0486183 34.2024644,36.9230769 29.4230769,36.9230769 C24.6436894,36.9230769 20.7692308,33.0486183 20.7692308,28.2692308 C20.7692308,26.8106634 21.1300748,25.4363757 21.7673614,24.2307692 L21.7673614,24.2307692 Z M40.0785289,15 C38.9730725,15 38.0769231,15.9014423 38.0769231,17.0016058 L38.0769231,18.767625 C38.0769231,19.8730813 38.9783654,20.7692308 40.0785289,20.7692308 L41.8445481,20.7692308 C42.9500044,20.7692308 43.8461538,19.8677885 43.8461538,18.767625 L43.8461538,17.0016058 C43.8461538,15.8961494 42.9447115,15 41.8445481,15 L40.0785289,15 Z M20.7692308,12.6923077 L20.7692308,19.6153846 L21.9230769,19.6153846 L21.9230769,12.6923077 L20.7692308,12.6923077 Z M18.4615385,12.6923077 L18.4615385,19.6153846 L19.6153846,19.6153846 L19.6153846,12.6923077 L18.4615385,12.6923077 Z M29.4230769,35.1923077 C33.2465869,35.1923077 36.3461538,32.0927408 36.3461538,28.2692308 C36.3461538,24.4457208 33.2465869,21.3461538 29.4230769,21.3461538 C25.5995669,21.3461538 22.5,24.4457208 22.5,28.2692308 C22.5,32.0927408 25.5995669,35.1923077 29.4230769,35.1923077 Z M29.4230769,32.8846154 C31.9720836,32.8846154 34.0384615,30.8182374 34.0384615,28.2692308 C34.0384615,25.7202241 31.9720836,23.6538462 29.4230769,23.6538462 C26.8740703,23.6538462 24.8076923,25.7202241 24.8076923,28.2692308 C24.8076923,30.8182374 26.8740703,32.8846154 29.4230769,32.8846154 Z"
+              fill="#FFFFFF"
+            />
+          </g>
+        </g>
+      </svg>
+    ),
+    label: 'Instagram',
+    href: 'https://instagram.com/',
+  },
+  {
+    icon: (
+      <svg
+        role="img"
+        width="24px"
+        height="24px"
         viewBox="0 0 24 24"
         xmlns="http://www.w3.org/2000/svg"
       >
@@ -153,8 +188,14 @@ const socialIcons = [
   },
 ]
 
-function Footer(props) {
+interface FooterProps {
+  theme: any
+  classes: any
+  width: string
+}
+const Footer: React.FC<FooterProps> = (props) => {
   const { classes, theme, width } = props
+  const { t } = useTranslation(['common'])
   return (
     <footer className="lg-p-top">
       <WaveBorder
@@ -171,7 +212,7 @@ function Footer(props) {
                   <TextField
                     variant="outlined"
                     multiline
-                    placeholder="Get in touch with us"
+                    placeholder={t('Get in touch with us')}
                     inputProps={{ 'aria-label': 'Get in Touch' }}
                     InputProps={{
                       className: classes.whiteBg,
@@ -182,7 +223,7 @@ function Footer(props) {
                   />
                 </Box>
                 <ColoredButton color={theme.palette.common.white} variant="outlined" type="submit">
-                  Send Message
+                  {t('Send Message')}
                 </ColoredButton>
               </Box>
             </form>
@@ -211,11 +252,12 @@ function Footer(props) {
           </Hidden>
           <Grid item xs={12} md={6} lg={4}>
             <Typography variant="h6" paragraph className="text-white">
-              About the Company
+              {t('About the Company')}
             </Typography>
             <Typography style={{ color: '#8f9296' }} paragraph>
-              Lorem ipsum dolor sit amet, consectateur adispicing elit. Fusce euismod convallis
-              velit, eu auctor lacus vehicula sit amet.
+              {t(
+                'Our team specialized on training athletes of all categories. We have worked with plenty tournaments champions and even more students have been inspired with sport.'
+              )}
             </Typography>
             <Box display="flex">
               {socialIcons.map((socialIcon, index) => (
@@ -235,12 +277,6 @@ function Footer(props) {
       </div>
     </footer>
   )
-}
-
-Footer.propTypes = {
-  theme: PropTypes.object.isRequired,
-  classes: PropTypes.object.isRequired,
-  width: PropTypes.string.isRequired,
 }
 
 export default withWidth()(withStyles(styles, { withTheme: true })(Footer))

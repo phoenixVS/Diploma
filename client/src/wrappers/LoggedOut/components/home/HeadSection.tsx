@@ -171,7 +171,7 @@ const HeadSection: React.FC<HeadSectionProps> = (props) => {
                   <Hidden smDown>
                     <Grid className={classes.relative} item md={6}>
                       <ZoomImage
-                        src={`${process.env.PUBLIC_URL}/images/logged_out/hero.jpg`}
+                        src={`${process.env.PUBLIC_URL}/images/logged_out/hero2.jpg`}
                         className={classes.image}
                         alt="header example"
                       />

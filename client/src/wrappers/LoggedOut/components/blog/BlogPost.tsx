@@ -6,6 +6,7 @@ import BlogCard from './BlogCard'
 import ShareButton from '../../../../common/components/ShareButton'
 import ZoomImage from '../../../../common/components/ZoomImage'
 import smoothScrollTop from '../../../../common/functions/smoothScrollTop'
+import { useTranslation } from 'i18n'
 
 const styles = (theme: Theme) => ({
   blogContentWrapper: {
@@ -41,6 +42,8 @@ interface BlogPostProps {
 
 const BlogPost: React.FC<BlogPostProps> = (props) => {
   const { classes, date, title, src, content, otherArticles } = props
+
+  const { t } = useTranslation(['blog'])
 
   useEffect(() => {
     document.title = `${title}`
@@ -90,7 +93,7 @@ const BlogPost: React.FC<BlogPostProps> = (props) => {
           </Grid>
           <Grid item md={3}>
             <Typography variant="h6" paragraph>
-              Other articles
+              {t('Other articles')}
             </Typography>
             {otherArticles.map((blogPost) => (
               <Box key={blogPost.id} mb={3}>

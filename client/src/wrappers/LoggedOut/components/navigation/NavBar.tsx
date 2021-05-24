@@ -27,6 +27,11 @@ import LanguageSwitcher from 'wrappers/LoggedIn/components/navigation/LanguageSw
 import { useTranslation } from 'i18n'
 
 const styles: Styles<Theme, {}> = (theme: Theme) => ({
+  root: {
+    position: 'fixed',
+    width: '100%',
+    zIndex: 10,
+  },
   appBar: {
     position: 'relative',
     boxShadow: theme.shadows[6],
@@ -86,16 +91,16 @@ const NavBar: React.FC<NavBarProps> = (props) => {
       name: t('Library'),
       icon: <BookIcon className="text-white" />,
     },
-    {
-      link: '/c/online',
-      name: t('Online lesson'),
-      icon: <DuoIcon className="text-white" />,
-    },
-    {
-      link: '/test',
-      name: t('Create seminar'),
-      icon: <ScheduleIcon className="text-white" />,
-    },
+    // {
+    //   link: '/c/online',
+    //   name: t('Online lesson'),
+    //   icon: <DuoIcon className="text-white" />,
+    // },
+    // {
+    //   link: '/test',
+    //   name: t('Create seminar'),
+    //   icon: <ScheduleIcon className="text-white" />,
+    // },
     {
       name: t('Sign up'),
       onClick: openRegisterDialog,
