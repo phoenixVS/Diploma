@@ -1,5 +1,4 @@
 import React, { useCallback } from 'react'
-import PropTypes from 'prop-types'
 import classNames from 'classnames'
 import {
   Typography,
@@ -27,12 +26,22 @@ const styles = (theme) => ({
   },
 })
 
-function EnhancedTableHead(props) {
+interface EnhancedTableHeadProps {
+  classes: any
+  theme: any
+  onRequestSort?: (event: any, property: any) => void
+  order?: 'asc' | 'desc'
+  orderBy?: string
+  rows: any[]
+}
+const EnhancedTableHead: React.FC<EnhancedTableHeadProps> = (props) => {
   const { order, orderBy, rows, onRequestSort, classes } = props
 
   const createSortHandler = useCallback(
-    (property) => (event) => {
-      onRequestSort(event, property)
+    (property) => (event: any) => {
+      if (onRequestSort) {
+        onRequestSort(event, property)
+      }
     },
     [onRequestSort]
   )
@@ -74,14 +83,6 @@ function EnhancedTableHead(props) {
       </TableRow>
     </TableHead>
   )
-}
-EnhancedTableHead.propTypes = {
-  classes: PropTypes.object.isRequired,
-  theme: PropTypes.object.isRequired,
-  onRequestSort: PropTypes.func,
-  order: PropTypes.string,
-  orderBy: PropTypes.string,
-  rows: PropTypes.arrayOf(PropTypes.object).isRequired,
 }
 
 export default withStyles(styles, { withTheme: true })(EnhancedTableHead)

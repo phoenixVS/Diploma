@@ -1,5 +1,4 @@
 import React, { Fragment, useState, useCallback } from 'react'
-import PropTypes from 'prop-types'
 import {
   Typography,
   IconButton,
@@ -15,8 +14,8 @@ import {
   withStyles,
 } from '@material-ui/core'
 import CloseIcon from '@material-ui/icons/Close'
-import Bordered from '../../../common/components/Bordered'
-import ImageCropperDialog from '../../../common/components/ImageCropperDialog'
+import Bordered from '../../../../common/components/Bordered'
+import ImageCropperDialog from '../../../../common/components/ImageCropperDialog'
 
 const styles = (theme) => ({
   floatButtonWrapper: {
@@ -76,7 +75,25 @@ const styles = (theme) => ({
 
 const inputOptions = ['None', 'Slow', 'Normal', 'Fast']
 
-function AddPostOptions(props) {
+interface AddPostOptionsProps {
+  onEmojiTextareaChange: () => void
+  DateTimePicker: any
+  EmojiTextArea: any
+  Dropzone: any
+  ImageCropper: any
+  classes: any
+  cropperFile: any
+  onCrop: () => void
+  onCropperClose: () => void
+  files: any[]
+  deleteItem: () => void
+  onDrop: () => void
+  value: string
+  characters: number
+  uploadAt: Date
+  onChangeUploadAt: () => void
+}
+const AddPostOptions: React.FC<AddPostOptionsProps> = (props) => {
   const {
     Dropzone,
     classes,
@@ -254,25 +271,6 @@ function AddPostOptions(props) {
       </List>
     </Fragment>
   )
-}
-
-AddPostOptions.propTypes = {
-  onEmojiTextareaChange: PropTypes.func,
-  DateTimePicker: PropTypes.elementType,
-  EmojiTextArea: PropTypes.elementType,
-  Dropzone: PropTypes.elementType,
-  ImageCropper: PropTypes.elementType,
-  classes: PropTypes.object,
-  cropperFile: PropTypes.object,
-  onCrop: PropTypes.func,
-  onCropperClose: PropTypes.func,
-  files: PropTypes.arrayOf(PropTypes.object).isRequired,
-  deleteItem: PropTypes.func,
-  onDrop: PropTypes.func,
-  value: PropTypes.string,
-  characters: PropTypes.number,
-  uploadAt: PropTypes.instanceOf(Date),
-  onChangeUploadAt: PropTypes.func,
 }
 
 export default withStyles(styles, { withTheme: true })(AddPostOptions)

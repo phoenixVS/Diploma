@@ -1,9 +1,18 @@
 import React, { useState, useCallback, useEffect } from 'react'
-import PropTypes from 'prop-types'
 import PostContent from './PostContent'
 import AddPost from './AddPost'
 
-function Posts(props) {
+interface PostsProps {
+  EmojiTextArea: any
+  ImageCropper: any
+  Dropzone: any
+  DateTimePicker: any
+  posts: any[]
+  setPosts: (posts: any[]) => void
+  pushMessageToSnackbar: () => void
+  selectPosts: () => void
+}
+const Posts: React.FC<PostsProps> = (props) => {
   const {
     selectPosts,
     EmojiTextArea,
@@ -48,17 +57,6 @@ function Posts(props) {
       pushMessageToSnackbar={pushMessageToSnackbar}
     />
   )
-}
-
-Posts.propTypes = {
-  EmojiTextArea: PropTypes.elementType,
-  ImageCropper: PropTypes.elementType,
-  Dropzone: PropTypes.elementType,
-  DateTimePicker: PropTypes.elementType,
-  posts: PropTypes.arrayOf(PropTypes.object).isRequired,
-  setPosts: PropTypes.func.isRequired,
-  pushMessageToSnackbar: PropTypes.func,
-  selectPosts: PropTypes.func.isRequired,
 }
 
 export default Posts

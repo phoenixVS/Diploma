@@ -1,5 +1,4 @@
 import React, { useEffect } from 'react'
-import PropTypes from 'prop-types'
 import { List, Divider, Paper, withStyles } from '@material-ui/core'
 import SubscriptionTable from './SubscriptionTable'
 import SubscriptionInfo from './SubscriptionInfo'
@@ -10,7 +9,13 @@ const styles = {
   },
 }
 
-function Subscription(props) {
+interface SubscriptionProps {
+  classes: any
+  transactions: any[]
+  selectSubscription: () => void
+  openAddBalanceDialog: () => void
+}
+const Subscription: React.FC<SubscriptionProps> = (props) => {
   const { transactions, classes, openAddBalanceDialog, selectSubscription } = props
 
   useEffect(selectSubscription, [selectSubscription])
@@ -24,13 +29,6 @@ function Subscription(props) {
       </List>
     </Paper>
   )
-}
-
-Subscription.propTypes = {
-  classes: PropTypes.object.isRequired,
-  transactions: PropTypes.arrayOf(PropTypes.object).isRequired,
-  selectSubscription: PropTypes.func.isRequired,
-  openAddBalanceDialog: PropTypes.func.isRequired,
 }
 
 export default withStyles(styles)(Subscription)

@@ -8,11 +8,11 @@ import {
   TableRow,
   withStyles,
 } from '@material-ui/core'
-import EnhancedTableHead from '../../../common/components/EnhancedTableHead'
-import ColorfulChip from '../../../common/components/ColorfulChip'
-import unixToDateString from '../../../common/functions/unixToDateString'
-import HighlightedInformation from '../../../common/components/HighlightedInformation'
-import currencyPrettyPrint from '../../../common/functions/currencyPrettyPrint'
+import EnhancedTableHead from '../../../../common/components/EnhancedTableHead'
+import ColorfulChip from '../../../../common/components/ColorfulChip'
+import unixToDateString from '../../../../common/functions/unixToDateString'
+import HighlightedInformation from '../../../../common/components/HighlightedInformation'
+import currencyPrettyPrint from '../../../../common/functions/currencyPrettyPrint'
 
 const styles = (theme) => ({
   tableWrapper: {
@@ -65,7 +65,12 @@ const rows = [
 
 const rowsPerPage = 25
 
-function SubscriptionTable(props) {
+interface SubscriptionTableProps {
+  theme: any
+  classes: any
+  transactions: any[]
+}
+const SubscriptionTable: React.FC<SubscriptionTableProps> = (props) => {
   const { transactions, theme, classes } = props
   const [page, setPage] = useState(0)
 
@@ -80,7 +85,7 @@ function SubscriptionTable(props) {
     return (
       <div className={classes.tableWrapper}>
         <Table aria-labelledby="tableTitle">
-          <EnhancedTableHead rowCount={transactions.length} rows={rows} />
+          <EnhancedTableHead rows={rows} />
           <TableBody>
             {transactions
               .slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage)
@@ -140,12 +145,6 @@ function SubscriptionTable(props) {
       <HighlightedInformation>No transactions received yet.</HighlightedInformation>
     </div>
   )
-}
-
-SubscriptionTable.propTypes = {
-  theme: PropTypes.object.isRequired,
-  classes: PropTypes.object.isRequired,
-  transactions: PropTypes.arrayOf(PropTypes.object).isRequired,
 }
 
 export default withStyles(styles, { withTheme: true })(SubscriptionTable)

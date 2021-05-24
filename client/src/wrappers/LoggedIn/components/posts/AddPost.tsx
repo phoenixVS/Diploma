@@ -1,11 +1,18 @@
 import React, { Fragment, useState, useCallback } from 'react'
-import PropTypes from 'prop-types'
 import { Button, Box } from '@material-ui/core'
-import ActionPaper from '../../../common/components/ActionPaper'
-import ButtonCircularProgress from '../../../common/components/ButtonCircularProgress'
+import ActionPaper from '../../../../common/components/ActionPaper'
+import ButtonCircularProgress from '../../../../common/components/ButtonCircularProgress'
 import AddPostOptions from './AddPostOptions'
 
-function AddPost(props) {
+interface AddPostProps {
+  pushMessageToSnackbar: (message: { isErrorMessage: boolean; text: string }) => void
+  onClose: () => void
+  Dropzone: any
+  EmojiTextArea: any
+  DateTimePicker: any
+  ImageCropper: any
+}
+const AddPost: React.FC<AddPostProps> = (props) => {
   const {
     pushMessageToSnackbar,
     Dropzone,
@@ -15,10 +22,10 @@ function AddPost(props) {
     onClose,
   } = props
 
-  const [files, setFiles] = useState([])
+  const [files, setFiles] = useState<any[]>([])
   const [uploadAt, setUploadAt] = useState(new Date())
   const [loading, setLoading] = useState(false)
-  const [cropperFile, setCropperFile] = useState(null)
+  const [cropperFile, setCropperFile] = useState<any>(null)
 
   const acceptDrop = useCallback(
     (file) => {
@@ -72,6 +79,7 @@ function AddPost(props) {
     setLoading(true)
     setTimeout(() => {
       pushMessageToSnackbar({
+        isErrorMessage: false,
         text: 'Your post has been uploaded',
       })
       onClose()
@@ -119,15 +127,6 @@ function AddPost(props) {
       />
     </Fragment>
   )
-}
-
-AddPost.propTypes = {
-  pushMessageToSnackbar: PropTypes.func,
-  onClose: PropTypes.func,
-  Dropzone: PropTypes.elementType,
-  EmojiTextArea: PropTypes.elementType,
-  DateTimePicker: PropTypes.elementType,
-  ImageCropper: PropTypes.elementType,
 }
 
 export default AddPost

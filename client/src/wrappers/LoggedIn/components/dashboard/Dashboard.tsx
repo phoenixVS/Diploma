@@ -4,6 +4,7 @@ import SettingsArea from './SettingsArea'
 import UserDataArea from './UserDataArea'
 import AccountInformationArea from './AccountInformationArea'
 import StatisticsArea from './StatisticsArea'
+import SeminarDashboard from './SeminarDashboard'
 
 interface DashboardProps {
   CardChart: any
@@ -32,7 +33,8 @@ const Dashboard: React.FC<DashboardProps> = (props) => {
 
   return (
     <Fragment>
-      <StatisticsArea CardChart={CardChart} data={statistics} />
+      <SeminarDashboard />
+      {/* <StatisticsArea CardChart={CardChart} data={statistics} /> */}
       <Box mt={4}>
         <Typography variant="subtitle1" gutterBottom>
           Your Account

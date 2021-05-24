@@ -22,19 +22,29 @@ const SeminarDashboard: FC<SeminarDashboardProps> = ({ theme }) => {
         Your Account
       </Typography>
       <Grid container spacing={3}>
-        <Grid item xs={12} md={12}>
+        <Grid item xs={12} md={4}>
+          <CardChart
+            data={[]}
+            color={styles.palette.primary.light}
+            height="80px"
+            title="Euristic method"
+          />
+        </Grid>
+        <Grid item xs={12} md={4}>
           <CardChart
             data={[]}
             color={styles.palette.secondary.light}
-            height="70px"
-            title="Profit"
+            height="80px"
+            title="B&B method"
           />
         </Grid>
-        <Grid item xs={12} md={12}>
-          <CardChart data={[]} color={styles.palette.primary.light} height="80px" title="Views" />
-        </Grid>
-        <Grid item xs={12} md={12}>
-          <CardChart data={[]} color={styles.palette.primary.light} height="80px" title="Views" />
+        <Grid item xs={12} md={4}>
+          <CardChart
+            data={[]}
+            color={styles.palette.primary.light}
+            height="80px"
+            title="Dynamic programming method"
+          />
         </Grid>
       </Grid>
     </Container>

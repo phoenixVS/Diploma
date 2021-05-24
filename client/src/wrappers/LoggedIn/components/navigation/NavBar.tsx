@@ -34,6 +34,7 @@ import { Nullable } from '@helpers/commonInterfaces/interfaces'
 import { Breakpoint } from '@material-ui/core/styles/createBreakpoints'
 import { Styles } from '@material-ui/styles'
 import LanguageSwitcher from './LanguageSwitcher'
+import { useTranslation } from 'i18n'
 
 const styles: Styles<Theme, {}> = (theme: Theme) => ({
   appBar: {
@@ -65,6 +66,11 @@ const styles: Styles<Theme, {}> = (theme: Theme) => ({
       paddingLeft: theme.spacing(4),
       paddingRight: theme.spacing(4),
     },
+  },
+  logo: {
+    maxWidth: '30vw',
+    textOverflow: 'ellipsis',
+    whiteSpace: 'nowrap',
   },
   accountAvatar: {
     backgroundColor: theme.palette.secondary.main,
@@ -115,6 +121,9 @@ const styles: Styles<Theme, {}> = (theme: Theme) => ({
   brandText: {
     fontFamily: "'Baloo Bhaijaan', cursive",
     fontWeight: 400,
+    maxWidth: '15vw',
+    textOverflow: 'ellipsis',
+    whiteSpace: 'nowrap',
   },
   username: {
     paddingLeft: 0,
@@ -142,6 +151,8 @@ const NavBar: React.FC<NavBarProps> = (props) => {
   const links = useRef([])
   const [isMobileOpen, setIsMobileOpen] = useState(false)
   const [isSideDrawerOpen, setIsSideDrawerOpen] = useState(false)
+
+  const { t } = useTranslation(['common'])
 
   const openMobileDrawer = useCallback(() => {
     setIsMobileOpen(true)
@@ -226,24 +237,26 @@ const NavBar: React.FC<NavBarProps> = (props) => {
             <Hidden xsDown>
               <LanguageSwitcher />
             </Hidden>
-            <Hidden xsDown>
-              <Typography
-                variant="h4"
-                className={classes.brandText}
-                display="inline"
-                color="primary"
-              >
-                Спортивна
-              </Typography>
-              <Typography
-                variant="h4"
-                className={classes.brandText}
-                display="inline"
-                color="secondary"
-              >
-                секція
-              </Typography>
-            </Hidden>
+            <Link href="/">
+              <a className={classes.logo}>
+                <Typography
+                  variant="h4"
+                  className={classes.brandText}
+                  display="inline"
+                  color="primary"
+                >
+                  {t('Work')}
+                </Typography>
+                <Typography
+                  variant="h4"
+                  className={classes.brandText}
+                  display="inline"
+                  color="secondary"
+                >
+                  {t('out')}
+                </Typography>
+              </a>
+            </Link>
           </Box>
           <Box display="flex" justifyContent="flex-end" alignItems="center" width="100%">
             {isWidthUp('sm', width) && (
@@ -264,7 +277,7 @@ const NavBar: React.FC<NavBarProps> = (props) => {
               {isWidthUp('sm', width) && (
                 <ListItemText
                   className={classes.username}
-                  primary={<Typography color="textPrimary">Username</Typography>}
+                  primary={<Typography color="textPrimary">{'valentin.sh@gmail.com'}</Typography>}
                 />
               )}
             </ListItem>

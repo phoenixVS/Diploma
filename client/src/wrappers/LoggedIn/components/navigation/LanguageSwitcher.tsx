@@ -1,4 +1,4 @@
-import React, { ReactElement } from 'react'
+import React from 'react'
 import cx from 'classnames'
 import { makeStyles } from '@material-ui/core/styles'
 import List from '@material-ui/core/List'
@@ -11,17 +11,22 @@ import { i18n } from 'i18n'
 const useStyles = makeStyles((theme) => ({
   root: {
     backgroundColor: theme.palette.background.paper,
+    maxHeight: '58px',
+    padding: '0',
   },
   label: {
     color: '#cf55fc',
     fontWeight: 700,
+    padding: '0',
   },
   sec: {
     fontWeight: 700,
+    padding: '0 8px',
   },
   secDark: {
     fontWeight: 700,
     color: '#fff',
+    padding: '0 8px',
   },
   overrides: {
     MUITypography: {

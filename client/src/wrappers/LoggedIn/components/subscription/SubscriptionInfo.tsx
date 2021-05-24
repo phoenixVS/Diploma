@@ -1,5 +1,4 @@
 import React from 'react'
-import PropTypes from 'prop-types'
 import { ListItemText, Button, Toolbar, withStyles } from '@material-ui/core'
 
 const styles = {
@@ -8,7 +7,11 @@ const styles = {
   },
 }
 
-function SubscriptionInfo(props) {
+interface SubscriptionInfoProps {
+  classes: any
+  openAddBalanceDialog: () => void
+}
+const SubscriptionInfo: React.FC<SubscriptionInfoProps> = (props) => {
   const { classes, openAddBalanceDialog } = props
   return (
     <Toolbar className={classes.toolbar}>
@@ -18,11 +21,6 @@ function SubscriptionInfo(props) {
       </Button>
     </Toolbar>
   )
-}
-
-SubscriptionInfo.propTypes = {
-  classes: PropTypes.object.isRequired,
-  openAddBalanceDialog: PropTypes.func.isRequired,
 }
 
 export default withStyles(styles)(SubscriptionInfo)

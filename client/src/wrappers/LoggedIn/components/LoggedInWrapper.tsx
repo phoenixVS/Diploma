@@ -19,6 +19,38 @@ const styles = (theme) => ({
       marginLeft: 0,
     },
   },
+  wrapper: {
+    margin: theme.spacing(1),
+    width: 'auto',
+    [theme.breakpoints.up('xs')]: {
+      width: '95%',
+      marginLeft: 'auto',
+      marginRight: 'auto',
+      marginTop: theme.spacing(4),
+      marginBottom: theme.spacing(4),
+    },
+    [theme.breakpoints.up('sm')]: {
+      marginTop: theme.spacing(6),
+      marginBottom: theme.spacing(6),
+      width: '90%',
+      marginLeft: 'auto',
+      marginRight: 'auto',
+    },
+    [theme.breakpoints.up('md')]: {
+      marginTop: theme.spacing(6),
+      marginBottom: theme.spacing(6),
+      width: '82.5%',
+      marginLeft: 'auto',
+      marginRight: 'auto',
+    },
+    [theme.breakpoints.up('lg')]: {
+      marginTop: theme.spacing(6),
+      marginBottom: theme.spacing(6),
+      width: '70%',
+      marginLeft: 'auto',
+      marginRight: 'auto',
+    },
+  },
 })
 
 function shuffle(array) {
@@ -27,13 +59,23 @@ function shuffle(array) {
     ;[array[i], array[j]] = [array[j], array[i]]
   }
 }
+
 interface MainProps {
   classes: any
+  isAddBalanceDialogOpen?: boolean
+  setIsAddBalanceDialogOpen?: (isOpen: boolean) => void
+  selectedTab: Nullable<string>
+  setSelectedTab: (tab: string) => void
 }
-
 const Main: React.FC<MainProps> = (props) => {
-  const { classes, children } = props
-  const [selectedTab, setSelectedTab] = useState<Nullable<string>>(null)
+  const {
+    classes,
+    children,
+    selectedTab,
+    setSelectedTab,
+    isAddBalanceDialogOpen,
+    setIsAddBalanceDialogOpen,
+  } = props
   const [CardChart, setCardChart] = useState<any>(null)
   const [hasFetchedCardChart, setHasFetchedCardChart] = useState(false)
   const [EmojiTextArea, setEmojiTextArea] = useState<any>(null)
@@ -45,6 +87,7 @@ const Main: React.FC<MainProps> = (props) => {
   const [DateTimePicker, setDateTimePicker] = useState<any>(null)
   const [hasFetchedDateTimePicker, setHasFetchedDateTimePicker] = useState(false)
   const [transactions, setTransactions] = useState<any[]>([])
+
   type StatisticsType = {
     profit: Array<{ value: number; timestamp: number }>
     views: Array<{ value: number; timestamp: number }>
@@ -54,7 +97,6 @@ const Main: React.FC<MainProps> = (props) => {
   const [targets, setTargets] = useState<any[]>([])
   const [messages, setMessages] = useState<any[]>([])
   const [isAccountActivated, setIsAccountActivated] = useState(false)
-  const [isAddBalanceDialogOpen, setIsAddBalanceDialogOpen] = useState(false)
   const [pushMessageToSnackbar, setPushMessageToSnackbar] = useState<any>(null)
 
   const fetchRandomTargets = useCallback(() => {
@@ -347,13 +389,15 @@ const Main: React.FC<MainProps> = (props) => {
           setTargets={setTargets}
           setPosts={setPosts}
         />*/}
-        {React.Children.map(children, (child) => {
-          // checking isValidElement is the safe way and avoids a typescript errors too
-          if (React.isValidElement(child)) {
-            return React.cloneElement(child)
-          }
-          return child
-        })}
+        <div className={classes.wrapper}>
+          {React.Children.map(children, (child) => {
+            // checking isValidElement is the safe way and avoids a typescript errors too
+            if (React.isValidElement(child)) {
+              return React.cloneElement(child, { pushMessageToSnackbar: pushMessageToSnackbar })
+            }
+            return child
+          })}
+        </div>
       </main>
     </Fragment>
   )

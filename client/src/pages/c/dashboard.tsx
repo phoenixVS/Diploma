@@ -1,13 +1,13 @@
-import React, { useCallback, useState } from 'react'
+import React, { useCallback, useEffect, useState } from 'react'
 import { NextPage } from 'next'
 import Head from 'next/head'
 import { MuiThemeProvider, CssBaseline } from '@material-ui/core'
 import theme from '../../common/theme'
 import GlobalStyles from '../../common/GlobalStyles'
-import s from '@styles/Home.module.sass'
 import LoggedInWrapper from 'wrappers/LoggedIn/components/LoggedInWrapper'
 import Dashboard from 'wrappers/LoggedIn/components/dashboard/Dashboard'
 import smoothScrollTop from 'common/functions/smoothScrollTop'
+import { PageHead } from 'common/components/PageHead'
 
 type StatisticsType = {
   profit: Array<{ value: number; timestamp: number }>
@@ -16,6 +16,7 @@ type StatisticsType = {
 const IndexPage: NextPage = () => {
   const [selectedTab, setSelectedTab] = useState<Nullable<string>>(null)
   const [pushMessageToSnackbar, setPushMessageToSnackbar] = useState<any>(null)
+  const [isAddBalanceDialogOpen, setIsAddBalanceDialogOpen] = useState(false)
   const [isAccountActivated, setIsAccountActivated] = useState(false)
   const [CardChart, setCardChart] = useState<any>(null)
   const [hasFetchedCardChart, setHasFetchedCardChart] = useState(false)
@@ -24,7 +25,7 @@ const IndexPage: NextPage = () => {
 
   const selectDashboard = useCallback(() => {
     smoothScrollTop()
-    document.title = 'WaVer - Dashboard'
+    document.title = 'Workout - Dashboard'
     setSelectedTab('Dashboard')
     if (!hasFetchedCardChart) {
       setHasFetchedCardChart(true)
@@ -33,6 +34,36 @@ const IndexPage: NextPage = () => {
       })
     }
   }, [setSelectedTab, setCardChart, hasFetchedCardChart, setHasFetchedCardChart])
+
+  const fetchRandomStatistics = useCallback(() => {
+    const statistics: StatisticsType = {
+      profit: [],
+      views: [],
+    }
+    const iterations = 300
+    const oneYearSeconds = 60 * 60 * 24 * 365
+    let curProfit = Math.round(3000 + Math.random() * 1000)
+    let curViews = Math.round(3000 + Math.random() * 1000)
+    let curUnix = Math.round(new Date().getTime() / 1000) - oneYearSeconds
+    for (let i = 0; i < iterations; i += 1) {
+      curUnix += Math.round(oneYearSeconds / iterations)
+      curProfit += Math.round((Math.random() * 2 - 1) * 10)
+      curViews += Math.round((Math.random() * 2 - 1) * 10)
+      statistics.profit.push({
+        value: curProfit,
+        timestamp: curUnix,
+      })
+      statistics.views.push({
+        value: curViews,
+        timestamp: curUnix,
+      })
+    }
+    setStatistics(statistics)
+  }, [setStatistics])
+
+  useEffect(() => {
+    fetchRandomStatistics()
+  }, [fetchRandomStatistics])
 
   const toggleAccountActivation = useCallback(() => {
     if (pushMessageToSnackbar) {
@@ -50,18 +81,17 @@ const IndexPage: NextPage = () => {
   }, [pushMessageToSnackbar, isAccountActivated, setIsAccountActivated])
 
   return (
-    <div className={s.root}>
-      <Head>
-        <link rel="manifest" href="/manifest.json" />
-        <link href="/icons/icon-16x16.png" rel="icon" type="image/png" sizes="16x16" />
-        <link href="/icons/icon-32x32.png" rel="icon" type="image/png" sizes="32x32" />
-        <link rel="apple-touch-icon" href="/icons/apple-icon.png"></link>
-        <meta name="theme-color" content="#317EFB" />
-      </Head>
+    <>
+      <PageHead />
       <MuiThemeProvider theme={theme}>
         <CssBaseline />
         <GlobalStyles />
-        <LoggedInWrapper>
+        <LoggedInWrapper
+          {...{ selectedTab }}
+          {...{ setSelectedTab }}
+          {...{ isAddBalanceDialogOpen }}
+          {...{ setIsAddBalanceDialogOpen }}
+        >
           <Dashboard
             toggleAccountActivation={toggleAccountActivation}
             pushMessageToSnackbar={pushMessageToSnackbar}
@@ -74,7 +104,8 @@ const IndexPage: NextPage = () => {
           />
         </LoggedInWrapper>
       </MuiThemeProvider>
-    </div>
+    </>
   )
 }
+
 export default IndexPage

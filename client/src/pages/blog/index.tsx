@@ -9,6 +9,7 @@ import { Nullable } from '@helpers/commonInterfaces/interfaces'
 import LoggedOutWrapper from '../../wrappers/LoggedOut/components/LoggedOutWrapper'
 import Blog from '../../wrappers/LoggedOut/components/blog/Blog'
 import dummyBlogPosts from '../../wrappers/LoggedOut/dummyData/blogPosts'
+import { PageHead } from 'common/components/PageHead'
 
 const IndexPage: NextPage = () => {
   const [selectedTab, setSelectedTab] = useState<Nullable<string>>(null)
@@ -41,13 +42,7 @@ const IndexPage: NextPage = () => {
 
   return (
     <>
-      <Head>
-        <link rel="manifest" href="/manifest.json" />
-        <link href="/icons/icon-16x16.png" rel="icon" type="image/png" sizes="16x16" />
-        <link href="/icons/icon-32x32.png" rel="icon" type="image/png" sizes="32x32" />
-        <link rel="apple-touch-icon" href="/icons/apple-icon.png"></link>
-        <meta name="theme-color" content="#317EFB" />
-      </Head>
+      <PageHead />
       <MuiThemeProvider theme={theme}>
         <CssBaseline />
         <GlobalStyles />
