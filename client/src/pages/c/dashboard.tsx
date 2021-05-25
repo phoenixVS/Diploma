@@ -1,6 +1,5 @@
 import React, { useCallback, useEffect, useState } from 'react'
 import { NextPage } from 'next'
-import Head from 'next/head'
 import { MuiThemeProvider, CssBaseline } from '@material-ui/core'
 import theme from '../../common/theme'
 import GlobalStyles from '../../common/GlobalStyles'
@@ -8,6 +7,7 @@ import LoggedInWrapper from 'wrappers/LoggedIn/components/LoggedInWrapper'
 import Dashboard from 'wrappers/LoggedIn/components/dashboard/Dashboard'
 import smoothScrollTop from 'common/functions/smoothScrollTop'
 import { PageHead } from 'common/components/PageHead'
+import { useTranslation } from 'i18n'
 
 type StatisticsType = {
   profit: Array<{ value: number; timestamp: number }>
@@ -23,10 +23,12 @@ const IndexPage: NextPage = () => {
   const [statistics, setStatistics] = useState<StatisticsType>({ views: [], profit: [] })
   const [targets, setTargets] = useState<any[]>([])
 
+  const { t } = useTranslation(['common'])
+
   const selectDashboard = useCallback(() => {
     smoothScrollTop()
     document.title = 'Workout - Dashboard'
-    setSelectedTab('Dashboard')
+    setSelectedTab(t('Dashboard'))
     if (!hasFetchedCardChart) {
       setHasFetchedCardChart(true)
       import('../../common/components/CardChart').then((Component) => {
@@ -58,6 +60,7 @@ const IndexPage: NextPage = () => {
         timestamp: curUnix,
       })
     }
+    console.log('statistics', statistics)
     setStatistics(statistics)
   }, [setStatistics])
 

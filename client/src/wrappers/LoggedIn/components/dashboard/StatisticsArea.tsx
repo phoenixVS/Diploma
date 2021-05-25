@@ -1,5 +1,6 @@
 import React from 'react'
 import { Grid, withTheme } from '@material-ui/core'
+import { useTranslation } from 'i18n'
 
 interface StatisticsAreaProps {
   theme: any
@@ -8,6 +9,7 @@ interface StatisticsAreaProps {
 }
 const StatisticsArea: React.FC<StatisticsAreaProps> = (props) => {
   const { theme, CardChart, data } = props
+  const { t } = useTranslation(['dashboard'])
   return (
     CardChart &&
     data.profit.length >= 2 &&
@@ -18,7 +20,7 @@ const StatisticsArea: React.FC<StatisticsAreaProps> = (props) => {
             data={data.profit}
             color={theme.palette.secondary.light}
             height="70px"
-            title="Profit"
+            title={t('Profit')}
           />
         </Grid>
         <Grid item xs={12} md={6}>
@@ -26,7 +28,7 @@ const StatisticsArea: React.FC<StatisticsAreaProps> = (props) => {
             data={data.views}
             color={theme.palette.primary.light}
             height="70px"
-            title="Views"
+            title={t('Visits')}
           />
         </Grid>
       </Grid>

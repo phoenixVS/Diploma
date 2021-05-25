@@ -1,6 +1,5 @@
 import React, { useCallback, useEffect, useState } from 'react'
 import { NextPage } from 'next'
-import Head from 'next/head'
 import { MuiThemeProvider, CssBaseline } from '@material-ui/core'
 import theme from '../../common/theme'
 import GlobalStyles from '../../common/GlobalStyles'
@@ -9,11 +8,14 @@ import Subscription from 'wrappers/LoggedIn/components/subscription/Subscription
 import smoothScrollTop from 'common/functions/smoothScrollTop'
 import { Nullable } from '@helpers/commonInterfaces/interfaces'
 import { PageHead } from 'common/components/PageHead'
+import { useTranslation } from 'i18n'
 
 const IndexPage: NextPage = () => {
   const [selectedTab, setSelectedTab] = useState<Nullable<string>>(null)
   const [transactions, setTransactions] = useState<any[]>([])
   const [isAddBalanceDialogOpen, setIsAddBalanceDialogOpen] = useState(false)
+
+  const { t } = useTranslation(['common'])
 
   const openAddBalanceDialog = useCallback(() => {
     setIsAddBalanceDialogOpen(true)
@@ -22,7 +24,7 @@ const IndexPage: NextPage = () => {
   const selectSubscription = useCallback(() => {
     smoothScrollTop()
     document.title = 'WaVer - Subscription'
-    setSelectedTab('Subscription')
+    setSelectedTab(t('Subscription'))
   }, [setSelectedTab])
 
   const fetchRandomTransactions = useCallback(() => {

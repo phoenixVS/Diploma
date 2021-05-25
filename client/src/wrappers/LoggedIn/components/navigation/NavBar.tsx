@@ -1,4 +1,4 @@
-import React, { Fragment, useRef, useCallback, useState } from 'react'
+import React, { Fragment, useRef, useCallback, useState, useEffect } from 'react'
 import Link from 'next/link'
 import classNames from 'classnames'
 import {
@@ -21,6 +21,7 @@ import {
   Theme,
 } from '@material-ui/core'
 import DashboardIcon from '@material-ui/icons/Dashboard'
+import GroupIcon from '@material-ui/icons/Group'
 import ImageIcon from '@material-ui/icons/Image'
 import AccountBalanceIcon from '@material-ui/icons/AccountBalance'
 import PowerSettingsNewIcon from '@material-ui/icons/PowerSettingsNew'
@@ -170,15 +171,19 @@ const NavBar: React.FC<NavBarProps> = (props) => {
     setIsSideDrawerOpen(false)
   }, [setIsSideDrawerOpen])
 
+  useEffect(() => {
+    console.log('selected tab', selectedTab)
+  }, [selectedTab])
+
   const menuItems = [
     {
       link: '/c/dashboard',
-      name: 'Dashboard',
+      name: t('Dashboard'),
       onClick: closeMobileDrawer,
       icon: {
         desktop: (
           <DashboardIcon
-            className={selectedTab === 'Dashboard' ? classes.textPrimary : 'text-white'}
+            className={selectedTab === t('Dashboard') ? classes.textPrimary : 'text-white'}
             fontSize="small"
           />
         ),
@@ -186,13 +191,27 @@ const NavBar: React.FC<NavBarProps> = (props) => {
       },
     },
     {
+      link: '/c/create-team',
+      name: t('Create team'),
+      onClick: closeMobileDrawer,
+      icon: {
+        desktop: (
+          <GroupIcon
+            className={selectedTab === t('Create team') ? classes.textPrimary : 'text-white'}
+            fontSize="small"
+          />
+        ),
+        mobile: <GroupIcon className="text-white" />,
+      },
+    },
+    {
       link: '/c/posts',
-      name: 'Posts',
+      name: t('Posts'),
       onClick: closeMobileDrawer,
       icon: {
         desktop: (
           <ImageIcon
-            className={selectedTab === 'Posts' ? classes.textPrimary : 'text-white'}
+            className={selectedTab === t('Posts') ? classes.textPrimary : 'text-white'}
             fontSize="small"
           />
         ),
@@ -201,12 +220,12 @@ const NavBar: React.FC<NavBarProps> = (props) => {
     },
     {
       link: '/c/subscription',
-      name: 'Subscription',
+      name: t('Subscription'),
       onClick: closeMobileDrawer,
       icon: {
         desktop: (
           <AccountBalanceIcon
-            className={selectedTab === 'Subscription' ? classes.textPrimary : 'text-white'}
+            className={selectedTab === t('Subscription') ? classes.textPrimary : 'text-white'}
             fontSize="small"
           />
         ),
@@ -215,7 +234,7 @@ const NavBar: React.FC<NavBarProps> = (props) => {
     },
     {
       link: '/',
-      name: 'Logout',
+      name: t('Logout'),
       icon: {
         desktop: <PowerSettingsNewIcon className="text-white" fontSize="small" />,
         mobile: <PowerSettingsNewIcon className="text-white" />,

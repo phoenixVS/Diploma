@@ -1,5 +1,14 @@
 import React, { useState, useCallback } from 'react'
-import { AreaChart, Area, XAxis, Tooltip, ResponsiveContainer, YAxis } from 'recharts'
+import {
+  AreaChart,
+  Area,
+  XAxis,
+  Tooltip,
+  ResponsiveContainer,
+  YAxis,
+  LineChart,
+  Line,
+} from 'recharts'
 import format from 'date-fns/format'
 import {
   Card,
@@ -36,16 +45,17 @@ function calculateMin(data, yKey, factor) {
 const itemHeight = 216
 const options = ['1 Week', '1 Month', '6 Months']
 
-interface CardChartProps {
+interface KnapsackChartProps {
   color: string
   data: any[]
+  additionals?: any[]
   title: string
   classes: any
   theme: any
   height: string
 }
-const CardChart: React.FC<CardChartProps> = (props) => {
-  const { color, data, title, classes, theme, height } = props
+const KnapsackChart: React.FC<KnapsackChartProps> = (props) => {
+  const { color, data, title, classes, theme, height, additionals } = props
   const [anchorEl, setAnchorEl] = useState(null)
   const [selectedOption, setSelectedOption] = useState('1 Month')
 
@@ -76,30 +86,30 @@ const CardChart: React.FC<CardChartProps> = (props) => {
     }
   }, [selectedOption])
 
-  const processData = useCallback(() => {
-    let seconds
-    switch (selectedOption) {
-      case '1 Week':
-        seconds = 60 * 60 * 24 * 7
-        break
-      case '1 Month':
-        seconds = 60 * 60 * 24 * 31
-        break
-      case '6 Months':
-        seconds = 60 * 60 * 24 * 31 * 6
-        break
-      default:
-        throw new Error('No branch selected in switch-statement')
-    }
-    const minSeconds = new Date() / 1000 - seconds
-    const arr = []
-    for (let i = 0; i < data.length; i += 1) {
-      if (minSeconds < data[i].timestamp) {
-        arr.unshift(data[i])
-      }
-    }
-    return arr
-  }, [data, selectedOption])
+  // const processData = useCallback(() => {
+  //   let seconds
+  //   switch (selectedOption) {
+  //     case '1 Week':
+  //       seconds = 60 * 60 * 24 * 7
+  //       break
+  //     case '1 Month':
+  //       seconds = 60 * 60 * 24 * 31
+  //       break
+  //     case '6 Months':
+  //       seconds = 60 * 60 * 24 * 31 * 6
+  //       break
+  //     default:
+  //       throw new Error('No branch selected in switch-statement')
+  //   }
+  //   const minSeconds = new Date() / 1000 - seconds
+  //   const arr = []
+  //   for (let i = 0; i < data.length; i += 1) {
+  //     if (minSeconds < data[i].timestamp) {
+  //       arr.unshift(data[i])
+  //     }
+  //   }
+  //   return arr
+  // }, [data, selectedOption])
 
   const handleClose = useCallback(() => {
     setAnchorEl(null)
@@ -114,6 +124,7 @@ const CardChart: React.FC<CardChartProps> = (props) => {
   )
 
   const isOpen = Boolean(anchorEl)
+
   return (
     <Card>
       <Box pt={2} px={2} pb={4}>
@@ -165,10 +176,14 @@ const CardChart: React.FC<CardChartProps> = (props) => {
       <CardContent>
         <Box className={classes.cardContentInner} height={height}>
           <ResponsiveContainer width="100%" height="100%">
-            <AreaChart data={processData()} type="number">
-              <XAxis dataKey="timestamp" type="number" domain={['dataMin', 'dataMax']} hide />
-              <YAxis domain={[calculateMin(data, 'value', 0.05), 'dataMax']} hide />
-              <Area type="monotone" dataKey="value" stroke={color} fill={color} />
+            <LineChart data={data}>
+              <Line type="monotone" dataKey="time" stroke="#8884d8" />
+              {additionals &&
+                additionals.map((data, idx) => (
+                  <Line key={idx} type="monotone" dataKey={`time${idx}`} stroke={`#42226a`} />
+                ))}
+              <XAxis dataKey="pr" type="number" />
+              <YAxis dataKey="time" />
               <Tooltip
                 labelFormatter={labelFormatter}
                 formatter={formatter}
@@ -188,7 +203,7 @@ const CardChart: React.FC<CardChartProps> = (props) => {
                   fontWeight: theme.typography.body1.fontWeight,
                 }}
               />
-            </AreaChart>
+            </LineChart>
           </ResponsiveContainer>
         </Box>
       </CardContent>
@@ -196,4 +211,4 @@ const CardChart: React.FC<CardChartProps> = (props) => {
   )
 }
 
-export default withStyles(styles, { withTheme: true })(CardChart)
+export default withStyles(styles, { withTheme: true })(KnapsackChart)

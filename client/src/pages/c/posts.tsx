@@ -10,6 +10,7 @@ import { Nullable } from '@helpers/commonInterfaces/interfaces'
 
 import persons from '../../wrappers/LoggedIn/dummyData/persons'
 import { PageHead } from 'common/components/PageHead'
+import { useTranslation } from 'i18n'
 
 const IndexPage: NextPage = () => {
   const [posts, setPosts] = useState<any[]>([])
@@ -23,6 +24,8 @@ const IndexPage: NextPage = () => {
   const [hasFetchedDateTimePicker, setHasFetchedDateTimePicker] = useState(false)
   const [DateTimePicker, setDateTimePicker] = useState<any>(null)
   const [Dropzone, setDropzone] = useState<any>(null)
+
+  const { t } = useTranslation(['common'])
 
   const fetchRandomPosts = useCallback(() => {
     shuffle(persons)
@@ -52,7 +55,7 @@ const IndexPage: NextPage = () => {
   const selectPosts = useCallback(() => {
     smoothScrollTop()
     document.title = 'WaVer - Posts'
-    setSelectedTab('Posts')
+    setSelectedTab(t('Posts'))
     if (!hasFetchedEmojiTextArea) {
       setHasFetchedEmojiTextArea(true)
       import('../../common/components/EmojiTextArea').then((Component) => {

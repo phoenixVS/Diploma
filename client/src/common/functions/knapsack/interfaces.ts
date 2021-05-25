@@ -8,4 +8,5 @@ export interface Input {
 export interface Answer {
   z: number
   items: Array<number>
+  time: number
 }

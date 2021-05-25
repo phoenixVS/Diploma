@@ -13,6 +13,7 @@ import CancelIcon from '@material-ui/icons/Cancel'
 import calculateSpacing from './calculateSpacing'
 import FeatureCard from './FeatureCard'
 import { Breakpoint } from '@material-ui/core/styles/createBreakpoints'
+import { useTranslation } from 'i18n'
 
 const iconSize = 30
 
@@ -106,11 +107,12 @@ interface FeatureSectionProps {
 
 const FeatureSection: React.FC<FeatureSectionProps> = (props) => {
   const { width } = props
+  const { t } = useTranslation(['home'])
   return (
     <div style={{ backgroundColor: '#FFFFFF' }}>
       <div className="container-fluid lg-p-top">
         <Typography variant="h3" align="center" className="lg-mg-bottom">
-          Features
+          {t('Features')}
         </Typography>
         <div className="container-fluid">
           <Grid container spacing={calculateSpacing(width)}>
