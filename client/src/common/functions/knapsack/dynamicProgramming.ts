@@ -21,5 +21,6 @@ export const dynamicProgramming = ({ n, cost, value, resource }: Input): Answer 
   }
 
   answer.time = window.performance.now() - answer.time
+  answer.z = K[n][resource]
   return answer
 }

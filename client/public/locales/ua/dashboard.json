@@ -5,5 +5,9 @@
   "DP method": "Метод ДП",
   "Profit": "Прибуток",
   "Visits": "Відвідування",
-  "Methods comparison": "Порівняння методів"
+  "Methods comparison": "Порівняння методів",
+  "Euristic optimum delta": "Відхилення евристичного методу від оптимуму",
+  "Time (ms)": "Час (мс)",
+  "Group prospects": "Перспективність групи",
+  "Number of students": "Кількість учнів"
 }

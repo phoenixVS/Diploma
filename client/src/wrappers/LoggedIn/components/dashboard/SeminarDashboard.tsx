@@ -35,7 +35,8 @@ const SeminarDashboard: FC<SeminarDashboardProps> = ({ theme, classes, selectCre
     }
   }, [theme])
 
-  type testingData = Array<{ pr: number; time: number }>
+  type testingData = Array<{ pr: number; dp?: number; bnb?: number; eu?: number }>
+  type deltaOpti = Array<{ pr: number; bnb: number; eu: number }>
 
   const generateTestingInputs = () => {
     const testingData = []
@@ -48,7 +49,7 @@ const SeminarDashboard: FC<SeminarDashboardProps> = ({ theme, classes, selectCre
       return res
     }
 
-    for (let i = 4; i <= 32; i += 4) {
+    for (let i = 8; i <= 36; i += 4) {
       testingData.push({
         n: i,
         cost: genRandArr(i),
@@ -67,14 +68,17 @@ const SeminarDashboard: FC<SeminarDashboardProps> = ({ theme, classes, selectCre
     console.log('inputs', inputs)
     const dpOut: testingData = [],
       euOut: testingData = [],
-      bnbOut: testingData = []
+      bnbOut: testingData = [],
+      optOut: deltaOpti = []
     inputs.forEach((input) => {
       const dp = dynamicProgramming(input)
-      dpOut.push({ pr: input.n, time: dp.time })
+      dpOut.push({ pr: input.n, dp: dp.time })
       const eu = euristic(input)
-      euOut.push({ pr: input.n, time: eu.time })
+      euOut.push({ pr: input.n, eu: eu.time })
       const bnb = branchesAndBoundes(input)
-      bnbOut.push({ pr: input.n, time: bnb.time })
+      bnbOut.push({ pr: input.n, bnb: bnb.time })
+
+      optOut.push({ pr: input.n, eu: eu.z, bnb: dp.z })
     })
     console.log('dp', dpOut)
     console.log('eu', euOut)
@@ -82,19 +86,25 @@ const SeminarDashboard: FC<SeminarDashboardProps> = ({ theme, classes, selectCre
     setDp(dpOut)
     setEu(euOut)
     setBnb(bnbOut)
-    setData(
-      dpOut.map((item, idx) => ({ ...item, time0: euOut[idx].time, time1: bnbOut[idx].time }))
-    )
+    setData(dpOut.map((item, idx) => ({ ...item, eu: euOut[idx].eu, bnb: bnbOut[idx].bnb })))
+    setOpti(optOut)
   }, [])
 
   const [dp, setDp] = useState<testingData>([])
   const [eu, setEu] = useState<testingData>([])
   const [bnb, setBnb] = useState<testingData>([])
-  const [data, setData] = useState([])
+  const [opti, setOpti] = useState<deltaOpti>([])
+  const [data, setData] = useState<testingData>([])
 
   useEffect(() => {
     console.log('dat', data)
-  }, [data])
+    console.log('opti', opti)
+  }, [data, opti])
+
+  const euLeg = [{ value: 'Euristics', id: 'time', type: 'line' }]
+  const dpLeg = [{ value: 'Dynamic Programming', id: 'time', type: 'line' }]
+  const bnbLeg = [{ value: 'Branches and Bounds', id: 'time', type: 'line' }]
+
   return (
     <Container className={classes.root}>
       <Typography variant="subtitle1" gutterBottom>
@@ -104,6 +114,7 @@ const SeminarDashboard: FC<SeminarDashboardProps> = ({ theme, classes, selectCre
         <Grid item xs={12} md={12}>
           <KnapsackChart
             data={eu}
+            legend={euLeg}
             color={styles.palette.primary.light}
             height="500px"
             title={t('Euristic method')}
@@ -112,6 +123,7 @@ const SeminarDashboard: FC<SeminarDashboardProps> = ({ theme, classes, selectCre
         <Grid item xs={12} md={12}>
           <KnapsackChart
             data={bnb}
+            legend={bnbLeg}
             color={styles.palette.secondary.light}
             height="500px"
             title={t('B&B method')}
@@ -120,6 +132,7 @@ const SeminarDashboard: FC<SeminarDashboardProps> = ({ theme, classes, selectCre
         <Grid item xs={12} md={12}>
           <KnapsackChart
             data={dp}
+            legend={dpLeg}
             color={styles.palette.primary.light}
             height="500px"
             title={t('DP method')}
@@ -128,10 +141,22 @@ const SeminarDashboard: FC<SeminarDashboardProps> = ({ theme, classes, selectCre
         <Grid item xs={12} md={12}>
           <KnapsackChart
             data={data}
+            legend={Array.prototype.concat(euLeg, bnbLeg, dpLeg)}
             additionals={[eu, dp]}
             color={styles.palette.primary.light}
             height="500px"
             title={t('Methods comparison')}
+          />
+        </Grid>
+        <Grid item xs={12} md={12}>
+          <KnapsackChart
+            data={opti}
+            legend={Array.prototype.concat(euLeg, bnbLeg, dpLeg)}
+            yAxisName={t('Group prospects')}
+            additionals={[opti.map((item) => ({ bnb: item.bnb, pr: item.pr }))]}
+            color={styles.palette.primary.light}
+            height="500px"
+            title={t('Euristic optimum delta')}
           />
         </Grid>
       </Grid>
