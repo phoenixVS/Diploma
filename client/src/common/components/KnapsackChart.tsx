@@ -25,7 +25,7 @@ import {
 import MoreVertIcon from '@material-ui/icons/MoreVert'
 import { useTranslation } from 'i18n'
 
-const styles = (theme) => ({
+const styles = (theme: any) => ({
   cardContentInner: {
     marginTop: theme.spacing(-4),
   },

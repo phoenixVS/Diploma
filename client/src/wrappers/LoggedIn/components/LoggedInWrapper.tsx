@@ -8,7 +8,7 @@ import persons from '../dummyData/persons'
 import LazyLoadAddBalanceDialog from './subscription/LazyLoadAddBalanceDialog'
 import { Nullable } from '@helpers/commonInterfaces/interfaces'
 
-const styles = (theme) => ({
+const styles = (theme: any) => ({
   main: {
     marginLeft: theme.spacing(9),
     transition: theme.transitions.create(['width', 'margin'], {

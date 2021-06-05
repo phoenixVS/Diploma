@@ -5,7 +5,7 @@ import { Snackbar, Button, Typography, Box, withStyles } from '@material-ui/core
 import fetchIpData from './fetchIpData'
 import { useTranslation } from 'i18n'
 
-const styles = (theme) => ({
+const styles = (theme: any) => ({
   snackbarContent: {
     borderBottomLeftRadius: 0,
     borderBottomRightRadius: 0,

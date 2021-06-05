@@ -3,12 +3,11 @@ import KnapsackChart from 'common/components/KnapsackChart'
 import { branchesAndBoundes } from 'common/functions/knapsack/bnb'
 import { dynamicProgramming } from 'common/functions/knapsack/dynamicProgramming'
 import { euristic } from 'common/functions/knapsack/euristic'
-import { Input } from 'common/functions/knapsack/interfaces'
 import { defaultTheme } from 'common/theme'
 import { useTranslation } from 'i18n'
 import React, { FC, useEffect, useState } from 'react'
 
-const styles = (theme) => ({
+const styles = () => ({
   root: {
     paddingLeft: 0,
     paddingRight: 0,

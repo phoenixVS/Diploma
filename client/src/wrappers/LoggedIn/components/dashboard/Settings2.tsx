@@ -23,7 +23,7 @@ import HelpIcon from '../../../../common/components/HelpIcon'
 import Bordered from '../../../../common/components/Bordered'
 import ButtonCircularProgress from '../../../../common/components/ButtonCircularProgress'
 
-const styles = (theme) => ({
+const styles = (theme:any) => ({
   numberInput: {
     width: 120,
     [theme.breakpoints.down('sm')]: {

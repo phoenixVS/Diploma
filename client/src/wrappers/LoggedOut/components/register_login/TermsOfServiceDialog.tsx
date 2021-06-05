@@ -11,7 +11,7 @@ import {
 import ArrowBackIcon from '@material-ui/icons/ArrowBack'
 import ColoredButton from '../../../../common/components/ColoredButton'
 
-const styles = (theme) => ({
+const styles = (theme: any) => ({
   termsConditionsListitem: {
     marginLeft: theme.spacing(3),
     marginTop: theme.spacing(1),

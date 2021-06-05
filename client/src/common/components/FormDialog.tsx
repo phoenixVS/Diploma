@@ -3,7 +3,7 @@ import PropTypes from 'prop-types'
 import { Dialog, DialogContent, Box, withStyles } from '@material-ui/core'
 import DialogTitleWithCloseIcon from './DialogTitleWithCloseIcon'
 
-const styles = (theme) => ({
+const styles = (theme: any) => ({
   dialogPaper: {
     display: 'flex',
     flexDirection: 'column',

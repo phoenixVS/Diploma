@@ -20,7 +20,7 @@ import ImageCropperDialog from '../../../../common/components/ImageCropperDialog
 import { Styles } from '@material-ui/styles'
 import { useTranslation } from 'i18n'
 
-const styles: Styles<Theme, {}> = (theme) => ({
+const styles: Styles<Theme, {}> = (theme:any) => ({
   floatButtonWrapper: {
     position: 'absolute',
     top: theme.spacing(1),

@@ -10,7 +10,7 @@ import DialogSelector from './register_login/DialogSelector'
 import smoothScrollTop from '../../../common/functions/smoothScrollTop'
 import { Nullable } from '@helpers/commonInterfaces/interfaces'
 
-const styles: Styles<Theme, {}, 'wrapper'> = (theme) => ({
+const styles: Styles<Theme, {}, 'wrapper'> = (theme: any) => ({
   wrapper: {
     backgroundColor: theme.palette.common.white,
     overflowX: 'hidden',

@@ -13,7 +13,7 @@ import {
 } from '@material-ui/core'
 import LoopIcon from '@material-ui/icons/Loop'
 
-const styles = (theme) => ({
+const styles = (theme:any) => ({
   paper: {
     borderBottomLeftRadius: 0,
     borderBottomRightRadius: 0,

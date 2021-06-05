@@ -11,7 +11,7 @@ import {
 } from '@material-ui/core'
 import ButtonCircularProgress from '../../../../common/components/ButtonCircularProgress'
 
-const styles = (theme) => ({
+const styles = (theme: any) => ({
   dialogContent: {
     paddingTop: theme.spacing(2),
   },

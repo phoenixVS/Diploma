@@ -1,6 +1,6 @@
-import { withStyles } from '@material-ui/core'
+import { Theme, withStyles } from '@material-ui/core'
 
-const styles = (theme) => ({
+const styles = (theme: Theme) => ({
   '@global': {
     /**
      * Disable the focus outline, which is default on some browsers like

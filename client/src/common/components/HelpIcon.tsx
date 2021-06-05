@@ -3,7 +3,7 @@ import PropTypes from 'prop-types'
 import { Tooltip, Typography, withStyles } from '@material-ui/core'
 import HelpIconOutline from '@material-ui/icons/HelpOutline'
 
-const styles = (theme) => ({
+const styles = (theme: any) => ({
   tooltipTypo: {
     whiteSpace: 'pre-line !important',
     ...theme.typography.caption,

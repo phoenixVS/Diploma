@@ -15,7 +15,7 @@ import {
 import MessageIcon from '@material-ui/icons/Message'
 import MessageListItem from './MessageListItem'
 
-const styles = (theme) => ({
+const styles = (theme: any) => ({
   tabContainer: {
     overflowY: 'auto',
     maxHeight: 350,

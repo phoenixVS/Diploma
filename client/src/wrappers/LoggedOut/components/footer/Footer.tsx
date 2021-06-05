@@ -17,7 +17,7 @@ import transitions from '@material-ui/core/styles/transitions'
 import ColoredButton from '../../../../common/components/ColoredButton'
 import { useTranslation } from 'i18n'
 
-const styles = (theme) => ({
+const styles = (theme: any) => ({
   footerInner: {
     backgroundColor: theme.palette.common.darkBlack,
     paddingTop: theme.spacing(8),

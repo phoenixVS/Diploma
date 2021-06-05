@@ -8,7 +8,7 @@ import MenuItem from '@material-ui/core/MenuItem'
 import Menu from '@material-ui/core/Menu'
 import { i18n } from 'i18n'
 
-const useStyles = makeStyles((theme) => ({
+const useStyles = makeStyles((theme: any) => ({
   root: {
     backgroundColor: theme.palette.background.paper,
     maxHeight: '58px',

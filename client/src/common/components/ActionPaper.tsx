@@ -1,5 +1,4 @@
 import React from 'react'
-import PropTypes from 'prop-types'
 import {
   Paper,
   DialogTitle,
@@ -7,9 +6,10 @@ import {
   DialogActions,
   Box,
   withStyles,
+  Theme,
 } from '@material-ui/core'
 
-const styles = (theme) => ({
+const styles = (theme: Theme) => ({
   helpPadding: {
     '@media (max-width:  400px)': {
       paddingLeft: theme.spacing(1),
@@ -21,20 +21,30 @@ const styles = (theme) => ({
   },
 })
 
-function ActionPaper(props) {
+interface ActionPaperProps {
+  theme: any
+  classes: any
+  title: any
+  content: any
+  maxWidth: string
+  actions: any
+  helpPadding: boolean
+  fullWidthActions: boolean
+}
+const ActionPaper: React.FC<ActionPaperProps> = (props) => {
   const { theme, classes, title, content, maxWidth, actions, helpPadding, fullWidthActions } = props
   return (
     <Box pt={1}>
       <Paper style={{ maxWidth: theme.breakpoints.values[maxWidth] }}>
         {title && <DialogTitle>{title}</DialogTitle>}
         {content && (
-          <DialogContent classes={helpPadding ? { root: classes.helpPadding } : null}>
+          <DialogContent classes={helpPadding ? { root: classes.helpPadding } : undefined}>
             {content}
           </DialogContent>
         )}
         {actions && (
           <Box pb={2} pr={2}>
-            <DialogActions classes={{ action: fullWidthActions ? classes.fullWidth : null }}>
+            <DialogActions classes={fullWidthActions ? classes.fullWidth : undefined}>
               {actions}
             </DialogActions>
           </Box>
@@ -42,17 +52,6 @@ function ActionPaper(props) {
       </Paper>
     </Box>
   )
-}
-
-ActionPaper.propTypes = {
-  theme: PropTypes.object.isRequired,
-  classes: PropTypes.object.isRequired,
-  title: PropTypes.oneOfType([PropTypes.element, PropTypes.func, PropTypes.string]),
-  content: PropTypes.element,
-  maxWidth: PropTypes.string,
-  actions: PropTypes.element,
-  helpPadding: PropTypes.bool,
-  fullWidthActions: PropTypes.bool,
 }
 
 export default withStyles(styles, { withTheme: true })(ActionPaper)

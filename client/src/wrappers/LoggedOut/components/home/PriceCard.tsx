@@ -3,7 +3,7 @@ import PropTypes from 'prop-types'
 import { Typography, Box, withStyles } from '@material-ui/core'
 import CheckIcon from '@material-ui/icons/Check'
 
-const styles = (theme) => ({
+const styles = (theme: any) => ({
   card: {
     paddingTop: theme.spacing(6),
     paddingBottom: theme.spacing(6),

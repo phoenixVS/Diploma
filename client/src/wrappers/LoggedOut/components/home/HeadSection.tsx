@@ -18,7 +18,7 @@ import { Styles } from '@material-ui/styles'
 import { Breakpoint } from '@material-ui/core/styles/createBreakpoints'
 import { useTranslation } from 'i18n'
 
-const styles: Styles<Theme, {}> = (theme) => ({
+const styles: Styles<Theme, {}> = (theme: any) => ({
   relative: {
     position: 'relative',
   },

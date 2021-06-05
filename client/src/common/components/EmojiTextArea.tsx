@@ -15,7 +15,7 @@ import EmojiEmotionsIcon from '@material-ui/icons/EmojiEmotions'
 import CloseIcon from '@material-ui/icons/Close'
 import countWithEmojis from '../functions/countWithEmojis'
 
-const styles = (theme) => ({
+const styles = (theme: any) => ({
   '@global': {
     '.emoji-mart-category-label': theme.typography.body1,
     '.emoji-mart-bar': { display: 'none !important' },

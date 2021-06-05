@@ -8,7 +8,7 @@ import KeyboardArrowLeft from '@material-ui/icons/KeyboardArrowLeft'
 import KeyboardArrowRight from '@material-ui/icons/KeyboardArrowRight'
 import DateRange from '@material-ui/icons/DateRange'
 
-const Theme2 = (theme) =>
+const Theme2 = (theme: any) =>
   createMuiTheme({
     ...theme,
     overrides: {

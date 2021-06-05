@@ -22,7 +22,7 @@ import withWidth from '@material-ui/core/withWidth'
 import Bordered from '../../../../common/components/Bordered'
 import ButtonCircularProgress from '../../../../common/components/ButtonCircularProgress'
 
-const styles = (theme) => ({
+const styles = (theme:any) => ({
   numberInput: {
     width: 110,
   },

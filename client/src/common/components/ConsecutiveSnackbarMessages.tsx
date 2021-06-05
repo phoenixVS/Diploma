@@ -2,7 +2,7 @@ import React, { useCallback, useState, useRef, useEffect } from 'react'
 import PropTypes from 'prop-types'
 import { Snackbar, withStyles } from '@material-ui/core'
 
-const styles = (theme) => ({
+const styles = (theme: any) => ({
   root: {
     backgroundColor: theme.palette.primary.main,
     paddingTop: 0,

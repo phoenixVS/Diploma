@@ -8,7 +8,7 @@ import Subscription from './subscription/Subscription'
 import PropsRoute from '../../shared/components/PropsRoute'
 import useLocationBlocker from '../../shared/functions/useLocationBlocker'
 
-const styles = (theme) => ({
+const styles = (theme: any) => ({
   wrapper: {
     margin: theme.spacing(1),
     width: 'auto',

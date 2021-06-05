@@ -3,7 +3,7 @@ import PropTypes from 'prop-types'
 import { Typography, withStyles } from '@material-ui/core'
 import Aos from 'aos'
 
-const styles = (theme) => ({
+const styles = (theme: any) => ({
   iconWrapper: {
     borderRadius: theme.shape.borderRadius,
     textAlign: 'center',

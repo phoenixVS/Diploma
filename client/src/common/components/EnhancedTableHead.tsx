@@ -10,7 +10,7 @@ import {
   withStyles,
 } from '@material-ui/core'
 
-const styles = (theme) => ({
+const styles = (theme: any) => ({
   tableSortLabel: {
     cursor: 'text',
     userSelect: 'auto',

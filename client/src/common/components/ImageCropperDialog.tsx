@@ -2,7 +2,7 @@ import React, { useState, useCallback } from 'react'
 import PropTypes from 'prop-types'
 import { Dialog, DialogContent, DialogActions, Button, Box, withStyles } from '@material-ui/core'
 
-const styles = (theme) => ({
+const styles = (theme: any) => ({
   dialogPaper: { maxWidth: `${theme.breakpoints.values.md}px !important` },
   dialogContent: {
     paddingTop: theme.spacing(2),

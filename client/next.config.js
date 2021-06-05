@@ -8,6 +8,9 @@ const localeSubpaths = {
 }
 
 module.exports = withPWA({
+  typescript: {
+    ignoreBuildErrors: true,
+  },
   env: {
     PUBLIC_URL: ''
   },

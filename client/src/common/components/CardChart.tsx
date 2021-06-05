@@ -13,17 +13,17 @@ import {
 } from '@material-ui/core'
 import MoreVertIcon from '@material-ui/icons/MoreVert'
 
-const styles = (theme) => ({
+const styles = (theme: any) => ({
   cardContentInner: {
     marginTop: theme.spacing(-4),
   },
 })
 
-function labelFormatter(label) {
+function labelFormatter(label: number) {
   return format(new Date(label * 1000), 'MMMM d, p yyyy')
 }
 
-function calculateMin(data, yKey, factor) {
+function calculateMin(data: any[], yKey: any, factor: number) {
   let max = Number.POSITIVE_INFINITY
   data.forEach((element) => {
     if (max > element[yKey]) {
@@ -91,7 +91,7 @@ const CardChart: React.FC<CardChartProps> = (props) => {
       default:
         throw new Error('No branch selected in switch-statement')
     }
-    const minSeconds = new Date() / 1000 - seconds
+    const minSeconds = Number(new Date()) / 1000 - seconds
     const arr = []
     for (let i = 0; i < data.length; i += 1) {
       if (minSeconds < data[i].timestamp) {
@@ -153,7 +153,6 @@ const CardChart: React.FC<CardChartProps> = (props) => {
                   onClick={() => {
                     selectOption(option)
                   }}
-                  name={option}
                 >
                   {option}
                 </MenuItem>
@@ -165,7 +164,7 @@ const CardChart: React.FC<CardChartProps> = (props) => {
       <CardContent>
         <Box className={classes.cardContentInner} height={height}>
           <ResponsiveContainer width="100%" height="100%">
-            <AreaChart data={processData()} type="number">
+            <AreaChart data={processData()}>
               <XAxis dataKey="timestamp" type="number" domain={['dataMin', 'dataMax']} hide />
               <YAxis domain={[calculateMin(data, 'value', 0.05), 'dataMax']} hide />
               <Area type="monotone" dataKey="value" stroke={color} fill={color} />

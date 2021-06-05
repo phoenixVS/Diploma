@@ -3,7 +3,7 @@ import PropTypes from 'prop-types'
 import classNames from 'classnames'
 import { Typography, withStyles } from '@material-ui/core'
 
-const styles = (theme) => ({
+const styles = (theme: any) => ({
   main: {
     backgroundColor: theme.palette.warning.light,
     border: `${theme.border.borderWidth}px solid ${theme.palette.warning.main}`,

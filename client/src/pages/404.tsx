@@ -19,7 +19,7 @@ import LoggedOutWrapper from 'wrappers/LoggedOut/components/LoggedOutWrapper'
 import Link from 'next/link'
 import { PageHead } from 'common/components/PageHead'
 
-const styles: Styles<Theme, any> = (theme) => ({
+const styles: Styles<Theme, any> = (theme: any) => ({
   wrapper: {
     position: 'relative',
     height: '50vh',

@@ -14,7 +14,7 @@ import unixToDateString from '../../../../common/functions/unixToDateString'
 import HighlightedInformation from '../../../../common/components/HighlightedInformation'
 import currencyPrettyPrint from '../../../../common/functions/currencyPrettyPrint'
 
-const styles = (theme) => ({
+const styles = (theme: any) => ({
   tableWrapper: {
     overflowX: 'auto',
     width: '100%',

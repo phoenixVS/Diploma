@@ -5,7 +5,7 @@ import { Grid, Typography, isWidthUp, withWidth, withStyles } from '@material-ui
 import PriceCard from './PriceCard'
 import calculateSpacing from './calculateSpacing'
 
-const styles = (theme) => ({
+const styles = (theme: any) => ({
   containerFix: {
     [theme.breakpoints.down('md')]: {
       paddingLeft: theme.spacing(6),

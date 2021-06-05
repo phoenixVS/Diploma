@@ -1,8 +1,7 @@
 import React from 'react'
-import PropTypes from 'prop-types'
 import { withStyles } from '@material-ui/core'
 
-const styles = (theme) => ({
+const styles = (theme: any) => ({
   wrapper: {
     border: `${theme.border.borderWidth}px solid ${theme.border.borderColor}`,
   },
@@ -11,7 +10,15 @@ const styles = (theme) => ({
   },
 })
 
-function Bordered(props) {
+interface BorderedProps {
+  classes: any
+  theme: any
+  disableVerticalPadding: boolean
+  disableBorderRadius: boolean
+  children: any
+  variant: string
+}
+const Bordered: React.FC<BorderedProps> = (props) => {
   const { classes, theme, disableVerticalPadding, disableBorderRadius, children, variant } = props
   return (
     <div
@@ -25,15 +32,6 @@ function Bordered(props) {
       {children}
     </div>
   )
-}
-
-Bordered.propTypes = {
-  classes: PropTypes.object,
-  theme: PropTypes.object,
-  disableVerticalPadding: PropTypes.bool,
-  disableBorderRadius: PropTypes.bool,
-  children: PropTypes.oneOfType([PropTypes.element, PropTypes.func, PropTypes.array]),
-  variant: PropTypes.string,
 }
 
 export default withStyles(styles, { withTheme: true })(Bordered)
