@@ -1,6 +1,6 @@
 import React, { useCallback, useEffect, useState } from 'react'
 import { NextPage } from 'next'
-import Head from 'next/head'
+import { useRouter } from 'next/router'
 import { MuiThemeProvider, CssBaseline } from '@material-ui/core'
 import theme from '../../../common/theme'
 import GlobalStyles from '../../../common/GlobalStyles'
@@ -8,7 +8,6 @@ import { Nullable } from '@helpers/commonInterfaces/interfaces'
 import LoggedOutWrapper from 'wrappers/LoggedOut/components/LoggedOutWrapper'
 import dummyBlogPosts from '../../../wrappers/LoggedOut/dummyData/blogPosts'
 import BlogPost from '../../../wrappers/LoggedOut/components/blog/BlogPost'
-import { useRouter } from 'next/dist/client/router'
 import { PageHead } from 'common/components/PageHead'
 
 const IndexPage: NextPage = () => {
