@@ -39,6 +39,9 @@ const styles = (theme: any) => ({
   },
 })
 
+interface PricingSectionProps {
+  width: string
+}
 function PricingSection(props) {
   const { width, classes } = props
   return (
@@ -125,10 +128,6 @@ function PricingSection(props) {
       </div>
     </div>
   )
-}
-
-PricingSection.propTypes = {
-  width: PropTypes.string.isRequired,
 }
 
 export default withStyles(styles, { withTheme: true })(withWidth()(PricingSection))
