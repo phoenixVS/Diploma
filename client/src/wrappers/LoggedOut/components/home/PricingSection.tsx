@@ -4,6 +4,7 @@ import classNames from 'classnames'
 import { Grid, Typography, isWidthUp, withWidth, withStyles } from '@material-ui/core'
 import PriceCard from './PriceCard'
 import calculateSpacing from './calculateSpacing'
+import { useTranslation } from 'i18n'
 
 const styles = (theme: any) => ({
   containerFix: {
@@ -42,12 +43,14 @@ const styles = (theme: any) => ({
 interface PricingSectionProps {
   width: string
 }
-function PricingSection(props) {
+const PricingSection: React.FC<PricingSectionProps> = (props) => {
   const { width, classes } = props
+  const { t } = useTranslation(['home'])
+
   return (
     <div className="lg-p-top" style={{ backgroundColor: '#FFFFFF' }}>
       <Typography variant="h3" align="center" className="lg-mg-bottom">
-        Pricing
+        {t('Pricing')}
       </Typography>
       <div className={classNames('container-fluid', classes.containerFix)}>
         <Grid container spacing={calculateSpacing(width)} className={classes.gridContainer}>
