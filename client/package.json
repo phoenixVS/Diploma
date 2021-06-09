@@ -7,6 +7,13 @@
     "export": "next export",
     "type-check": "tsc --project tsconfig.json --pretty --noEmit",
     "lint": "eslint --ext js,jsx,ts,tsx --fix",
+    "lint-staged": {
+      "complex-file-pattern-for-files-that-get-prettified": [
+        "replace '\\r\\n' '\n'",
+        "prettier --write",
+        "git add"
+      ]
+    },
     "test": "jest"
   },
   "dependencies": {
