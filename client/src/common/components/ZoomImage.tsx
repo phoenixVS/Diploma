@@ -65,12 +65,6 @@ const ZoomImage: React.FC<ZoomImageProps> = (props) => {
     if (!header) {
       return
     }
-    console.log(
-      `%cඞ zoomed in`,
-      "color: #29f4e9; font: 16px 'Open Sans', sans-serif; font-weight: 500; background: #FF00CB; border-radius: 10px; padding: 0 15px",
-      zoomedIn
-    )
-    console.log(`scrollbar size`, scrollbarSize)
     if (zoomedIn) {
       document.body.style.overflow = 'hidden'
       document.body.style.paddingRight = `${scrollbarSize}px`

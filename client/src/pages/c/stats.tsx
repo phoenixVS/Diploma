@@ -9,19 +9,26 @@ import { PageHead } from 'common/components/PageHead'
 import { Nullable } from '@helpers/commonInterfaces/interfaces'
 import SeminarDashboard from 'wrappers/LoggedIn/components/dashboard/SeminarDashboard'
 import { useTranslation } from 'i18n'
-import CreateTeam from 'wrappers/LoggedIn/components/createTeam/CreateTeam'
 
 const IndexPage: NextPage = () => {
   const [selectedTab, setSelectedTab] = useState<Nullable<string>>(null)
   const [isAddBalanceDialogOpen, setIsAddBalanceDialogOpen] = useState(false)
+  const [KnapsackChart, setKnapsackChart] = useState<any>(null)
+  const [hasFetchedCardChart, setHasFetchedCardChart] = useState(false)
 
   const { t } = useTranslation(['common'])
 
   const selectCreateTeam = useCallback(() => {
     smoothScrollTop()
     document.title = 'Workout - Dashboard'
-    setSelectedTab(t('Create team'))
-  }, [setSelectedTab])
+    setSelectedTab(t('Watch stats'))
+    if (!hasFetchedCardChart) {
+      setHasFetchedCardChart(true)
+      import('../../common/components/KnapsackChart').then((Component) => {
+        setKnapsackChart(Component.default)
+      })
+    }
+  }, [setSelectedTab, setKnapsackChart, hasFetchedCardChart, setHasFetchedCardChart])
 
   return (
     <>
@@ -35,7 +42,7 @@ const IndexPage: NextPage = () => {
           {...{ isAddBalanceDialogOpen }}
           {...{ setIsAddBalanceDialogOpen }}
         >
-          <CreateTeam {...{selectCreateTeam}} />
+          <SeminarDashboard {...{ selectCreateTeam }} />
         </LoggedInWrapper>
       </MuiThemeProvider>
     </>

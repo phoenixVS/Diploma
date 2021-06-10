@@ -1,5 +1,11 @@
 {
   "Create seminar": "Створити семінар",
+  "Create a team": "Створити команду",
+  "Create a student": "Створити учня",
+  "Students name": "Ім'я студента",
+  "Create": "Створити",
+  "Candidates": "Кандидати",
+  "Available time": "Доступний час",
   "Euristic method": "Евристичний метод",
   "B&B method": "Метод Гілок та Меж",
   "DP method": "Метод ДП",
@@ -9,5 +15,7 @@
   "Euristic optimum delta": "Відхилення евристичного методу від оптимуму",
   "Time (ms)": "Час (мс)",
   "Group prospects": "Перспективність групи",
-  "Number of students": "Кількість учнів"
+  "Number of students": "Кількість учнів",
+  "Cost": "Вартість",
+  "Prospects": "Перспективність"
 }

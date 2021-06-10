@@ -27,6 +27,8 @@ import AccountBalanceIcon from '@material-ui/icons/AccountBalance'
 import PowerSettingsNewIcon from '@material-ui/icons/PowerSettingsNew'
 import MenuIcon from '@material-ui/icons/Menu'
 import SupervisorAccountIcon from '@material-ui/icons/SupervisorAccount'
+import DuoIcon from '@material-ui/icons/Duo';
+import EqualizerIcon from '@material-ui/icons/Equalizer';
 import MessagePopperButton from './MessagePopperButton'
 import SideDrawer from './SideDrawer'
 import Balance from './Balance'
@@ -191,6 +193,20 @@ const NavBar: React.FC<NavBarProps> = (props) => {
       },
     },
     {
+      link: '/c/online-lesson',
+      name: t('Online lesson'),
+      onClick: closeMobileDrawer,
+      icon: {
+        desktop: (
+          <DuoIcon
+            className={selectedTab === t('Online lesson') ? classes.textPrimary : 'text-white'}
+            fontSize="small"
+          />
+        ),
+        mobile: <DuoIcon className="text-white" />,
+      },
+    },
+    {
       link: '/c/create-team',
       name: t('Create team'),
       onClick: closeMobileDrawer,
@@ -202,6 +218,20 @@ const NavBar: React.FC<NavBarProps> = (props) => {
           />
         ),
         mobile: <GroupIcon className="text-white" />,
+      },
+    },
+    {
+      link: '/c/stats',
+      name: t('Watch stats'),
+      onClick: closeMobileDrawer,
+      icon: {
+        desktop: (
+          <EqualizerIcon
+            className={selectedTab === t('Watch stats') ? classes.textPrimary : 'text-white'}
+            fontSize="small"
+          />
+        ),
+        mobile: <EqualizerIcon className="text-white" />,
       },
     },
     {

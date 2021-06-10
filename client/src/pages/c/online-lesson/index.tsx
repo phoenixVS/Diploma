@@ -1,15 +1,15 @@
 import React, { useCallback, useState } from 'react'
 import { NextPage } from 'next'
 import { MuiThemeProvider, CssBaseline } from '@material-ui/core'
-import theme from '../../common/theme'
-import GlobalStyles from '../../common/GlobalStyles'
+import theme from '../../../common/theme'
+import GlobalStyles from '../../../common/GlobalStyles'
 import LoggedInWrapper from 'wrappers/LoggedIn/components/LoggedInWrapper'
 import smoothScrollTop from 'common/functions/smoothScrollTop'
 import { PageHead } from 'common/components/PageHead'
 import { Nullable } from '@helpers/commonInterfaces/interfaces'
 import SeminarDashboard from 'wrappers/LoggedIn/components/dashboard/SeminarDashboard'
 import { useTranslation } from 'i18n'
-import CreateTeam from 'wrappers/LoggedIn/components/createTeam/CreateTeam'
+import Lobby from 'wrappers/LoggedIn/components/onlineLesson/Lobby'
 
 const IndexPage: NextPage = () => {
   const [selectedTab, setSelectedTab] = useState<Nullable<string>>(null)
@@ -20,7 +20,7 @@ const IndexPage: NextPage = () => {
   const selectCreateTeam = useCallback(() => {
     smoothScrollTop()
     document.title = 'Workout - Dashboard'
-    setSelectedTab(t('Create team'))
+    setSelectedTab(t('Online lesson'))
   }, [setSelectedTab])
 
   return (
@@ -35,7 +35,7 @@ const IndexPage: NextPage = () => {
           {...{ isAddBalanceDialogOpen }}
           {...{ setIsAddBalanceDialogOpen }}
         >
-          <CreateTeam {...{selectCreateTeam}} />
+          <Lobby {...{ selectCreateTeam }} />
         </LoggedInWrapper>
       </MuiThemeProvider>
     </>

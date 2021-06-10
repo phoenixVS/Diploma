@@ -1,5 +1,11 @@
 {
   "Create seminar": "Create seminar",
+  "Create a team": "Create a team",
+  "Create a student": "Create a student",
+  "Create": "Create",
+  "Candidates": "Candidates",
+  "Available time": "Available time",
+  "Students name": "Student's name",
   "Euristic method": "Euristic method",
   "B&B method": "B&B method",
   "DP method": "DP method",
@@ -9,5 +15,7 @@
   "Euristic optimum delta": "Euristic optimum delta",
   "Time (ms)": "Time (ms)",
   "Group prospects": "Group prospects",
-  "Number of students": "Number of students"
+  "Number of students": "Number of students",
+  "Cost": "Cost",
+  "Prospects": "Prospects"
 }

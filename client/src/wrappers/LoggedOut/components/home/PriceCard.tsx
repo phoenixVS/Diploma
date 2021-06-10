@@ -30,6 +30,13 @@ const styles = (theme: any) => ({
   },
 })
 
+interface PriceCardProps {
+  classes: any,
+  theme: any,
+  title: string,
+  pricing: any,
+  highlighted: boolean,
+}
 function PriceCard(props) {
   const { classes, theme, title, pricing, features, highlighted } = props
   return (
@@ -69,14 +76,6 @@ function PriceCard(props) {
       ))}
     </div>
   )
-}
-
-PriceCard.propTypes = {
-  classes: PropTypes.object.isRequired,
-  theme: PropTypes.object.isRequired,
-  title: PropTypes.string.isRequired,
-  pricing: PropTypes.oneOfType([PropTypes.node, PropTypes.string]).isRequired,
-  highlighted: PropTypes.bool,
 }
 
 export default withStyles(styles, { withTheme: true })(PriceCard)

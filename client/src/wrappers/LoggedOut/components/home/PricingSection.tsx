@@ -5,6 +5,7 @@ import { Grid, Typography, isWidthUp, withWidth, withStyles } from '@material-ui
 import PriceCard from './PriceCard'
 import calculateSpacing from './calculateSpacing'
 import { useTranslation } from 'i18n'
+import { Breakpoint } from '@material-ui/core/styles/createBreakpoints'
 
 const styles = (theme: any) => ({
   containerFix: {
@@ -41,7 +42,8 @@ const styles = (theme: any) => ({
 })
 
 interface PricingSectionProps {
-  width: string
+  width: Breakpoint
+  classes: any
 }
 const PricingSection: React.FC<PricingSectionProps> = (props) => {
   const { width, classes } = props
@@ -56,14 +58,14 @@ const PricingSection: React.FC<PricingSectionProps> = (props) => {
         <Grid container spacing={calculateSpacing(width)} className={classes.gridContainer}>
           <Grid item xs={12} sm={6} lg={3} className={classes.cardWrapper} data-aos="zoom-in-up">
             <PriceCard
-              title="Starter"
+              title={t("Starter")}
               pricing={
                 <span>
-                  $14.99
-                  <Typography display="inline"> / month</Typography>
+                  ₴300.00
+                  <Typography display="inline"> / {t('month')}</Typography>
                 </span>
               }
-              features={['Feature 1', 'Feature 2', 'Feature 3']}
+              features={[t('Work in group'), t('Dive in program'), t('Trener advices')]}
             />
           </Grid>
           <Grid
@@ -77,14 +79,14 @@ const PricingSection: React.FC<PricingSectionProps> = (props) => {
           >
             <PriceCard
               highlighted
-              title="Premium"
+              title={t("Default")}
               pricing={
                 <span>
-                  $29.99
-                  <Typography display="inline"> / month</Typography>
+                  ₴500
+                  <Typography display="inline"> / {t('month')}</Typography>
                 </span>
               }
-              features={['Feature 1', 'Feature 2', 'Feature 3']}
+              features={[t('Work in group'), t('Dive in program'), t('Trener advices')]}
             />
           </Grid>
           <Grid
@@ -97,14 +99,14 @@ const PricingSection: React.FC<PricingSectionProps> = (props) => {
             data-aos-delay={isWidthUp('md', width) ? '400' : '0'}
           >
             <PriceCard
-              title="Business"
+              title={t("Advanced")}
               pricing={
                 <span>
-                  $49.99
-                  <Typography display="inline"> / month</Typography>
+                  ₴600.00
+                  <Typography display="inline"> / {t('month')}</Typography>
                 </span>
               }
-              features={['Feature 1', 'Feature 2', 'Feature 3']}
+              features={[t('Work in group'), t('Dive in program'), t('Trener advices')]}
             />
           </Grid>
           <Grid
@@ -117,14 +119,14 @@ const PricingSection: React.FC<PricingSectionProps> = (props) => {
             data-aos-delay={isWidthUp('md', width) ? '600' : '200'}
           >
             <PriceCard
-              title="Tycoon"
+              title={t("Personal")}
               pricing={
                 <span>
-                  $99.99
-                  <Typography display="inline"> / month</Typography>
+                  ₴1200.00
+                  <Typography display="inline"> / {t('month')}</Typography>
                 </span>
               }
-              features={['Feature 1', 'Feature 2', 'Feature 3']}
+              features={[t('Work in group'), t('Dive in program'), t('Trener advices')]}
             />
           </Grid>
         </Grid>
