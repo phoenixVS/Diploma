@@ -31,7 +31,7 @@ const roomPage: NextPage = () => {
         <CssBaseline />
         <GlobalStyles />
         <LoggedInWrapper
-          fw
+          fw={true}
           {...{ selectedTab }}
           {...{ setSelectedTab }}
           {...{ isAddBalanceDialogOpen }}

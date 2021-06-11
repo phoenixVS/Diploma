@@ -21,7 +21,19 @@ const styles = () => ({
   wrapper: {
     display: 'flex',
     justifyContent: 'space-around',
-    alignItems: 'center'
+    alignItems: 'center',
+    marginTop: '25px'
+  },
+  video: {
+    height: '300px',
+    width: '400px',
+    backgroundColor: '#4829B2',
+    objectFit: 'cover'
+  },
+  videoPlaceHolder: {
+    height: '300px',
+    width: '400px',
+    backgroundColor: '#4829B2'
   }
 })
 
@@ -64,7 +76,7 @@ const Room:React.FC<RoomProps> = ({ classes, theme, selectEnterLobby }) => {
       myVideoStream = stream
       
       videoRef.current.srcObject = stream
-      videoRef.current.addEventListener('loadmetadata', () => {
+      videoRef.current.addEventListener('loadedmetadata', () => {
         videoRef.current.play()
         videoRef.current.muted = true
       })
@@ -75,9 +87,10 @@ const Room:React.FC<RoomProps> = ({ classes, theme, selectEnterLobby }) => {
     <Container className={classes.root}>
             <Grid container spacing={4} className={classes.wrapper}>
               <Grid item xs={12} md={4}>
-                <video ref={videoRef}></video>
+                <video ref={videoRef} className={classes.video}></video>
               </Grid>
-              <Grid item xs={12} md={3}>
+              <Grid item xs={12} md={4}>
+                <div className={classes.videoPlaceholder}></div>
               </Grid>
             </Grid>
     </Container>

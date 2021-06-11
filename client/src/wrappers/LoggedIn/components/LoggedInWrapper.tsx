@@ -394,7 +394,7 @@ const Main: React.FC<MainProps> = (props) => {
           setTargets={setTargets}
           setPosts={setPosts}
         />*/}
-        <div className={classes.wrapper, cx({[classes.fullWidth]:fw})}>
+        <div className={cx({[classes.wrapper]: !fw}, {[classes.fullWidth]: fw})}>
           {React.Children.map(children, (child) => {
             // checking isValidElement is the safe way and avoids a typescript errors too
             if (React.isValidElement(child)) {
