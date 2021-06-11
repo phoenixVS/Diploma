@@ -1,5 +1,5 @@
 import React, { memo, useCallback, useState, useEffect, Fragment } from 'react'
-import classNames from 'classnames'
+import cx from 'classnames'
 import { withStyles } from '@material-ui/core'
 import NavBar from './navigation/NavBar'
 import ConsecutiveSnackbarMessages from '../../../common/components/ConsecutiveSnackbarMessages'
@@ -18,6 +18,9 @@ const styles = (theme: any) => ({
     [theme.breakpoints.down('xs')]: {
       marginLeft: 0,
     },
+  },
+  fullWidth: {
+    width: '100%'
   },
   wrapper: {
     margin: theme.spacing(1),
@@ -61,6 +64,7 @@ function shuffle(array) {
 }
 
 interface MainProps {
+  fw?: boolean
   classes: any
   isAddBalanceDialogOpen?: boolean
   setIsAddBalanceDialogOpen?: (isOpen: boolean) => void
@@ -69,6 +73,7 @@ interface MainProps {
 }
 const Main: React.FC<MainProps> = (props) => {
   const {
+    fw,
     classes,
     children,
     selectedTab,
@@ -368,7 +373,7 @@ const Main: React.FC<MainProps> = (props) => {
         openAddBalanceDialog={openAddBalanceDialog}
       />
       <ConsecutiveSnackbarMessages getPushMessageFromChild={getPushMessageFromChild} />
-      <main className={classNames(classes.main)}>
+      <main className={cx(classes.main)}>
         {/*<Routing
           isAccountActivated={isAccountActivated}
           ImageCropper={ImageCropper}
@@ -389,7 +394,7 @@ const Main: React.FC<MainProps> = (props) => {
           setTargets={setTargets}
           setPosts={setPosts}
         />*/}
-        <div className={classes.wrapper}>
+        <div className={classes.wrapper, cx({[classes.fullWidth]:fw})}>
           {React.Children.map(children, (child) => {
             // checking isValidElement is the safe way and avoids a typescript errors too
             if (React.isValidElement(child)) {

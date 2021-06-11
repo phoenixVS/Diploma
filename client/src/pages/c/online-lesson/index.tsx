@@ -11,15 +11,15 @@ import SeminarDashboard from 'wrappers/LoggedIn/components/dashboard/SeminarDash
 import { useTranslation } from 'i18n'
 import Lobby from 'wrappers/LoggedIn/components/onlineLesson/Lobby'
 
-const IndexPage: NextPage = () => {
+const LobbyPage: NextPage = () => {
   const [selectedTab, setSelectedTab] = useState<Nullable<string>>(null)
   const [isAddBalanceDialogOpen, setIsAddBalanceDialogOpen] = useState(false)
 
   const { t } = useTranslation(['common'])
 
-  const selectCreateTeam = useCallback(() => {
+  const selectEnterLobby = useCallback(() => {
     smoothScrollTop()
-    document.title = 'Workout - Dashboard'
+    document.title = 'Workout - Lobby'
     setSelectedTab(t('Online lesson'))
   }, [setSelectedTab])
 
@@ -35,11 +35,11 @@ const IndexPage: NextPage = () => {
           {...{ isAddBalanceDialogOpen }}
           {...{ setIsAddBalanceDialogOpen }}
         >
-          <Lobby {...{ selectCreateTeam }} />
+          <Lobby {...{ selectEnterLobby }} />
         </LoggedInWrapper>
       </MuiThemeProvider>
     </>
   )
 }
 
-export default IndexPage
+export default LobbyPage

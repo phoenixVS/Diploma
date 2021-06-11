@@ -55,7 +55,7 @@ const features = [
     color: '#d50000',
     headline: t('Educational material'),
     text:
-      t('A lot of exercises videos, gallery and educational literature and waiting for you:)'),
+      t('A lot of exercises videos, gallery and educational literature and waiting for you'),
     icon: <ComputerIcon style={{ fontSize: iconSize }} />,
     mdDelay: '0',
     smDelay: '200',

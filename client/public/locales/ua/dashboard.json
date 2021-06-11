@@ -2,10 +2,10 @@
   "Create seminar": "Створити семінар",
   "Create a team": "Створити команду",
   "Create a student": "Створити учня",
-  "Students name": "Ім'я студента",
   "Create": "Створити",
   "Candidates": "Кандидати",
   "Available time": "Доступний час",
+  "Students name": "Ім'я студента",
   "Euristic method": "Евристичний метод",
   "B&B method": "Метод Гілок та Меж",
   "DP method": "Метод ДП",
@@ -17,5 +17,6 @@
   "Group prospects": "Перспективність групи",
   "Number of students": "Кількість учнів",
   "Cost": "Вартість",
-  "Prospects": "Перспективність"
+  "Prospects": "Перспективність",
+  "Join room": "Приєднатися до кімнати"
 }

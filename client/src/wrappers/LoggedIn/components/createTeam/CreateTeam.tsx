@@ -151,7 +151,7 @@ const CreateTeam:React.FC<CreateTeamProps> = ({ classes, theme, selectCreateTeam
             </Typography>
             <Grid container spacing={2}>
               <Grid item xs={12} md={5}>
-                <TextField id="outlined-basic" required error={nameError} value={name} onChange={inputChangeHandler} label="Student Name" variant="outlined" style={{width: '100%'}}/>
+                <TextField id="outlined-basic" required error={nameError} value={name} onChange={inputChangeHandler} label={t("Students Name")} variant="outlined" style={{width: '100%'}}/>
               </Grid> 
               <Grid item xs={6} md={3}>
                 <Typography id="cost" gutterBottom>
