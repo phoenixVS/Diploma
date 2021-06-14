@@ -1,5 +1,14 @@
 import { Answer, Input } from './interfaces'
 
+interface Node {
+  ub: number
+  lb: number
+  level: number
+  flag: boolean
+  tv: number
+  tw: number
+}
+
 export const branchesAndBoundes = ({ n, cost, value, resource }: Input): Answer => {
   const answer: Answer = {
     z: 0,
@@ -13,9 +22,42 @@ export const branchesAndBoundes = ({ n, cost, value, resource }: Input): Answer 
   }
   const sortedLambda = sortWithIndeces(lambda)
 
-  const minLB = 0
+  const minLB = 0,
+    finalLB = Infinity
   answer.time = window.performance.now() - answer.time
   return answer
+
+  // Function to calculate upper bound
+  // (includes fractional part of the items)
+  function upper_bound(tv, tw, idx, arr) {
+    let value = tv
+    let weight = tw
+    for (let i = idx; i < n; i++) {
+      if (weight + arr[i].weight <= resource) {
+        weight += arr[i].weight
+        value -= arr[i].value
+      } else {
+        value -= ((resource - weight) / arr[i].weight) * arr[i].value
+        break
+      }
+    }
+    return value
+  }
+  // Function to calculate lower bound (doesn't
+  // include fractional part of the items)
+  function lower_bound(tv, tw, idx, arr) {
+    let value = tv
+    let weight = tw
+    for (let i = idx; i < n; i++) {
+      if (weight + arr[i].weight <= resource) {
+        weight += arr[i].weight
+        value -= arr[i].value
+      } else {
+        break
+      }
+    }
+    return value
+  }
 }
 
 function sortWithIndeces(toSort) {
