@@ -7,5 +7,4 @@
   useTabs: false,
   arrowParens: 'always',
   endOfLine: 'lf'
-  eol: lf
 }

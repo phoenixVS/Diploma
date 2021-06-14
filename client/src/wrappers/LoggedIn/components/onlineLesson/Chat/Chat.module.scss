@@ -1,0 +1,63 @@
+@import './_colors';
+
+$message-time-color: #a9a9a9;
+$speech-bubble-border-color: #d3d3d3;
+
+.messageRow {
+    display: grid;
+    grid-template-columns: 70%;
+    margin-bottom: 20px;
+
+    > .messageContent {
+        display: grid;
+
+        > .avatar {
+            border-radius: 100%;
+            grid-row: span 2;
+            width: 48px;
+            height: 48px;
+        }
+        
+        > .messageTime {
+            font-size: 0.8rem;
+            color: $message-time-color;
+        }
+        
+        > .messageText {
+            padding: 9px 14px;
+            font-size: 1rem;
+            margin-bottom: 5px;
+        }
+    }
+
+    &.yourMessage {
+        justify-content: end;
+
+        > .messageContent {
+            justify-items: end;
+
+            > .messageText {
+                background: $primary-color;
+                color: $contrasted-primary-text;
+                border: 1px solid $primary-color;
+                border-radius: 14px 14px 0 14px;
+            }
+        }
+    }
+
+    &.otherMessage {
+        justify-items: start;
+
+        > .messageContent {
+            grid-template-columns: 48px 1fr;
+            grid-column-gap: 15px;
+
+            > .messageText {
+                background: $accent-color;
+                color: $contrasted-accent-text;
+                border: 1px solid $speech-bubble-border-color;
+                border-radius: 14px 14px 14px 0;
+            }
+        }
+    }
+}

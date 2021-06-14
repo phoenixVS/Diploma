@@ -7,6 +7,7 @@
       "@layouts/*": ["layouts/*"],
       "@helpers/*": ["helpers/*"],
       "@icons/*": ["../public/svg/*"],
+      "@images/*": ["../public/images/*"],
       "@styles/*": ["styles/*"],
     },
     "target": "es5",

@@ -16,7 +16,12 @@
   "Time (ms)": "Time (ms)",
   "Group prospects": "Group prospects",
   "Number of students": "Number of students",
+  "Name": "Name",
   "Cost": "Cost",
   "Prospects": "Prospects",
-  "Join room": "Join room"
+  "Join room": "Join room",
+  "Type something...": "Type something...",
+  "Chat": "Chat",
+  "Lobby": "Lobby",
+  "Enter room id": "Enter room id"
 }

@@ -1,11 +1,23 @@
-import React, { useEffect, useState } from 'react';
-import { useTranslation } from 'i18n';
+import React, { useEffect, useState } from 'react'
+import { useTranslation } from 'i18n'
 import { defaultTheme } from 'common/theme'
-import cx from 'classnames';
-import { Button, Card, CardContent, Container, Fab, Grid, Slider, TextField, Theme, Typography, withStyles } from '@material-ui/core'
-import AddIcon from '@material-ui/icons/Add';
-import Participants from './participants/Participants';
-import { euristic } from 'common/functions/knapsack/euristic';
+import cx from 'classnames'
+import {
+  Button,
+  Card,
+  CardContent,
+  Container,
+  Fab,
+  Grid,
+  Slider,
+  TextField,
+  Theme,
+  Typography,
+  withStyles,
+} from '@material-ui/core'
+import AddIcon from '@material-ui/icons/Add'
+import Participants from './participants/Participants'
+import { euristic } from 'common/functions/knapsack/euristic'
 
 const styles = () => ({
   root: {
@@ -21,31 +33,31 @@ const defaultCandidates = [
   {
     name: 'Валерій',
     cost: 54,
-    prospects: 29
+    prospects: 29,
   },
   {
     name: 'Олексій',
     cost: 36,
-    prospects: 36
+    prospects: 36,
   },
   {
     name: 'Іван',
     cost: 54,
-    prospects: 29
+    prospects: 29,
   },
   {
     name: 'Артем',
     cost: 19,
-    prospects: 21
+    prospects: 21,
   },
   {
     name: 'Кирило',
     cost: 61,
-    prospects: 56
+    prospects: 56,
   },
 ]
 function valuetext(value) {
-  return `${value} W`;
+  return `${value} W`
 }
 interface ICandidate {
   name: string
@@ -53,28 +65,28 @@ interface ICandidate {
   cost: number
 }
 type CreateTeamProps = {
-  classes: any;
+  classes: any
   theme: Theme
   selectCreateTeam: () => void
-};
-const CreateTeam:React.FC<CreateTeamProps> = ({ classes, theme, selectCreateTeam }) => {
+}
+const CreateTeam: React.FC<CreateTeamProps> = ({ classes, theme, selectCreateTeam }) => {
   const [styles, setStyles] = useState(defaultTheme)
   const { t } = useTranslation(['dashboard'])
-  
-  const [createdTeam, setCreatedTeam] = React.useState<Array<ICandidate>>([]);
-  const [resource, setResource] = useState() 
+
+  const [createdTeam, setCreatedTeam] = React.useState<Array<ICandidate>>([])
+  const [resource, setResource] = useState()
   const [resError, setResError] = useState(false)
   const [candidates, setCandidates] = useState<Array<ICandidate>>(defaultCandidates)
   const [name, setName] = useState('')
   const [nameError, setNameError] = useState(false)
-  const [cost, setCost] = React.useState(30);
+  const [cost, setCost] = React.useState(30)
   const handleCostChange = (event, newValue) => {
-    setCost(newValue);
-  };
-  const [prospects, setProspects] = React.useState(30);
+    setCost(newValue)
+  }
+  const [prospects, setProspects] = React.useState(30)
   const handleProspectsChange = (event, newValue) => {
-    setProspects(newValue);
-  };
+    setProspects(newValue)
+  }
 
   useEffect(selectCreateTeam, [selectCreateTeam])
   useEffect(() => {
@@ -82,15 +94,16 @@ const CreateTeam:React.FC<CreateTeamProps> = ({ classes, theme, selectCreateTeam
       setStyles(theme)
     }
   }, [theme])
-  
+
   const addCandidateHandler = (props: ICandidate) => {
     if (name === '') {
       setNameError(true)
       return
     }
     const newCandidates = [...candidates]
-    newCandidates.unshift({...props})
+    newCandidates.unshift({ ...props })
     setCandidates(newCandidates)
+    setName('')
   }
 
   const removeCandidateHandler = (id: number) => {
@@ -105,7 +118,7 @@ const CreateTeam:React.FC<CreateTeamProps> = ({ classes, theme, selectCreateTeam
     }
     setName(e.target.value)
   }
-  
+
   const resourceInputChangeHandler = (e) => {
     setResource(e.target.value)
     if (e.target.value === '') {
@@ -124,11 +137,12 @@ const CreateTeam:React.FC<CreateTeamProps> = ({ classes, theme, selectCreateTeam
     }
     const indices = euristic({
       n: candidates.length,
-      cost: candidates.map(item => item.cost),
-      value: candidates.map(item => item.prospects),
-      resource}).items
-    
-    setCreatedTeam(candidates.filter((item, idx) => indices.some(i => i === idx)))
+      cost: candidates.map((item) => item.cost),
+      value: candidates.map((item) => item.prospects),
+      resource,
+    }).items
+
+    setCreatedTeam(candidates.filter((item, idx) => indices.some((i) => i === idx)))
   }
 
   return (
@@ -136,14 +150,24 @@ const CreateTeam:React.FC<CreateTeamProps> = ({ classes, theme, selectCreateTeam
       <Typography variant="h2" component="h2" gutterBottom>
         {t('Create a team')}
       </Typography>
-      <Card style={{margin: "15px"}}>
+      <Card style={{ margin: '15px' }}>
         <CardContent>
           <form noValidate autoComplete="off">
-            <TextField id="outlined-basic" type="number" required error={resError} value={resource ? resource : ''} onChange={resourceInputChangeHandler} label={t('Available time')} variant="outlined" style={{width: '100%'}}/>
+            <TextField
+              id="outlined-basic"
+              type="number"
+              required
+              error={resError}
+              value={resource ? resource : ''}
+              onChange={resourceInputChangeHandler}
+              label={t('Available time')}
+              variant="outlined"
+              style={{ width: '100%' }}
+            />
           </form>
         </CardContent>
       </Card>
-      <Card style={{margin: "15px"}}>
+      <Card style={{ margin: '15px' }}>
         <CardContent>
           <form noValidate autoComplete="off">
             <Typography variant="h3" component="h3" gutterBottom>
@@ -151,8 +175,17 @@ const CreateTeam:React.FC<CreateTeamProps> = ({ classes, theme, selectCreateTeam
             </Typography>
             <Grid container spacing={2}>
               <Grid item xs={12} md={5}>
-                <TextField id="outlined-basic" required error={nameError} value={name} onChange={inputChangeHandler} label={t("Students Name")} variant="outlined" style={{width: '100%'}}/>
-              </Grid> 
+                <TextField
+                  id="outlined-basic"
+                  required
+                  error={nameError}
+                  value={name}
+                  onChange={inputChangeHandler}
+                  label={t('Students name')}
+                  variant="outlined"
+                  style={{ width: '100%' }}
+                />
+              </Grid>
               <Grid item xs={6} md={3}>
                 <Typography id="cost" gutterBottom>
                   {t('Cost')}
@@ -168,7 +201,7 @@ const CreateTeam:React.FC<CreateTeamProps> = ({ classes, theme, selectCreateTeam
                   min={10}
                   max={100}
                 />
-              </Grid> 
+              </Grid>
               <Grid item xs={6} md={3}>
                 <Typography id="prospects" gutterBottom>
                   {t('Prospects')}
@@ -184,29 +217,41 @@ const CreateTeam:React.FC<CreateTeamProps> = ({ classes, theme, selectCreateTeam
                   min={1}
                   max={100}
                 />
-              </Grid> 
-              <Grid item xs={12} md={1} style={{ display: 'flex', justifyContent: 'center'}}>
-                <Fab color="primary" aria-label="add" onClick={() => {addCandidateHandler({name, cost, prospects})}}>
+              </Grid>
+              <Grid item xs={12} md={1} style={{ display: 'flex', justifyContent: 'center' }}>
+                <Fab
+                  color="primary"
+                  aria-label="add"
+                  onClick={() => {
+                    addCandidateHandler({ name, cost, prospects })
+                  }}
+                >
                   <AddIcon />
                 </Fab>
-              </Grid> 
+              </Grid>
             </Grid>
           </form>
         </CardContent>
       </Card>
-      {createdTeam.length > 0 ?
-      <Card style={{margin: "15px"}}>
-        <CardContent>
-          <Participants {...{candidates}} {...{removeCandidateHandler}} noEdit />
-        </CardContent>
-      </Card>
-      :<Card style={{margin: "15px"}}>
-        <CardContent>
-          <Participants {...{candidates}} {...{removeCandidateHandler}} {...{createTeamHandler}} />
-        </CardContent>
-      </Card>}
+      {createdTeam.length > 0 ? (
+        <Card style={{ margin: '15px' }}>
+          <CardContent>
+            <Participants {...{ candidates }} {...{ removeCandidateHandler }} noEdit />
+          </CardContent>
+        </Card>
+      ) : (
+        <Card style={{ margin: '15px' }}>
+          <CardContent>
+            <Participants
+              {...{ candidates }}
+              {...{ removeCandidateHandler }}
+              {...{ createTeamHandler }}
+            />
+          </CardContent>
+        </Card>
+      )}
     </Container>
-  );
-};
+  )
+}
 
 export default withStyles(styles, { withTheme: true })(CreateTeam)
