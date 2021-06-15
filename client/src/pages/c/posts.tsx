@@ -7,7 +7,6 @@ import LoggedInWrapper from 'wrappers/LoggedIn/components/LoggedInWrapper'
 import smoothScrollTop from 'common/functions/smoothScrollTop'
 import Posts from 'wrappers/LoggedIn/components/posts/Posts'
 import { Nullable } from '@helpers/commonInterfaces/interfaces'
-
 import persons from '../../wrappers/LoggedIn/dummyData/persons'
 import { PageHead } from 'common/components/PageHead'
 import { useTranslation } from 'i18n'

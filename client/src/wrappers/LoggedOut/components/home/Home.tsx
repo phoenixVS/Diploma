@@ -2,7 +2,6 @@ import React, { Fragment, useEffect } from 'react'
 import HeadSection from './HeadSection'
 import FeatureSection from './FeatureSection'
 import PricingSection from './PricingSection'
-import SeminarDashboard from 'wrappers/LoggedIn/components/dashboard/SeminarDashboard'
 
 interface HomeProps {
   selectHome: () => void
