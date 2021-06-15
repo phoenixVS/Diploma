@@ -1,9 +1,6 @@
 import React, { useEffect, useState } from 'react'
 import { useTranslation } from 'i18n'
-import { defaultTheme } from 'common/theme'
-import cx from 'classnames'
 import {
-  Button,
   Card,
   CardContent,
   Container,
@@ -18,6 +15,8 @@ import {
 import AddIcon from '@material-ui/icons/Add'
 import Participants from './participants/Participants'
 import { euristic } from 'common/functions/knapsack/euristic'
+import { branchesAndBoundes } from 'common/functions/knapsack/true_bnb'
+import { useCallback } from 'react'
 
 const styles = () => ({
   root: {
@@ -47,7 +46,7 @@ const defaultCandidates = [
   },
   {
     name: 'Артем',
-    cost: 19,
+    cost: 15,
     prospects: 21,
   },
   {
@@ -69,12 +68,11 @@ type CreateTeamProps = {
   theme: Theme
   selectCreateTeam: () => void
 }
-const CreateTeam: React.FC<CreateTeamProps> = ({ classes, theme, selectCreateTeam }) => {
-  const [styles, setStyles] = useState(defaultTheme)
+const CreateTeam: React.FC<CreateTeamProps> = ({ classes, selectCreateTeam }) => {
   const { t } = useTranslation(['dashboard'])
 
   const [createdTeam, setCreatedTeam] = React.useState<Array<ICandidate>>([])
-  const [resource, setResource] = useState()
+  const [resource, setResource] = useState(140)
   const [resError, setResError] = useState(false)
   const [candidates, setCandidates] = useState<Array<ICandidate>>(defaultCandidates)
   const [name, setName] = useState('')
@@ -89,11 +87,6 @@ const CreateTeam: React.FC<CreateTeamProps> = ({ classes, theme, selectCreateTea
   }
 
   useEffect(selectCreateTeam, [selectCreateTeam])
-  useEffect(() => {
-    if (theme) {
-      setStyles(theme)
-    }
-  }, [theme])
 
   const addCandidateHandler = (props: ICandidate) => {
     if (name === '') {
@@ -130,20 +123,28 @@ const CreateTeam: React.FC<CreateTeamProps> = ({ classes, theme, selectCreateTea
     }
   }
 
-  const createTeamHandler = () => {
+  const createTeamHandler = useCallback(() => {
     if (resError || !resource) {
       setResError(true)
       return
     }
-    const indices = euristic({
+    console.log('candidates', candidates)
+    console.log('resource', resource)
+    const input = {
       n: candidates.length,
       cost: candidates.map((item) => item.cost),
       value: candidates.map((item) => item.prospects),
       resource,
-    }).items
-
-    setCreatedTeam(candidates.filter((item, idx) => indices.some((i) => i === idx)))
-  }
+    }
+    const indices_BnB = branchesAndBoundes(input).items
+    console.log('indices_BnB', indices_BnB)
+    const indices = euristic(input).items
+    console.log('indices eu', indices)
+    // const newTeam = candidates.filter((item, idx) => indices[idx] === 1)
+    const newTeam = candidates.filter((item, idx) => indices.some((i) => i === idx))
+    console.log('new Team', newTeam)
+    setCreatedTeam(newTeam)
+  }, [resError, candidates, resource])
 
   return (
     <Container className={classes.root}>
@@ -233,23 +234,16 @@ const CreateTeam: React.FC<CreateTeamProps> = ({ classes, theme, selectCreateTea
           </form>
         </CardContent>
       </Card>
-      {createdTeam.length > 0 ? (
-        <Card style={{ margin: '15px' }}>
-          <CardContent>
-            <Participants {...{ candidates }} {...{ removeCandidateHandler }} noEdit />
-          </CardContent>
-        </Card>
-      ) : (
-        <Card style={{ margin: '15px' }}>
-          <CardContent>
-            <Participants
-              {...{ candidates }}
-              {...{ removeCandidateHandler }}
-              {...{ createTeamHandler }}
-            />
-          </CardContent>
-        </Card>
-      )}
+      <Card style={{ margin: '15px' }}>
+        <CardContent>
+          <Participants
+            candidates={createdTeam.length > 0 ? createdTeam : candidates}
+            {...{ removeCandidateHandler }}
+            {...{ createTeamHandler }}
+            noEdit={createdTeam.length > 0 ? true : false}
+          />
+        </CardContent>
+      </Card>
     </Container>
   )
 }
